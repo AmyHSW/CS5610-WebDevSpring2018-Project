@@ -1,6 +1,6 @@
 module.exports = function(app){
 
-  var ProductModel = require("../models/page/page.model.server");
+  var ProductModel = require("../models/product/product.model.server");
   app.post("/api/product", createProduct);
   app.get("/api/product/:userId/product",findAllProductsForUser);
   app.get("/api/product/:productId",findProductById);
