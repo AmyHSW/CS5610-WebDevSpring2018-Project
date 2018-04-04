@@ -7,11 +7,6 @@ module.exports = function(app){
   app.put("/api/product/:productId",updateProduct);
   app.delete("/api/product/:productId",deleteProduct);
 
-  /* pattern matching usies only base URL. it ignores anything after ?
-   app.get("/api/user/:userId", findUserById);
-   app.get("/api/user/:userId", findUserById);
-   are the same URLs to Express!     */
-
   function createProduct(req, res) {
     var userId = req.params.userId;
     var product = req.body;
