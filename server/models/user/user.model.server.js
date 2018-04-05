@@ -49,10 +49,6 @@ function findUsersByType(type) {
   return UserModel.find({type:type});
 }
 
-function findFavoritesForUser(userId) {
-  return UserModel.findById(userId).favorites;
-}
-
 function addFollow(followerId, followeeId) {
   return UserModel.findOne({_id:followeeId})
     .then(function (followee) {
