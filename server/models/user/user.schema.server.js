@@ -1,6 +1,4 @@
 var mongoose = require("mongoose");
-var userSchema = require('../user/user.schema.server');
-var productSchema = require('../product/product.schema.server');
 
 var UserSchema = mongoose.Schema({
   type: {type: String, enum: ['ADMIN', 'BUSINESS', 'REVIEWER', 'OBSERVER']} ,
@@ -9,9 +7,9 @@ var UserSchema = mongoose.Schema({
   firstName:String,
   lastName: String,
   email: String,
-  followers: [userSchema],
-  followings: [userSchema],
-  favorites: [productSchema],
+  followers: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
+  followings: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
+  favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProductModel'}],
   dateCreated: {type: Date, default : Date.now}
 }, {collection:'user'});
 

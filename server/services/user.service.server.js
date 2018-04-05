@@ -9,10 +9,10 @@ module.exports = function (app) {
   app.get("/api/user/:userId/followers", findFollowersForUser);
   app.get("/api/user/:userId/followings", findFollowingsForUser);
   app.get("/api/user/:userId/favorites", findFavoritesForUser);
-  app.put("/api/add/follower/:followerId/followee/:followeeId", addFollow);
-  app.put("/api/delete/follower/:followerId/followee/:followeeId", deleteFollow);
-  app.put("/api/add/user/:userId/product/:productId", addFavorite);
-  app.put("/api/delete/user/:userId/product/:productId", deleteFavorite);
+  app.put("/api/follower/:followerId/followee/:followeeId", addFollow);
+  app.delete("/api/follower/:followerId/followee/:followeeId", deleteFollow);
+  app.put("/api/user/:userId/product/:productId", addFavorite);
+  app.delete("/api/user/:userId/product/:productId", deleteFavorite);
 
   var userModel = require("../models/user/user.model.server");
 
@@ -25,7 +25,7 @@ module.exports = function (app) {
           res.send(users);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
@@ -37,7 +37,7 @@ module.exports = function (app) {
           res.json(user);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
@@ -51,7 +51,7 @@ module.exports = function (app) {
         //console.log(user);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
     } else {
       userModel.findUserByUserName(username)
@@ -59,7 +59,7 @@ module.exports = function (app) {
           res.json(user);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
     }
   }
@@ -71,7 +71,7 @@ module.exports = function (app) {
         res.json(user);
       },
       function (err) {
-        res.sendStatus(404).send(err);
+        res.status(500).send(err);
       });
   }
 
@@ -85,7 +85,7 @@ module.exports = function (app) {
           res.send(status);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
@@ -97,7 +97,7 @@ module.exports = function (app) {
           res.send(status);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
@@ -109,31 +109,31 @@ module.exports = function (app) {
         res.json(user);
       },
       function (err) {
-        res.sendStatus(404).send(err);
+        res.status(500).send(err);
       });
   }
 
   function findFollowersForUser(req, res){
     var userId = req.params["userId"];
     userModel
-      .findFollowersForUser(userId)
-      .then(function (followers) {
-          res.json(followers);
+      .findUserById(userId)
+      .then(function (user) {
+          res.status(200).json(user.followers);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
   function findFollowingsForUser(req, res){
     var userId = req.params["userId"];
     userModel
-      .findFollowingsForUser(userId)
-      .then(function (followings) {
-          res.json(followings);
+      .findUserById(userId)
+      .then(function (user) {
+          res.status(200).json(user.followings);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
@@ -145,7 +145,7 @@ module.exports = function (app) {
           res.json(favorites);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
@@ -158,7 +158,7 @@ module.exports = function (app) {
           res.json(status);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
@@ -171,7 +171,7 @@ module.exports = function (app) {
           res.json(status);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
@@ -184,7 +184,7 @@ module.exports = function (app) {
           res.json(status);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
 
@@ -197,7 +197,7 @@ module.exports = function (app) {
           res.json(status);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.status(500).send(err);
         });
   }
-}
+};

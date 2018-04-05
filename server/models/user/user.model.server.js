@@ -11,14 +11,11 @@ UserModel.findUserByCredentials = findUserByCredentials;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
 UserModel.findUsersByType = findUsersByType;
-UserModel.findFollowersForUser = findFollowersForUser;
-UserModel.findFollowingsForUser = findFollowingsForUser;
-UserModel. findFavoritesForUser =  findFavoritesForUser;
-UserModel. addFollow =  addFollow;
-UserModel. deleteFollow =  deleteFollow;
-UserModel. addFavorite =  addFavorite;
-UserModel. deleteFavorite =  deleteFavorite;
-
+UserModel.findFavoritesForUser =  findFavoritesForUser;
+UserModel.addFollow =  addFollow;
+UserModel.deleteFollow =  deleteFollow;
+UserModel.addFavorite =  addFavorite;
+UserModel.deleteFavorite =  deleteFavorite;
 
 //helper functions -- delete after testing
 function findAllUsers(){
@@ -60,18 +57,6 @@ function findUsersByType(type) {
   return UserModel.find({type:type});
 }
 
-function findFollowersForUser(userId) {
-  UserModel.findOne({_id:userId}, function (err, user) {
-    console.log(user);
-    console.log(user.followers.length);
-    return user.followers;
-  });
-}
-
-function findFollowingsForUser(userId) {
-  return UserModel.findById(userId).followings;
-}
-
 function findFavoritesForUser(userId) {
   return UserModel.findById(userId).favorites;
 }
@@ -79,29 +64,27 @@ function findFavoritesForUser(userId) {
 function addFollow(followerId, followeeId) {
   return UserModel.findOne({_id:followeeId}, function (err,followee) {
     UserModel.findOne({_id:followerId}, function (err,follower) {
-      followee.followers.push(Object.assign(follower));
-      follower.followings.push(Object.assign(followee));
-      console.log('second' + ' ' + followee.followers.length);
-    })
-    console.log(followee);
-    console.log('first' + ' ' + followee.followers.length);
-  })
+      followee.followers.push(follower);
+      follower.followings.push(followee);
+      followee.save();
+      follower.save();
+    });
+  });
 }
 
 function deleteFollow(followerId, followeeId) {
-  return UserModel.findOne({_id: followeeId}, function (err, user) {
-    var followers = user.followers;
-    for (var i = 1; i < followers.length; i++) {
-      if (followers[i]._id === followerId) {
-        followers.splice(i, 1);
+  return UserModel.findOne({_id: followeeId}, function (err, followee) {
+    UserModel.findOne({_id: followerId}, function (err, follower) {
+      for (var i = 0; i < followee.followers.length; i++) {
+        if (followee.followers[i].equals(followerId)) {
+          followee.followers.splice(i, 1);
+          return followee.save();
+        }
       }
-    }
-    //console.log(user.followers.length);
-    UserModel.findOne({_id: followeeId}, function (err, user) {
-      var followings = user.followings;
-      for (var i = 1; i < followings.length; i++) {
-        if (followings[i]._id === followeeId) {
-          followings.splice(i, 1);
+      for (var i = 0; i < follower.followings.length; i++) {
+        if (follower.followings[i].equals(followeeId)) {
+          follower.followings.splice(i, 1);
+          return follower.save();
         }
       }
     });
