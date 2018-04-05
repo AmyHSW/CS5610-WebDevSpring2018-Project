@@ -16,27 +16,16 @@ module.exports = function (app) {
 
   var userModel = require("../models/user/user.model.server");
 
-  //helper functions -- can be removed after testing
-  app.get("/api/user/findall", findAllUsers);
-  function findAllUsers(req, res) {
-    userModel
-      .findAllUsers()
-      .then(function (users) {
-          res.send(users);
-        },
-        function (err) {
-          res.status(500).send(err);
-        });
-  }
 
   function createUser(req, res) {
     var newUser = req.body;
     userModel.createUser(newUser)
       .then(function(user){
-        //console.log("add")
+        console.log("create user: " + user);
           res.json(user);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }
@@ -47,18 +36,21 @@ module.exports = function (app) {
     if (username && password){
       userModel.findUserByCredentials(username, password)
         .then(function(user){
+          console.log("find user by credential: " + user);
           res.json(user);
-        //console.log(user);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
     } else {
       userModel.findUserByUserName(username)
         .then(function(user){
+          console.log("find user by username: " + user);
           res.json(user);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
     }
@@ -68,9 +60,11 @@ module.exports = function (app) {
     var userId = req.params["userId"]
     userModel.findUserById(userId).then(
       function (user){
+        console.log("find user by id: " + user);
         res.json(user);
       },
       function (err) {
+        console.log(err);
         res.status(500).send(err);
       });
   }
@@ -82,9 +76,11 @@ module.exports = function (app) {
     userModel.updateUser(userId, user)
       .then(
         function(status){
+          console.log("update user: userId = " + userId);
           res.send(status);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }
@@ -94,9 +90,11 @@ module.exports = function (app) {
     userModel
       .deleteUser(userId)
       .then(function (status) {
+          console.log("delete user: userId = " + userId);
           res.send(status);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }
@@ -106,9 +104,11 @@ module.exports = function (app) {
     userModel
       .findUsersByType(userType)
       .then(function (user) {
+        console.log("find users by type: type = " + userType);
         res.json(user);
       },
       function (err) {
+        console.log(err);
         res.status(500).send(err);
       });
   }
@@ -118,9 +118,11 @@ module.exports = function (app) {
     userModel
       .findUserById(userId)
       .then(function (user) {
+          console.log("find followers for user: userId = " + userId);
           res.status(200).json(user.followers);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }
@@ -130,9 +132,11 @@ module.exports = function (app) {
     userModel
       .findUserById(userId)
       .then(function (user) {
+          console.log("find followings for user: userId = " + userId);
           res.status(200).json(user.followings);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }
@@ -140,11 +144,13 @@ module.exports = function (app) {
   function findFavoritesForUser(req, res){
     var userId = req.params["userId"];
     userModel
-      .findFavoritesForUser(userId)
-      .then(function (favorites) {
-          res.json(favorites);
+      .findUserById(userId)
+      .then(function (user) {
+          console.log("find favorites for user: userId = " + userId);
+          res.status(200).json(user.favorites);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }
@@ -155,9 +161,11 @@ module.exports = function (app) {
     userModel
       .addFollow(followerId, followeeId)
       .then(function (status) {
+          console.log("add follow: followerId = " + followerId + " followeeId = " + followeeId);
           res.json(status);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }
@@ -168,9 +176,11 @@ module.exports = function (app) {
     userModel
       .deleteFollow(followerId, followeeId)
       .then(function (status) {
+          console.log("delete follow: followerId = " + followerId + " followeeId = " + followeeId);
           res.json(status);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }
@@ -181,9 +191,11 @@ module.exports = function (app) {
     userModel
       .addFavorite(userId, productId)
       .then(function (status) {
+          console.log("add favorite: userId = " + userId);
           res.json(status);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }
@@ -194,9 +206,11 @@ module.exports = function (app) {
     userModel
       .deleteFavorite(userId, productId)
       .then(function (status) {
+          console.log("delete favorite: userId = " + userId);
           res.json(status);
         },
         function (err) {
+          console.log(err);
           res.status(500).send(err);
         });
   }

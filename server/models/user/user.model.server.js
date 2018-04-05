@@ -11,18 +11,10 @@ UserModel.findUserByCredentials = findUserByCredentials;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
 UserModel.findUsersByType = findUsersByType;
-UserModel.findFavoritesForUser =  findFavoritesForUser;
 UserModel.addFollow =  addFollow;
 UserModel.deleteFollow =  deleteFollow;
 UserModel.addFavorite =  addFavorite;
 UserModel.deleteFavorite =  deleteFavorite;
-
-//helper functions -- delete after testing
-function findAllUsers(){
-  UserModel.find(function (err, doc) {
-    console.log(docs);
-  })
-}
 
 module.exports = UserModel;
 
@@ -62,50 +54,56 @@ function findFavoritesForUser(userId) {
 }
 
 function addFollow(followerId, followeeId) {
-  return UserModel.findOne({_id:followeeId}, function (err,followee) {
-    UserModel.findOne({_id:followerId}, function (err,follower) {
-      followee.followers.push(follower);
-      follower.followings.push(followee);
-      followee.save();
-      follower.save();
-    });
-  });
+  return UserModel.findOne({_id:followeeId})
+    .then(function (followee) {
+      UserModel.findOne({_id:followerId})
+        .then(function (follower) {
+          followee.followers.push(follower);
+          follower.followings.push(followee);
+          followee.save();
+          follower.save();
+        })
+  })
 }
 
 function deleteFollow(followerId, followeeId) {
-  return UserModel.findOne({_id: followeeId}, function (err, followee) {
-    UserModel.findOne({_id: followerId}, function (err, follower) {
-      for (var i = 0; i < followee.followers.length; i++) {
-        if (followee.followers[i].equals(followerId)) {
-          followee.followers.splice(i, 1);
-          return followee.save();
+  return UserModel.findOne({_id: followeeId})
+    .then(function (followee) {
+    UserModel.findOne({_id: followerId})
+      .then(function (follower) {
+        for (var i = 0; i < followee.followers.length; i++) {
+          if (followee.followers[i].equals(followerId)) {
+            followee.followers.splice(i, 1);
+            return followee.save();
+          }
         }
-      }
-      for (var i = 0; i < follower.followings.length; i++) {
-        if (follower.followings[i].equals(followeeId)) {
-          follower.followings.splice(i, 1);
-          return follower.save();
+        for (var i = 0; i < follower.followings.length; i++) {
+          if (follower.followings[i].equals(followeeId)) {
+            follower.followings.splice(i, 1);
+            return follower.save();
+          }
         }
-      }
-    });
-  });
+      })
+    })
 }
 
 function addFavorite(userId, productId) {
-  return UserModel.findOne({_id:userId}, function (err, user) {
-    user.favorites.push(ProductModel.findById(productId));
-  })
+  return UserModel.findOne({_id:userId})
+    .then(function (user) {
+      user.favorites.push(ProductModel.findById(productId));
+    })
 }
 
 function deleteFavorite(userId, productId) {
-  return UserModel.findOne({_id:userId}, function (err, user) {
-    var favorites = user.favorites;
-    for (var i = 1; i < favorites.length; i++) {
-      if (favorites[i]._id === productId) {
-        favorites.splice(i, 1);
+  return UserModel.findOne({_id:userId})
+    .then(function (user) {
+      var favorites = user.favorites;
+      for (var i = 1; i < favorites.length; i++) {
+        if (favorites[i]._id === productId) {
+          favorites.splice(i, 1);
+        }
       }
-    }
-  })
+    })
 }
 
 
