@@ -1,7 +1,7 @@
 var mongoose = require ("mongoose");
 var ProductSchema = require("./product.schema.server");
 
-var ProductModel =  mongoose.model("product", ProductSchema);
+var ProductModel =  mongoose.model("ProductModel", ProductSchema);
 
 ProductModel.findProductById = findProductById;
 ProductModel.createProduct = createProduct;
