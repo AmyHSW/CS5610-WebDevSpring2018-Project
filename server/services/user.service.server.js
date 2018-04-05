@@ -9,8 +9,12 @@ module.exports = function (app) {
   app.get("/api/user/:userId/followers", findFollowersForUser);
   app.get("/api/user/:userId/followings", findFollowingsForUser);
   app.get("/api/user/:userId/favorites", findFavoritesForUser);
+  app.put("/api/add/follower/:followerId/followee/:followeeId", addFollow);
+  app.put("/api/delete/follower/:followerId/followee/:followeeId", deleteFollow);
+  //app.put("/api/add/user/:userId/product/:productId", addFavorite);
+  //app.put("/api/delete/user/:userId/product/:productId", deleteFavorite);
 
-  var userModel = require("../model/user/user.model.server");
+  var userModel = require("../models/user/user.model.server");
 
   //helper functions -- can be removed after testing
   app.get("/api/user/findall", findAllUsers);
@@ -29,6 +33,7 @@ module.exports = function (app) {
     var newUser = req.body;
     userModel.createUser(newUser)
       .then(function(user){
+        //console.log("add")
           res.json(user);
         },
         function (err) {
@@ -138,6 +143,32 @@ module.exports = function (app) {
       .findFollowersForUser(userId)
       .then(function (favorites) {
           res.json(favorites);
+        },
+        function (err) {
+          res.sendStatus(404).send(err);
+        });
+  }
+
+  function addFollow(req, res){
+    var followerId = req.params["followerId"];
+    var followeeId = req.params["followeeId"];
+    userModel
+      .addFollow(followerId, followeeId)
+      .then(function (status) {
+          res.json(status);
+        },
+        function (err) {
+          res.sendStatus(404).send(err);
+        });
+  }
+
+  function deleteFollow(req, res){
+    var followerId = req.params["followerId"];
+    var followeeId = req.params["followeeId"];
+    userModel
+      .deleteFollow(followerId, followeeId)
+      .then(function (status) {
+          res.json(status);
         },
         function (err) {
           res.sendStatus(404).send(err);
