@@ -128,7 +128,7 @@ module.exports = function (app) {
   function findFollowingsForUser(req, res){
     var userId = req.params["userId"];
     userModel
-      .findFollowersForUser(userId)
+      .findFollowingsForUser(userId)
       .then(function (followings) {
           res.json(followings);
         },
@@ -140,7 +140,7 @@ module.exports = function (app) {
   function findFavoritesForUser(req, res){
     var userId = req.params["userId"];
     userModel
-      .findFollowersForUser(userId)
+      .findFavoritesForUser(userId)
       .then(function (favorites) {
           res.json(favorites);
         },

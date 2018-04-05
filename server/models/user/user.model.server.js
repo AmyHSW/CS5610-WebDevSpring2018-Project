@@ -61,7 +61,11 @@ function findUsersByType(type) {
 }
 
 function findFollowersForUser(userId) {
-  return UserModel.findById(userId).followers;
+  UserModel.findOne({_id:userId}, function (err, user) {
+    console.log(user);
+    console.log(user.followers.length);
+    return user.followers;
+  });
 }
 
 function findFollowingsForUser(userId) {
@@ -73,17 +77,15 @@ function findFavoritesForUser(userId) {
 }
 
 function addFollow(followerId, followeeId) {
-  return UserModel.findOne({_id:followeeId}, function (err,user) {
-      //console.log(user);
-      var followers = user.followers;
-      user.followers.push(UserModel.findById(followerId));
-      //console.log(user.followers.length);
-      UserModel.findOne({_id:followerId}, function (err,user) {
-        //console.log(user);
-        var followings = user.followings;
-        user.followings.push(UserModel.findById(followeeId));
-      })
-    });
+  return UserModel.findOne({_id:followeeId}, function (err,followee) {
+    UserModel.findOne({_id:followerId}, function (err,follower) {
+      followee.followers.push(Object.assign(follower));
+      follower.followings.push(Object.assign(followee));
+      console.log('second' + ' ' + followee.followers.length);
+    })
+    console.log(followee);
+    console.log('first' + ' ' + followee.followers.length);
+  })
 }
 
 function deleteFollow(followerId, followeeId) {
