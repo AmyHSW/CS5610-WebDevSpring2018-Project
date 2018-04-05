@@ -11,8 +11,8 @@ module.exports = function (app) {
   app.get("/api/user/:userId/favorites", findFavoritesForUser);
   app.put("/api/add/follower/:followerId/followee/:followeeId", addFollow);
   app.put("/api/delete/follower/:followerId/followee/:followeeId", deleteFollow);
-  //app.put("/api/add/user/:userId/product/:productId", addFavorite);
-  //app.put("/api/delete/user/:userId/product/:productId", deleteFavorite);
+  app.put("/api/add/user/:userId/product/:productId", addFavorite);
+  app.put("/api/delete/user/:userId/product/:productId", deleteFavorite);
 
   var userModel = require("../models/user/user.model.server");
 
@@ -167,6 +167,32 @@ module.exports = function (app) {
     var followeeId = req.params["followeeId"];
     userModel
       .deleteFollow(followerId, followeeId)
+      .then(function (status) {
+          res.json(status);
+        },
+        function (err) {
+          res.sendStatus(404).send(err);
+        });
+  }
+
+  function addFavorite(req, res){
+    var userId = req.params["userId"];
+    var productId = req.params["productId"];
+    userModel
+      .addFavorite(userId, productId)
+      .then(function (status) {
+          res.json(status);
+        },
+        function (err) {
+          res.sendStatus(404).send(err);
+        });
+  }
+
+  function deleteFavorite(req, res){
+    var userId = req.params["userId"];
+    var productId = req.params["productId"];
+    userModel
+      .deleteFavorite(userId, productId)
       .then(function (status) {
           res.json(status);
         },
