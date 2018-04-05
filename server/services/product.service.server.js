@@ -13,7 +13,7 @@ module.exports = function(app){
     product._user= userId;
     console.log(product);
     ProductModel
-      .createProduct(userId, product)
+      .createProduct(product)
       .then(function (product) {
         res.json(product);});
   }
