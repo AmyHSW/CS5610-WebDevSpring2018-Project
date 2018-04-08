@@ -17,6 +17,8 @@ module.exports = function (app) {
   app.delete("/api/user/:userId/product/:productId", deleteFavorite);
   app.get("/api/user/all", findAllUsers);
 
+  app.post('/api/logout', logout);
+  app.post ('/api/register', register);
   app.post('/api/login', passport.authenticate('local'), login);
   app.post ('/api/loggedIn', loggedIn);
   passport.use(new LocalStrategy(localStrategy));
@@ -57,6 +59,35 @@ module.exports = function (app) {
       );
   }
 
+  function register(req, res) {
+    var user = req.body;
+    user.password = bcrypt.hashSync(user.password);
+    userModel
+      .findUserByUserName(user.username)
+      .then(function (data) {
+        if(data){
+          res.status(400).send('Username is in use!');
+          return;
+        } else{
+          userModel
+            .createUser(user)
+            .then(
+              function(user){
+                if(user){
+                  req.login(user, function(err) {
+                    if(err) {
+                      res.status(400).send(err);
+                    } else {
+                      res.json(user);
+                    }
+                  });
+                }
+              }
+            );
+        }
+      })
+  }
+
   function login(req, res) {
     var user = req.user;
     res.json(user);
@@ -64,6 +95,11 @@ module.exports = function (app) {
 
   function loggedIn(req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
+  }
+
+  function logout(req, res) {
+    req.logOut();
+    res.send(200);
   }
 
   function createUser(req, res) {
