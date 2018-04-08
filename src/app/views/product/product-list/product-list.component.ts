@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../../services/product.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-product-list',
@@ -9,7 +10,7 @@ import {ProductService} from '../../../services/product.service.client';
 })
 export class ProductListComponent implements OnInit {
   products = [{}];
-  constructor(private productService: ProductService, private activeRoute: ActivatedRoute) { }
+  constructor(private productService: ProductService, private sharedService: SharedService) { }
 
   ngOnInit() {
     this.productService.findAllProduct().subscribe(

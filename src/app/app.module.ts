@@ -15,12 +15,16 @@ import {ProductService} from './services/product.service.client';
 import {SharedService} from './services/shared.service';
 import { ProductListBusinessComponent } from './views/product/product-list-business/product-list-business.component';
 import { ProductDetailComponent } from './views/product/product-detail/product-detail.component';
+
+import {AuthGuard} from './services/auth-gaurd.service';
+
 import { RegisterComponent } from './views/user/register/register.component';
 import { ProfileComponent } from './views/user/profile/profile.component';
 import { ProfileAdminComponent } from './views/user/profile/profile-admin/profile-admin.component';
 import { ProfileReviewerComponent } from './views/user/profile/profile-reviewer/profile-reviewer.component';
 import {ReviewListComponent} from "./views/review/review-list/review-list.component";
 import {ReviewNewComponent} from "./views/review/review-new/review-new.component";
+
 
 @NgModule({
   declarations: [
@@ -44,7 +48,11 @@ import {ReviewNewComponent} from "./views/review/review-new/review-new.component
     FormsModule,
     HttpModule
   ],
+<<<<<<< HEAD
   providers: [UserService, ProductService, SharedService],
+=======
+  providers: [UserService, ProductService, SharedService, AuthGuard, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+>>>>>>> 7ebe86a6328fc0c930aceebaf64666adbd24a779
   bootstrap: [AppComponent]
 })
 export class AppModule { }
