@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ReviewService} from "../../../services/review.service.client";
+import {ActivatedRoute, Router} from "@angular/router";
+import {SharedService} from "../../../services/shared.service";
 
 @Component({
   selector: 'app-review-new',
@@ -7,9 +10,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewNewComponent implements OnInit {
 
-  constructor() { }
+  user: any;
+  review: any;
+  productId: String;
+  errorFlag: boolean;
+  errorMsg: String;
+  summaryFlag: boolean;
+  summaryAlert: String;
+  ratingFlag: boolean;
+  ratingAlert: String;
+
+  constructor(private reviewService: ReviewService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private sharedService: SharedService) { }
 
   ngOnInit() {
+    this.user = this.sharedService.user;
+    this.errorFlag = false;
+    this.activatedRoute.params.subscribe((params: any) => {
+      this.productId = params['productId'];
+    });
+    this.review = ReviewService.getNewReview();
   }
 
+  createReview() {
+    this.summaryFlag = false;
+    this.ratingFlag = false;
+    if (this.review.summary === undefined || this.review.summary === '') {
+      this.summaryFlag = true;
+      this.summaryAlert = '* Please enter summary';
+    } else if (this.review.rating === undefined || this.review.rating === '') {
+      this.ratingFlag = true;
+      this.ratingAlert = '* Please enter rating';
+    } else {
+      this.review._product = this.productId;
+      this.reviewService.createReview(this.user._id, this.review).subscribe(
+        (reviews: any) => {
+          console.log('created review');
+          this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+        },
+        (error: any) => {
+          this.errorFlag = true;
+          this.errorMsg = error._body;
+          console.log(error);
+        }
+      );
+    }
+  }
 }

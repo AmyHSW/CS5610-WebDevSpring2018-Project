@@ -25,9 +25,18 @@ const appRoutes: Routes = [
 
   {path: 'product/:productId/review', component: ReviewListComponent},
   {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'product', component: ProductListComponent}, //guest
   {path: 'user/product', component: ProductListBusinessComponent, canActivate: [AuthGuard]},
   {path: 'user/product/new', component: ProductNewComponent, canActivate: [AuthGuard]},
-  {path: 'user/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuard]}
+  {path: 'user/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuard]},
+  {path: 'product/:productId', component: ProductDetailComponent}, //guest
+  {path: 'user/:userId/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuard]},
+  {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuard]},
+  {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuard]},
+  {path: 'user/all', component: UserListComponent, canActivate: [AuthGuard]},
+  {path: 'product/:productId/review', component: ReviewListComponent}, // guest
+  {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuard]}
 
 ];
 
