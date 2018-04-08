@@ -16,6 +16,10 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {SharedService} from './services/shared.service';
 import { ProductListBusinessComponent } from './views/product/product-list-business/product-list-business.component';
 import { ProductDetailComponent } from './views/product/product-detail/product-detail.component';
+import { RegisterComponent } from './views/user/register/register.component';
+import { ProfileComponent } from './views/user/profile/profile.component';
+import { ProfileAdminComponent } from './views/user/profile/profile-admin/profile-admin.component';
+import { ProfileReviewerComponent } from './views/user/profile/profile-reviewer/profile-reviewer.component';
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import { ProductDetailComponent } from './views/product/product-detail/product-d
     ProductListComponent,
     LoginComponent,
     ProductListBusinessComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    RegisterComponent,
+    ProfileComponent,
+    ProfileAdminComponent,
+    ProfileReviewerComponent
   ],
   imports: [
     BrowserModule,
