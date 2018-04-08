@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { ProductNewComponent } from './views/product/product-new/product-new.component';
 import { ProductEditComponent } from './views/product/product-edit/product-edit.component';
@@ -28,6 +27,10 @@ import { UserListComponent } from './views/user/user-list/user-list.component';
 
 import {ReviewListComponent} from "./views/review/review-list/review-list.component";
 import {ReviewNewComponent} from "./views/review/review-new/review-new.component";
+import { ProfileObserverComponent } from './views/user/profile/profile-observer/profile-observer.component';
+import { ProfileBusinessComponent } from './views/user/profile/profile-business/profile-business.component';
+import {ReviewService} from "./services/review.service.client";
+import { ProductListObserverComponent } from './views/product/product-list-observer/product-list-observer.component';
 
 
 
@@ -47,7 +50,10 @@ import {ReviewNewComponent} from "./views/review/review-new/review-new.component
     HomeComponent,
     UserListComponent,
     ReviewListComponent,
-    ReviewNewComponent
+    ReviewNewComponent,
+    ProfileObserverComponent,
+    ProfileBusinessComponent,
+    ProductListObserverComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,7 @@ import {ReviewNewComponent} from "./views/review/review-new/review-new.component
     FormsModule,
     HttpModule
   ],
-  providers: [UserService, ProductService, SharedService, AuthGuard],
+  providers: [UserService, ProductService, ReviewService, SharedService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
