@@ -1,0 +1,41 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+    <div class="navbar-text pull-left">
+      <a routerLink=".." class="cl-text-black cl-icon-padding">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink="./new" class="cl-icon-padding cl-text-black">
+              <span class="glyphicon glyphicon-plus">
+              </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold" routerLink=".">
+      Reviews
+    </a>
+  </div>
+</nav>
+
+<div class="container-fluid cl-container-padding">
+  <ul class="list-group cl-list-group-borderless">
+    <li *ngFor="let review of reviews" class="list-group-item cl-list-item-borderless">
+      <div>
+        <h3>{{review.summary}}</h3>
+        <h3><small>created by {{review._user.username}} at {{review.dateCreated}}</small></h3>
+        <h3>{{review.rating}}</h3>
+        <h4>{{review.content}}</h4>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right navbar-text">
+      <a [routerLink]="['/profile']" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </div>
+  </div>
+</nav>

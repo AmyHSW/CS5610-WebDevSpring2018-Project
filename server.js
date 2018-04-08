@@ -1,22 +1,20 @@
 // Get the dependencies
+
 const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
 const path = require('path');
 const http = require('http');
-const cookieParser = require('cookie-parser');
-const session      = require('express-session');
-const passport = require('passport');
+const bodyParser = require('body-parser');
+const app = express();
 
+// loading authentication modules
+const passport      = require('passport');
+const cookieParser  = require('cookie-parser');
+const session       = require('express-session');
 
-
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'dist')));
+const secret = process.env.SECRET || "this is the secret";
 
 app.use(session({
-  secret: 'this is the secret',
+  secret: secret,
   resave: true,
   saveUninitialized: true
 }));
@@ -25,8 +23,13 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Parsers for POST data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, 'dist')));
+// app.use(express.static(path.join(__dirname, 'src/assets')));
 
 //CORS
 app.use(function(reg, res, next){
@@ -43,7 +46,7 @@ app.set('port', port);
 // Create HTTP server
 const server = http.createServer(app);
 
-require('./server/app.js')(app);
+require('./assignment/app.js')(app);
 
 // For Build: Catch all other routes and return the index file -- BUILDING
 app.get('*', function (req, res) {
