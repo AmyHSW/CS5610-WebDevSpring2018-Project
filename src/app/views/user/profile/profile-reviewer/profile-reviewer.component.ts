@@ -5,8 +5,8 @@ import {SharedService} from "../../../../services/shared.service";
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  templateUrl: './profile-reviewer.component.html',
+  styleUrls: ['./profile-reviewer.component.css']
 })
 export class ProfileReviewerComponent implements OnInit {
   user: {};
