@@ -1,3 +1,71 @@
-<p>
-  review-new works!
-</p>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+    <div class="navbar-text pull-left">
+      <a routerLink=".." class="cl-text-black cl-icon-padding">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink=".">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold" routerLink=".">
+      New Review
+    </a>
+  </div>
+</nav>
+
+<div class="container-fluid">
+
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
+  <form>
+
+    <div class="form-group">
+      <label for="review-summary">Summary</label>
+      <input [(ngModel)]="review.summary"
+             type="text"
+             class="form-control"
+             id="review-summary"
+             placeholder="Summary"
+             [ngClass]="{'red-border-class': summaryFlag}"
+             name="summary"/>
+      <span class="alert-class" *ngIf="summaryFLag">{{summaryAlert}}</span>
+    </div>
+
+    <div class="form-group">
+      <label for="review-rating">Rating</label>
+      <input [(ngModel)]="review.title"
+             type="number"
+             class="form-control"
+             id="review-rating"
+             placeholder="5.0"
+             name="rating"/>
+      <span class="alert-class" *ngIf="ratingFlag">{{ratingAlert}}</span>
+    </div>
+
+    <div class="form-group">
+      <label for="review-content">Content</label>
+      <input [(ngModel)]="review.content"
+             type="text"
+             class="form-control"
+             id="review-content"
+             placeholder="Content"
+             name="content"/>
+    </div>
+
+  </form>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right navbar-text">
+      <a [routerLink]="['/profile']" class="cl-icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </div>
+  </div>
+</nav>
