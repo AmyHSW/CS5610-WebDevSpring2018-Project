@@ -16,6 +16,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {SharedService} from './services/shared.service';
 import { ProductListBusinessComponent } from './views/product/product-list-business/product-list-business.component';
 import { ProductDetailComponent } from './views/product/product-detail/product-detail.component';
+import {AuthGuard} from './services/auth-gaurd.service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { ProductDetailComponent } from './views/product/product-detail/product-d
     FormsModule,
     HttpModule
   ],
-  providers: [UserService, ProductService, SharedService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [UserService, ProductService, SharedService, AuthGuard, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

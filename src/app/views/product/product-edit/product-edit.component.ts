@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../../services/product.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -8,12 +9,13 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-
+  user = {};
   productId: String;
   userId: String;
   products = [{}];
   product: {};
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
+              private sharedService: SharedService) { }
 
   deleteProduct() {
     this.productService.deleteProduct(this.productId).subscribe(
@@ -35,9 +37,10 @@ export class ProductEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = this.sharedService.user;
+    this.userId = this.user['_id'];
     this.activatedRoute.params.subscribe(
       (params: any) => {
-        this.userId = params['userId'];
         this.productId = params['productId'];
       }
     );
