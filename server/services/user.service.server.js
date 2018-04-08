@@ -15,6 +15,7 @@ module.exports = function (app) {
   app.delete("/api/follower/:followerId/followee/:followeeId", deleteFollow);
   app.put("/api/user/:userId/product/:productId", addFavorite);
   app.delete("/api/user/:userId/product/:productId", deleteFavorite);
+  app.get("/api/user/all", findAllUsers);
 
   app.post('/api/login', passport.authenticate('local'), login);
   passport.use(new LocalStrategy(localStrategy));
@@ -258,5 +259,17 @@ module.exports = function (app) {
           console.log(err);
           res.status(500).send(err);
         });
+  }
+
+  function findAllUsers(req, res){
+    userModel.findAllUsers().then(
+      function (users){
+        console.log("find all users");
+        res.json(users);
+      },
+      function (err) {
+        console.log(err);
+        res.status(500).send(err);
+      });
   }
 };

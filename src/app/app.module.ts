@@ -20,6 +20,8 @@ import { RegisterComponent } from './views/user/register/register.component';
 import { ProfileComponent } from './views/user/profile/profile.component';
 import { ProfileAdminComponent } from './views/user/profile/profile-admin/profile-admin.component';
 import { ProfileReviewerComponent } from './views/user/profile/profile-reviewer/profile-reviewer.component';
+import { HomeComponent } from './views/home/home.component';
+import { UserListComponent } from './views/user/user-list/user-list.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { ProfileReviewerComponent } from './views/user/profile/profile-reviewer/
     RegisterComponent,
     ProfileComponent,
     ProfileAdminComponent,
-    ProfileReviewerComponent
+    ProfileReviewerComponent,
+    HomeComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

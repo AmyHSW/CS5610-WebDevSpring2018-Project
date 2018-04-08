@@ -15,6 +15,7 @@ UserModel.addFollow =  addFollow;
 UserModel.deleteFollow =  deleteFollow;
 UserModel.addFavorite =  addFavorite;
 UserModel.deleteFavorite =  deleteFavorite;
+UserModel.findAllUsers = findAllUsers;
 
 module.exports = UserModel;
 
@@ -100,6 +101,10 @@ function deleteFavorite(userId, productId) {
         }
       }
     })
+}
+
+function findAllUsers() {
+  return UserModel.find();
 }
 
 

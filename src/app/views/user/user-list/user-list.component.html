@@ -1,0 +1,32 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+    <div class="navbar-text pull-left">
+      <a routerLink="../.." class="cl-text-black cl-icon-padding">
+            <span class="glyphicon glyphicon-chevron-left">
+            </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold">
+      User list
+    </a>
+  </div>
+</nav>
+
+<div class="padding padding-b">
+  <div *ngFor = "let user of users" class="container-fluid">
+    <ul  class="list-group">
+      <li class="list-group-item blue ">
+        <b>
+          username: {{ user.username }}   &nbsp;&nbsp;&nbsp;
+          Name:&nbsp;{{user.lastName}}.{{user.firstName}} &nbsp;&nbsp;&nbsp;
+          Role: {{user.type}} &nbsp;&nbsp;&nbsp;
+        </b>
+
+        <button (click) = deleteUser(user._id) class="pull-right btn-danger " >
+          Delete User
+        </button>
+
+      </li>
+    </ul>
+  </div>
+</div>
