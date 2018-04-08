@@ -1,11 +1,20 @@
 module.exports = function(app){
 
   var ProductModel = require("../models/product/product.model.server");
-  app.post("/api/product", createProduct);
-  app.get("/api/product/:userId/product",findAllProductsForUser);
+  app.post("/api/user/:userId/product", createProduct);
+  app.get("/api/user/:userId/product",findAllProductsForUser);
   app.get("/api/product/:productId",findProductById);
+  app.get("/api/product/",findAllProducts);
   app.put("/api/product/:productId",updateProduct);
   app.delete("/api/product/:productId",deleteProduct);
+
+  function findAllProducts(req, res){
+    ProductModel
+      .findAllProducts()
+      .then(function (products) {
+        res.json(products);
+      })
+  }
 
   function createProduct(req, res) {
     var userId = req.params.userId;
@@ -20,14 +29,13 @@ module.exports = function(app){
 
   function findAllProductsForUser(req,res) {
     var userId = req.params.userId;
-
     ProductModel
       .findAllProductsForUser(userId)
       .then(function (products) {
           res.json(products);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.sendStatus(500).send(err);
         });
   }
   function updateProduct(req,res) {
@@ -41,7 +49,7 @@ module.exports = function(app){
           res.send(200);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.sendStatus(500).send(err);
         });
   }
   function findProductById(req,res ) {
@@ -52,7 +60,7 @@ module.exports = function(app){
           res.json(product);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.sendStatus(500).send(err);
         });
   }
 
@@ -65,7 +73,7 @@ module.exports = function(app){
           res.send(200);
         },
         function (err) {
-          res.sendStatus(404).send(err);
+          res.sendStatus(500).send(err);
         });
   }
 }

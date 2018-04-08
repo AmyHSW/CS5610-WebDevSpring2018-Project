@@ -6,6 +6,16 @@ import { AppComponent } from './app.component';
 import { ProductNewComponent } from './views/product/product-new/product-new.component';
 import { ProductEditComponent } from './views/product/product-edit/product-edit.component';
 import { ProductListComponent } from './views/product/product-list/product-list.component';
+import { LoginComponent } from './views/user/login/login.component';
+import {routing} from './app.routing';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {UserService} from './services/user.service.client';
+import {ProductService} from './services/product.service.client';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {SharedService} from './services/shared.service';
+import { ProductListBusinessComponent } from './views/product/product-list-business/product-list-business.component';
+import { ProductDetailComponent } from './views/product/product-detail/product-detail.component';
 
 
 @NgModule({
@@ -13,12 +23,18 @@ import { ProductListComponent } from './views/product/product-list/product-list.
     AppComponent,
     ProductNewComponent,
     ProductEditComponent,
-    ProductListComponent
+    ProductListComponent,
+    LoginComponent,
+    ProductListBusinessComponent,
+    ProductDetailComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    routing,
+    FormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [UserService, ProductService, SharedService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

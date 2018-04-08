@@ -1,3 +1,59 @@
-<p>
-  product-new works!
-</p>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a routerLink=".." class="cl-text-black cl-icon-padding">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a class="cl-icon-padding cl-text-black">
+          <span class="glyphicon glyphicon-ok" (click)="createProduct()">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand cl-text-white cl-text-bold" routerLink="./">
+      New Product
+    </a>
+  </div>
+</nav>
+
+
+<form #f="ngForm">
+      <div class="form-group">
+        <label for="product-name">Name</label>
+        <input type="text" class="form-control" id="product-name" placeholder="Name"
+               [(ngModel)]="product.productName" required
+               name="webname"/>
+      </div>
+      <div class="form-group">
+        <label for="product-description">Description</label>
+        <textarea id="product-description" class="form-control" rows="3" placeholder="Description"
+                  [(ngModel)]="product.description" required
+                  name="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="product-brand">Brand</label>
+        <textarea id="product-brand" class="form-control" placeholder="Description"
+                  [(ngModel)]="product.brand" required
+                  name="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="product-price">Price</label>
+        <textarea id="product-price" class="form-control" placeholder="Description"
+                  [(ngModel)]="product.price" required
+                  name="description"></textarea>
+      </div>
+</form>
+
+
+
+
+<nav class="navbar navbar-fixed-bottom cl-blue-navbar">
+  <div class="container-fuild">
+    <a routerLink=".." class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+      <span class="glyphicon glyphicon-user"></span>
+    </a>
+  </div>
+</nav>

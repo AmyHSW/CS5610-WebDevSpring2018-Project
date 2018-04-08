@@ -8,9 +8,14 @@ ProductModel.createProduct = createProduct;
 ProductModel.findAllProductsForUser = findAllProductsForUser;
 ProductModel.updateProduct = updateProduct;
 ProductModel.deleteProduct = deleteProduct;
+ProductModel.findAllProducts = findAllProducts;
 
 
 module.exports = ProductModel;
+
+function findAllProducts(){
+  return ProductModel.find();
+}
 
 
 function findProductById(productId) {

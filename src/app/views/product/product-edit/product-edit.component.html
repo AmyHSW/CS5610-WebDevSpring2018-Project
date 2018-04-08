@@ -1,3 +1,72 @@
-<p>
-  product-edit works!
-</p>
+<nav class="navbar navbar-fixed-top cl-blue-navbar">
+  <div class="row">
+    <div class="col-xs-1 col-sm-4">
+      <div class="container-fluid row">
+        <div class="col-sm-2 col-xs-12">
+          <p class="navbar-text pull-left">
+            <a routerLink="../../" class="navbar-link cl-text-white">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+          </p>
+        </div>
+        <div class="col-xs-10 hidden-xs">
+          <a class="cl-text-white navbar-brand cl-text-bold cl-icon-padding" routerLink="/product">
+            Products
+          </a>
+          <a routerLink="../../new" class="navbar-link navbar-text pull-right cl-text-white">
+            <span class="glyphicon glyphicon-plus"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-11 col-sm-8">
+      <div class="container-fluid">
+        <a class="cl-text-white navbar-brand cl-text-bold" routerLink=".">
+          Edit Products
+        </a>
+        <a (click)="updateProduct()" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+          <span class="glyphicon glyphicon-ok"></span></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="col-xs-4 hidden-xs" *ngIf = "products">
+    <ul class="list-group cl-list-group-borderless">
+      <li *ngFor = "let product of products" class="list-group-item cl-list-item-borderless">
+        <a routerLink="../../{{product._id}}/edit"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+        <a routerLink="/product/{{product._id}}">{{product.productName}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-xs-12 col-sm-8" *ngIf="product">
+    <form>
+      <div class="form-group">
+        <label for="product-name">Product Name</label>
+        <input [(ngModel)]="product.productName" type="text" class="form-control" id="product-name" placeholder='productName' name="productName">
+      </div>
+      <div class="form-group">
+        <label for="product-description">Product Description</label>
+        <textarea [(ngModel)]="product.description" id="product-description" class="form-control" placeholder="description" rows="5" name="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="product-price">Product Price</label>
+        <textarea [(ngModel)]="product.price" id="product-price" class="form-control" placeholder="description" name="price"></textarea>
+      </div>
+      <br/>
+    </form>
+    <a (click)="deleteProduct()" class="btn btn-danger btn-block">Delete</a>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-fixed-bottom cl-blue-navbar">
+  <div class="container-fluid">
+    <a routerLink="../.." class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+      <span class="glyphicon glyphicon-user"></span>
+    </a>
+  </div>
+</nav>
+
