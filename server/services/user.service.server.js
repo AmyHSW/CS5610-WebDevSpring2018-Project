@@ -28,19 +28,18 @@ module.exports = function (app) {
 
   function localStrategy(username, password, done) {
     userModel
-      .findUserByCredentials(username, password)
+      .findUserByUserName(username)
       .then(
-        function(user) {
-          if(user.username === username && user.password === password) {
+        function (user) {
+          if (user && bcrypt.compareSync(password, user.password)) {
             return done(null, user);
           } else {
             return done(null, false);
           }
         },
-        function(err) {
-          if (err) { return done(err); }
-        }
-      );
+        function (err) {
+          res.sendStatus(500).send(err);
+        });
   }
 
   function serializeUser(user, done) {
