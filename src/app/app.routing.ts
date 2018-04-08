@@ -7,19 +7,27 @@ import {ProductDetailComponent} from './views/product/product-detail/product-det
 import {ProductEditComponent} from './views/product/product-edit/product-edit.component';
 import {ProfileComponent} from "./views/user/profile/profile.component";
 import {UserListComponent} from "./views/user/user-list/user-list.component";
+import {ReviewListComponent} from "./views/review/review-list/review-list.component";
+import {ReviewNewComponent} from "./views/review/review-new/review-new.component";
+import {AuthGuard} from './services/auth-guard.service';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'product', component: ProductListComponent},
-  {path: 'user/:userId/product', component: ProductListBusinessComponent},
-  {path: 'user/:userId/product/new', component: ProductNewComponent},
   {path: 'product/:productId', component: ProductDetailComponent},
   {path: 'user/:userId/product/:productId/edit', component: ProductEditComponent},
 
   {path: 'profile', component: ProfileComponent},
   {path: 'user/followers', component: UserListComponent},
   {path: 'user/followings', component: UserListComponent},
-  {path: 'user/all', component: UserListComponent}
+  {path: 'user/all', component: UserListComponent},
+
+
+  {path: 'product/:productId/review', component: ReviewListComponent},
+  {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuard]},
+  {path: 'user/product', component: ProductListBusinessComponent, canActivate: [AuthGuard]},
+  {path: 'user/product/new', component: ProductNewComponent, canActivate: [AuthGuard]},
+  {path: 'user/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuard]}
 
 ];
 

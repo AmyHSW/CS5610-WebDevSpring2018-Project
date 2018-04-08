@@ -2,7 +2,7 @@ module.exports = function (app) {
 
   const reviewModel = require("../models/review/review.model.server");
 
-  app.post("/api/user/:userId/product/:productId/review", createReview);
+  app.post("/api/user/:userId/review", createReview);
   app.get("/api/user/:userId/review", findAllReviewsForUser);
   app.get("/api/product/:productId/review", findAllReviewsForProduct);
   app.get("/api/review/:reviewId", findReviewById);

@@ -18,6 +18,7 @@ module.exports = function (app) {
   app.get("/api/user/all", findAllUsers);
 
   app.post('/api/login', passport.authenticate('local'), login);
+  app.post ('/api/loggedIn', loggedIn);
   passport.use(new LocalStrategy(localStrategy));
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
@@ -62,6 +63,9 @@ module.exports = function (app) {
     res.json(user);
   }
 
+  function loggedIn(req, res) {
+    res.send(req.isAuthenticated() ? req.user : '0');
+  }
 
   function createUser(req, res) {
     var newUser = req.body;
