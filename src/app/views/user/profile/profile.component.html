@@ -1,3 +1,12 @@
-<p>
-  profile works!
-</p>
+
+<div *ngIf="user" [ngSwitch]="user.type">
+
+  <div *ngSwitchCase="'ADMIN'" >
+    <app-profile-admin></app-profile-admin>
+  </div>
+
+  <div *ngSwitchCase="'REVIEWER'">
+    <app-profile-reviewer></app-profile-reviewer>
+  </div>
+
+</div>

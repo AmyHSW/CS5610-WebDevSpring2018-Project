@@ -17,10 +17,10 @@ const appRoutes: Routes = [
   {path: 'product/:productId', component: ProductDetailComponent},
   {path: 'user/:userId/product/:productId/edit', component: ProductEditComponent},
 
-  {path: 'profile', component: ProfileComponent},
-  {path: 'user/followers', component: UserListComponent},
-  {path: 'user/followings', component: UserListComponent},
-  {path: 'user/all', component: UserListComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuard]},
+  {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuard]},
+  {path: 'user/all', component: UserListComponent, canActivate: [AuthGuard]},
 
 
   {path: 'product/:productId/review', component: ReviewListComponent},
