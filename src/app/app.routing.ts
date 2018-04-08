@@ -10,6 +10,7 @@ import {UserListComponent} from "./views/user/user-list/user-list.component";
 import {ReviewListComponent} from "./views/review/review-list/review-list.component";
 import {ReviewNewComponent} from "./views/review/review-new/review-new.component";
 import {AuthGuard} from './services/auth-guard.service';
+import {ProductListObserverComponent} from "./views/product/product-list-observer/product-list-observer.component";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -21,7 +22,7 @@ const appRoutes: Routes = [
   {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'user/all', component: UserListComponent, canActivate: [AuthGuard]},
-
+  {path: 'user/favorite', component: ProductListObserverComponent, canActivate: [AuthGuard]},
 
   {path: 'product/:productId/review', component: ReviewListComponent},
   {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuard]},

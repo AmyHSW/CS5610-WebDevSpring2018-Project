@@ -38,11 +38,11 @@
 
     <div class="form-group">
       <label for="review-rating">Rating</label>
-      <input [(ngModel)]="review.title"
+      <input [(ngModel)]="review.rating"
              type="number"
              class="form-control"
              id="review-rating"
-             placeholder="5.0"
+             placeholder="0 - 5.0"
              name="rating"/>
       <span class="alert-class" *ngIf="ratingFlag">{{ratingAlert}}</span>
     </div>

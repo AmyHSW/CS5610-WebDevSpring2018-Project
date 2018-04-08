@@ -101,6 +101,12 @@ export class UserService {
       });
   }
 
+  findUserByUsername(username: String) {
+    return this.http.get(this.baseUrl + '/api/user?username=' + username)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
 
   loggedIn() {
     this.options.withCredentials = true;

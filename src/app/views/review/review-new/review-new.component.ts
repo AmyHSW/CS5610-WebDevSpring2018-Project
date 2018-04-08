@@ -40,9 +40,10 @@ export class ReviewNewComponent implements OnInit {
     if (this.review.summary === undefined || this.review.summary === '') {
       this.summaryFlag = true;
       this.summaryAlert = '* Please enter summary';
-    } else if (this.review.rating === undefined || this.review.rating === '') {
+    } else if (this.review.rating === undefined || this.review.rating === '' 
+      || this.review.rating < 0 || this.review.rating > 5) {
       this.ratingFlag = true;
-      this.ratingAlert = '* Please enter rating';
+      this.ratingAlert = '* Please enter rating: 0.0 - 5.0';
     } else {
       this.review._product = this.productId;
       this.reviewService.createReview(this.user._id, this.review).subscribe(

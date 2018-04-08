@@ -1,0 +1,77 @@
+<nav class="navbar navbar-fixed-top cl-blue-navbar">
+  <div class="container-fluid">
+    <a class="cl-text-white navbar-brand cl-text-bold" routerLink="/profile">
+      Profile - Business User
+    </a>
+    <a (click)="updateUser()"
+       [routerLink]="['/profile']"
+       class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+      <span class="glyphicon glyphicon-ok"></span>
+    </a>
+  </div>
+</nav>
+
+<div class="container-fluid">
+
+  <div *ngIf="updateFlag" class="alert alert-success">
+    {{updateMsg}}
+  </div>
+
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
+  <form>
+
+    <div class="form-group" *ngIf="user">
+      <label for="username">Username</label>
+      <input [(ngModel)]="username"
+             [ngClass]="{'red-border-class': errorFlag}"
+             id="username"
+             type="text"
+             class="form-control"
+             placeholder="Username"
+             [ngModelOptions]="{standalone: true}"/>
+      <span class="alert-class" *ngIf="errorFlag">{{alert}}</span>
+    </div>
+
+    <div class="form-group" *ngIf="user">
+      <label for="email">Email address</label>
+      <input [(ngModel)]="user.email"
+             id="email"
+             type="email"
+             class="form-control"
+             placeholder="alice@wonderland.com"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group" *ngIf="user">
+      <label for="first-name">First Name</label>
+      <input [(ngModel)]="user.firstName"
+             id="first-name"
+             type="text"
+             class="form-control"
+             placeholder="Alice"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group" *ngIf="user">
+      <label for="last-name">Last Name</label>
+      <input [(ngModel)]="user.lastName"
+             id="last-name"
+             type="text"
+             class="form-control"
+             placeholder="Wonderland"
+             [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <button class="btn btn-success btn-block"
+            [routerLink]="['/user', 'product']">Products</button>
+
+    <button class="btn btn-warning btn-block"
+            (click)="logout()">Logout</button>
+
+  </form>
+</div>
+
+<nav class="navbar navbar-fixed-bottom cl-blue-navbar"></nav>
