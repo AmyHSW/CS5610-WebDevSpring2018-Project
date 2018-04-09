@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
       (products) => {
         this.products = products;
       }
-    )
+    );
   }
 
   ngOnInit() {
