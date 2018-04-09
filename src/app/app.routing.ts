@@ -12,9 +12,11 @@ import {ReviewNewComponent} from './views/review/review-new/review-new.component
 import {AuthGuard} from './services/auth-guard.service';
 import {RegisterComponent} from './views/user/register/register.component';
 import {ProductListObserverComponent} from './views/product/product-list-observer/product-list-observer.component';
+import {HomeComponent} from "./views/home/home.component";
 
 
 const appRoutes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'product', component: ProductListComponent},

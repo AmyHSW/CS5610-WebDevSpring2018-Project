@@ -7,6 +7,7 @@ module.exports = function(app){
   app.get("/api/product/",findAllProducts);
   app.put("/api/product/:productId",updateProduct);
   app.delete("/api/product/:productId",deleteProduct);
+  app.get("/api/products/:productName",findProductsByProductName);
 
   function findAllProducts(req, res){
     ProductModel
@@ -71,6 +72,20 @@ module.exports = function(app){
       .then (function (stats) {
           console.log(stats);
           res.send(200);
+        },
+        function (err) {
+          res.sendStatus(500).send(err);
+        });
+  }
+
+  function findProductsByProductName(req,res) {
+    var productName = req.params.productName;
+    //console.log(productName);
+    ProductModel
+      .findProductsByProductName(productName)
+      .then(function (products) {
+          res.json(products);
+          //console.log(products);
         },
         function (err) {
           res.sendStatus(500).send(err);

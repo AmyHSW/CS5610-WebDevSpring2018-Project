@@ -9,6 +9,7 @@ ProductModel.findAllProductsForUser = findAllProductsForUser;
 ProductModel.updateProduct = updateProduct;
 ProductModel.deleteProduct = deleteProduct;
 ProductModel.findAllProducts = findAllProducts;
+ProductModel.findProductsByProductName = findProductsByProductName;
 
 
 module.exports = ProductModel;
@@ -40,4 +41,9 @@ function deleteProduct(productId) {
 function createProduct(product){
   console.log(product);
   return  ProductModel.create(product);
+}
+
+function findProductsByProductName(productName) {
+  //console.log("model" + " productName")
+  return ProductModel.find({productName: '/' + productName + '/'});
 }

@@ -80,4 +80,17 @@ export class ProductService {
         }
       );
   }
+
+  findProductsByProductName(productName) {
+    const url = this.baseUrl + '/api/products/' + productName;
+    //console.log(productName);
+    return this._http.get(url)
+      .map(
+        (res: Response) => {
+          const data = res.json();
+          console.log(data);
+          return data;
+        }
+      );
+  }
 }

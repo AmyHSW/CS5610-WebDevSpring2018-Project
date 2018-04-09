@@ -1,3 +1,49 @@
-<p>
-  home works!
-</p>
+
+<!--Header-->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <span>
+        <!--heading on the nav bar-->
+        <p class="navbar-header pull-left">
+            <a class="navbar-brand thick">
+                <b>Search Product</b>
+            </a>
+        </p>
+        <p class="navbar-header pull-right">
+            <a [routerLink]="['/profile']">
+                <b>Login</b>
+            </a>
+        </p>
+        <p class="navbar-header pull-right">
+            <a [routerLink]="['/register']">
+                <b>Register</b>
+            </a>
+        </p>
+        </span>
+  </div>
+</nav>
+
+<!--!!Material on the page!!-->
+<div class = "container">
+  <div class="input-group">
+    <input [(ngModel)]="searchText" type="text" class="form-control">
+    <span class="input-group-btn">
+            <a (click)="searchProducts()" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+            </a>
+        </span>
+  </div>
+
+  <div class="row" *ngIf="products">
+      <ul class="list-group cl-list-group-borderless">
+        <li *ngFor = "let product of products">
+
+          <a routerLink="./{{product._id}}">{{product.productName}}</a>
+          <span class="pull-right">Price: {{product.price}}</span>
+        </li>
+      </ul>
+  </div>
+</div>
+
+<!-- Footer -->
+

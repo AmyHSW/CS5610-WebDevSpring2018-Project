@@ -11,7 +11,7 @@ import {SharedService} from "../../../services/shared.service";
 export class UserListComponent implements OnInit {
   href: string;
   userId: string;
-  users: any[];
+  users: [any];
 
   constructor(
     private userService: UserService,
