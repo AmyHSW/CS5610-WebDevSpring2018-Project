@@ -135,11 +135,12 @@ export class UserService {
           const user = res.json();
           //console.log(user !== 0);
           if (user !== 0) {
-            //console.log(user);
+            console.log('loggedIn: ' + user.username);
             this.sharedService.user = user; // setting user as global variable using shared service
             return true;
           } else {
-            this.router.navigate(['/login']);
+            console.log('loggedIn: fail');
+            this.router.navigate(['']);
             return false;
           }
         }
@@ -158,7 +159,7 @@ export class UserService {
             this.sharedService.user = user; // setting user as global variable using shared service
             return true;
           } else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
             return false;
           }
         }
@@ -177,7 +178,7 @@ export class UserService {
             this.sharedService.user = user; // setting user as global variable using shared service
             return true;
           } else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
             return false;
           }
         }
@@ -196,7 +197,7 @@ export class UserService {
             this.sharedService.user = user; // setting user as global variable using shared service
             return true;
           } else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
             return false;
           }
         }
@@ -215,7 +216,7 @@ export class UserService {
             this.sharedService.user = user; // setting user as global variable using shared service
             return true;
           } else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
             return false;
           }
         }

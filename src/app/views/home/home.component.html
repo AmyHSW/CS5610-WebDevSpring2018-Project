@@ -2,24 +2,31 @@
 <!--Header-->
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
-    <span>
-        <!--heading on the nav bar-->
-        <p class="navbar-header pull-left">
-            <a class="navbar-brand thick">
-                <b>Search Product</b>
-            </a>
-        </p>
-        <p class="navbar-header pull-right">
-            <a [routerLink]="['/profile']">
-                <b> Login</b>
-            </a>
-        </p>
-        <p class="navbar-header pull-right">
-            <a [routerLink]="['/register']">
-                <b>Register</b>
-            </a>
-        </p>
-        </span>
+    <!--heading on the nav bar-->
+    <div class="navbar-header pull-left">
+        <a class="navbar-brand thick">
+            <b>Search Product</b>
+        </a>
+    </div>
+
+    <div class="navbar-header pull-right" *ngIf="noUser">
+        <a [routerLink]="['/login']">
+            <b>Login</b>
+        </a>
+    </div>
+
+    <div class="navbar-header pull-right" *ngIf="!noUser">
+      <a [routerLink]="['/profile']">
+        <b>Profile</b>
+      </a>
+    </div>
+
+    <div class="navbar-header pull-right">
+        <a [routerLink]="['/register']">
+            <b>Register</b>
+        </a>
+    </div>
+
   </div>
 </nav>
 
