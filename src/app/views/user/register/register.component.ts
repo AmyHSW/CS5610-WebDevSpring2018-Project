@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {UserService} from "../../../services/user.service.client";
 import {Router} from "@angular/router";
+import {SharedService} from "../../../services/shared.service";
 
 @Component({
   selector: 'app-register',
@@ -11,39 +12,59 @@ import {Router} from "@angular/router";
 export class RegisterComponent implements OnInit {
 
   @ViewChild('f') registerForm: NgForm;
-  username: String;
-  password: String;
-  type: String;
-  confirmPassword: String;
-  errorMsg = 'Passwords are different!';
-  errorFlag = false;
+  user: any;
+  v_password: String;
 
-  constructor(
-    private userService: UserService,
-    private router: Router) { }
+  errorFlag: boolean;
+  errorMsg: String;
+  passwordFlag; boolean;
+  passwordMsg: String;
+  errorAlert: String;
+  passwordAlert: String;
+
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   register() {
-    this.username = this.registerForm.value.username;
-    this.password = this.registerForm.value.password1;
-    this.confirmPassword = this.registerForm.value.password2;
-    this.type = this.registerForm.value.type;
+    this.user.username = this.registerForm.value.username;
+    this.user.password = this.registerForm.value.password;
+    this.user.type = this.registerForm.value.type;
+    this.v_password = this.registerForm.value.v_password;
 
-    if (this.password === this.confirmPassword) {
-      this.userService.register(this.username, this.password, this.type)
-        .subscribe(
-          (data: any) => {
-            this.router.navigate(['/profile']);
-          },
-          (error: any) => {
-            this.errorMsg = error._body;
-          }
-        );
+    this.errorFlag = false;
+    this.passwordFlag = false;
 
-    } else {
-      this.errorFlag = true;
+    if (this.v_password !== this.user.password) {
+      this.passwordFlag = true;
+      this.passwordMsg = 'Password mis-matching!';
+      return;
     }
+    this.userService.findUserByUsername(this.user.username).subscribe(
+      (data: any) => {
+        if (data) {
+          this.errorFlag = true;
+          this.errorMsg = 'This username is in use. Please enter a different one.';
+        } else {
+          return this.userService.register(this.user.username, this.user.password, this.user.type)
+            .subscribe(
+              (newUser: any) => {
+                console.log(newUser['type']);
+                this.router.navigate(['/profile']);
+              }, (error: any) => {
+                this.errorFlag = true;
+                this.errorMsg = error._body;
+              }
+            );
+        }
+      });
+  }
+  cancel() {
+    this.router.navigate(['/login']);
+  }
+  ngOnInit() {
+    this.errorAlert = '* Please enter username';
+    this.passwordAlert = '* Please enter password';
+    this.user = UserService.getNewUser();
   }
 
-  ngOnInit() {
-  }
 }

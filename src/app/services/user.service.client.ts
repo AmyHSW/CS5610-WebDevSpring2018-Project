@@ -16,6 +16,10 @@ export class UserService {
 
   options = new RequestOptions();
 
+  static getNewUser() {
+    return {username: undefined, password: undefined, type: undefined};
+  }
+
   findUserByCredential(username: String, password: String) {
     return this.http.get(this.baseUrl + '/api/user?username=' + username + '&password=' + password)
       .map((res: Response) => {
@@ -142,4 +146,79 @@ export class UserService {
       );
   }
 
+  loggedInBusiness() {
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+      .map(
+        (res: Response) => {
+          const user = res.json();
+          //console.log(user !== 0);
+          if (user !== 0 && user.type === 'BUSINESS') {
+            //console.log(user);
+            this.sharedService.user = user; // setting user as global variable using shared service
+            return true;
+          } else {
+            this.router.navigate(['/login']);
+            return false;
+          }
+        }
+      );
+  }
+
+  loggedInObserver() {
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+      .map(
+        (res: Response) => {
+          const user = res.json();
+          //console.log(user !== 0);
+          if (user !== 0 && user.type === 'OBSERVER') {
+            //console.log(user);
+            this.sharedService.user = user; // setting user as global variable using shared service
+            return true;
+          } else {
+            this.router.navigate(['/login']);
+            return false;
+          }
+        }
+      );
+  }
+
+  loggedInReviewer() {
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+      .map(
+        (res: Response) => {
+          const user = res.json();
+          //console.log(user !== 0);
+          if (user !== 0 && user.type === 'REVIEWER') {
+            //console.log(user);
+            this.sharedService.user = user; // setting user as global variable using shared service
+            return true;
+          } else {
+            this.router.navigate(['/login']);
+            return false;
+          }
+        }
+      );
+  }
+
+  loggedInAdmin() {
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+      .map(
+        (res: Response) => {
+          const user = res.json();
+          //console.log(user !== 0);
+          if (user !== 0 && user.type === 'ADMIN') {
+            //console.log(user);
+            this.sharedService.user = user; // setting user as global variable using shared service
+            return true;
+          } else {
+            this.router.navigate(['/login']);
+            return false;
+          }
+        }
+      );
+  }
 }

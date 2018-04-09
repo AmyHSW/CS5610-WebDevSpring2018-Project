@@ -68,7 +68,6 @@ module.exports = function (app) {
       .then(function (data) {
         if(data){
           res.status(400).send('Username is in use!');
-          return;
         } else{
           userModel
             .createUser(user)

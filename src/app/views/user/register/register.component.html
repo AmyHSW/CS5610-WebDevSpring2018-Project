@@ -1,33 +1,74 @@
-<div *ngIf="errorFlag"
-     class="alert alert-danger">
-  {{errorMsg}}
-</div>
+<div class="container-fluid">
 
-<div class="container">
   <h1>Register</h1>
-  <form (ngSubmit) = "register()" #f="ngForm">
-    <input placeholder="username" name="username" type="text" class="form-control" ngModel required #username="ngModel"/>
 
-    <input placeholder="verify password" name="password1" type="password" class="form-control" ngModel required #password1="ngModel"/>
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
 
-    <input placeholder="password" name="password2" type="password" class="form-control" ngModel required #password2="ngModel"/>
+  <div *ngIf="passwordFlag" class="alert alert-warning">
+    {{passwordMsg}}
+  </div>
 
-    <input placeholder="type" name="type" type="text" class="form-control" ngModel required #password2="ngModel"/>
+  <form (ngSubmit)="register()" #f="ngForm">
 
-    <span class="help-block" *ngIf="!username.valid && username.touched">
-        Please enter username!
-    </span>
+    <div class="form-group">
+      <input id="username"
+             name="username"
+             placeholder="username"
+             type="text"
+             class="form-control"
+             [ngClass]="{'red-border-class': errorFlag}"
+             ngModel
+             required
+             #username="ngModel"/>
+      <span class="alert-class" *ngIf="errorFlag">{{errorAlert}}</span>
+    </div>
 
-    <span class="help-block" *ngIf="!password1.valid && password1.touched">
-        Please enter password!
-    </span>
+    <div class="form-group">
+      <input id="password"
+             name="password"
+             placeholder="password"
+             type="password"
+             class="form-control"
+             [ngClass]="{'red-border-class': passwordFlag}"
+             ngModel
+             required
+             #password="ngModel"/>
+      <span class="alert-class" *ngIf="passwordFlag">{{passwordAlert}}</span>
+    </div>
 
-    <span class="help-block" *ngIf="!password2.valid && password2.touched">
-        Please verify your password!
-    </span>
+    <div class="form-group">
+      <input id="v_password"
+             name="v_password"
+             placeholder="verify password"
+             type="password"
+             class="form-control"
+             ngModel
+             required
+             #v_password="ngModel"/>
+    </div>
 
-    <button class="btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Register</button>
-    <button class="btn btn-danger btn-block" type="submit"
-            [routerLink]="['/login']">Cancel</button>
+    <div class="form-group">
+      <input id="type"
+             name="type"
+             placeholder="type"
+             type="text"
+             class="form-control"
+             ngModel
+             required
+             #v_password="ngModel"/>
+    </div>
+
+    <button class="btn btn-primary btn-block"
+            type="submit"
+            [disabled]="!f.valid">Register</button>
+
+    <button class="btn btn-danger btn-block"
+            type="button"
+            (click)="cancel()">Cancel</button>
+
   </form>
+
 </div>
+

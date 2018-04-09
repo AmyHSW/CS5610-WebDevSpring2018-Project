@@ -14,25 +14,29 @@ import {RegisterComponent} from './views/user/register/register.component';
 import {ProductListObserverComponent} from './views/product/product-list-observer/product-list-observer.component';
 import {HomeComponent} from './views/home/home.component';
 import {ReviewListOfReviewerComponent} from "./views/review/review-list-of-reviewer/review-list-of-reviewer.component";
+import {AuthGuardReviewer} from "./services/auth-guard-reviewer.service";
+import {AuthGuardAdmin} from "./services/auth-guard-admin.service";
+import {AuthGuardObserver} from "./services/auth-guard-observer.service";
+import {AuthGuardBusiness} from "./services/auth-guard-business.service";
 
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'product', component: ProductListComponent},
   {path: 'product/:productId', component: ProductDetailComponent},
   {path: 'product/:productId/review', component: ReviewListComponent},
-  {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuard]},
+  {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuardReviewer]},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuard]},
-  {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuard]},
-  {path: 'user/all', component: UserListComponent, canActivate: [AuthGuard]},
-  {path: 'user/favorite', component: ProductListObserverComponent, canActivate: [AuthGuard]},
-  {path: 'user/product', component: ProductListBusinessComponent, canActivate: [AuthGuard]},
-  {path: 'user/product/new', component: ProductNewComponent, canActivate: [AuthGuard]},
-  {path: 'user/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuard]},
-  {path: 'user/review', component: ReviewListOfReviewerComponent, canActivate: [AuthGuard]}
+  {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuardReviewer]},
+  {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuardReviewer]},
+  {path: 'user/all', component: UserListComponent, canActivate: [AuthGuardAdmin]},
+  {path: 'user/favorite', component: ProductListObserverComponent, canActivate: [AuthGuardObserver]},
+  {path: 'user/product', component: ProductListBusinessComponent, canActivate: [AuthGuardBusiness]},
+  {path: 'user/product/new', component: ProductNewComponent, canActivate: [AuthGuardBusiness]},
+  {path: 'user/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuardBusiness]},
+  {path: 'user/review', component: ReviewListOfReviewerComponent, canActivate: [AuthGuardReviewer]}
 
 
 ];

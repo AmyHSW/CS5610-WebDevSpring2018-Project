@@ -32,6 +32,10 @@ import { ProfileBusinessComponent } from './views/user/profile/profile-business/
 import {ReviewService} from "./services/review.service.client";
 import { ProductListObserverComponent } from './views/product/product-list-observer/product-list-observer.component';
 import { ReviewListOfReviewerComponent } from './views/review/review-list-of-reviewer/review-list-of-reviewer.component';
+import {AuthGuardAdmin} from "./services/auth-guard-admin.service";
+import {AuthGuardReviewer} from "./services/auth-guard-reviewer.service";
+import {AuthGuardObserver} from "./services/auth-guard-observer.service";
+import {AuthGuardBusiness} from "./services/auth-guard-business.service";
 
 
 
@@ -63,7 +67,8 @@ import { ReviewListOfReviewerComponent } from './views/review/review-list-of-rev
     FormsModule,
     HttpModule
   ],
-  providers: [UserService, ProductService, ReviewService, SharedService, AuthGuard],
+  providers: [UserService, ProductService, ReviewService, SharedService, AuthGuard, AuthGuardAdmin, AuthGuardReviewer,
+  AuthGuardObserver, AuthGuardBusiness],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
