@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SharedService} from "../../../services/shared.service";
 
 @Component({
-  selector: 'app-profile-reviewer',
+  selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
@@ -12,7 +12,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.sharedService.user;
-    console.log(this.user);
+    //console.log(this.user);
+    //console.log(this.user.type);
   }
 
 }

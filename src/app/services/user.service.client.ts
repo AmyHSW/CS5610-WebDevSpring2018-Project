@@ -41,12 +41,13 @@ export class UserService {
       );
   }
 
-  register (username, password) {
+  register (username, password, type) {
     const url = this.baseUrl + '/api/register';
     // create an object to keep track of the username and password
     const credentials = {
       username: username,
       password: password,
+      type: type
     };
     // turn on credentials to make sure the communication is secure
     this.options.withCredentials = true;
@@ -114,9 +115,9 @@ export class UserService {
       .map(
         (res: Response) => {
           const user = res.json();
-          console.log(user !== 0);
+          //console.log(user !== 0);
           if (user !== 0) {
-            console.log(user);
+            //console.log(user);
             this.sharedService.user = user; // setting user as global variable using shared service
             return true;
           } else {

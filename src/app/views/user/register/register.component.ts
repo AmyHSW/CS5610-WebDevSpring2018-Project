@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('f') registerForm: NgForm;
   username: String;
   password: String;
+  type: String;
   confirmPassword: String;
   errorMsg = 'Passwords are different!';
   errorFlag = false;
@@ -25,9 +26,10 @@ export class RegisterComponent implements OnInit {
     this.username = this.registerForm.value.username;
     this.password = this.registerForm.value.password1;
     this.confirmPassword = this.registerForm.value.password2;
+    this.type = this.registerForm.value.type;
 
     if (this.password === this.confirmPassword) {
-      this.userService.register(this.username, this.password)
+      this.userService.register(this.username, this.password, this.type)
         .subscribe(
           (data: any) => {
             this.router.navigate(['/profile']);

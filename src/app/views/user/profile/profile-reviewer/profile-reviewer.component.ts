@@ -4,7 +4,7 @@ import {UserService} from '../../../../services/user.service.client';
 import {SharedService} from "../../../../services/shared.service";
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-profile-reviewer',
   templateUrl: './profile-reviewer.component.html',
   styleUrls: ['./profile-reviewer.component.css']
 })
