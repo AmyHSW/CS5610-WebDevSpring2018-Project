@@ -96,7 +96,7 @@ export class UserService {
   }
 
   findAllUsers() {
-    return this.http.get(this.baseUrl + '/api/user/all')
+    return this.http.get(this.baseUrl + '/api/alluser')
       .map((response: Response) => {
         return response.json();
       });

@@ -16,7 +16,7 @@ module.exports = function (app) {
   app.delete("/api/follower/:followerId/followee/:followeeId", deleteFollow);
   app.put("/api/user/:userId/product/:productId", addFavorite);
   app.delete("/api/user/:userId/product/:productId", deleteFavorite);
-  app.get("/api/user/all", findAllUsers);
+  app.get("/api/alluser", findAllUsers);
 
   app.post('/api/logout', logout);
   app.post ('/api/register', register);

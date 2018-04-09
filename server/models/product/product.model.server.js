@@ -45,5 +45,5 @@ function createProduct(product){
 
 function findProductsByProductName(productName) {
   //console.log("model" + " productName")
-  return ProductModel.find({productName: '/' + productName + '/'});
+  return ProductModel.find({productName: {'$regex': '.*' + productName + '.*'}});
 }
