@@ -1,3 +1,38 @@
-<p>
-  product-detail works!
-</p>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid row">
+    <div class="navbar-text pull-left">
+      <a routerLink="../.." class="cl-text-black cl-icon-padding">
+        <span class="glyphicon glyphicon-chevron-left">
+        </span>
+      </a>
+    </div>
+
+    <a class="navbar-brand cl-text-white cl-text-bold" routerLink=".">
+      Product: {{product.productName}}
+    </a>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="col-xs-4 hidden-xs">
+    <img class="img-responsive img-rounded cl-widget-images" src="{{product.url}}">
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-8">
+  <h1>{{product.productName}}: {{product.price}}</h1>
+  <h2>Brand: {{product.brand}}</h2>
+  <h5>Description: {{product.description}}</h5>
+</div>
+
+<div class="container-fluid cl-container-padding ">
+  <ul class="list-group cl-list-group-borderless">
+    <li *ngFor = "let review of reviews">
+      {{review._user}} : {{review.rating}}
+      <br>
+      {{review.summery}}
+      <br>
+      {{review.content}}
+    </li>
+  </ul>
+</div>

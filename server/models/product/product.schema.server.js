@@ -6,6 +6,8 @@ var ProductSchema = mongoose.Schema({
   description: String,
   brand: String,
   price: Number,
+  url : String,
+  width : String,
   dateCreated: {type: Date, default: Date.now}
 }, {collection: 'product'});
 

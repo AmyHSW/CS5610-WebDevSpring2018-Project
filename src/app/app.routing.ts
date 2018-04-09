@@ -12,7 +12,7 @@ import {ReviewNewComponent} from './views/review/review-new/review-new.component
 import {AuthGuard} from './services/auth-guard.service';
 import {RegisterComponent} from './views/user/register/register.component';
 import {ProductListObserverComponent} from './views/product/product-list-observer/product-list-observer.component';
-import {HomeComponent} from "./views/home/home.component";
+import {HomeComponent} from './views/home/home.component';
 
 
 const appRoutes: Routes = [
@@ -21,28 +21,20 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'product', component: ProductListComponent},
   {path: 'product/:productId', component: ProductDetailComponent},
-  {path: 'user/:userId/product/:productId/edit', component: ProductEditComponent},
-
+  {path: 'product/:productId/review', component: ReviewListComponent},
+  {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'user/all', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'user/favorite', component: ProductListObserverComponent, canActivate: [AuthGuard]},
-
-  {path: 'product/:productId/review', component: ReviewListComponent},
-  {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuard]},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'product', component: ProductListComponent},
   {path: 'user/product', component: ProductListBusinessComponent, canActivate: [AuthGuard]},
   {path: 'user/product/new', component: ProductNewComponent, canActivate: [AuthGuard]},
   {path: 'user/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuard]},
-  {path: 'product/:productId', component: ProductDetailComponent},
-  {path: 'user/:userId/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuard]},
   {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'user/all', component: UserListComponent, canActivate: [AuthGuard]},
-  {path: 'product/:productId/review', component: ReviewListComponent}, // guest
-  {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuard]}
+
 
 ];
 
