@@ -64,28 +64,22 @@ module.exports = function (app) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
     userModel
-      .findUserByUserName(user.username)
-      .then(function (data) {
-        if(data){
-          res.status(400).send('Username is in use!');
-        } else{
-          userModel
-            .createUser(user)
-            .then(
-              function(user){
-                if(user){
-                  req.login(user, function(err) {
-                    if(err) {
-                      res.status(400).send(err);
-                    } else {
-                      res.json(user);
-                    }
-                  });
-                }
+      .createUser(user)
+      .then(
+        function(user){
+          if(user){
+            req.login(user, function(err) {
+              if(err) {
+                res.status(400).send(err);
+              } else {
+                res.status(200).json(user);
               }
-            );
+            });
+          } else {
+            res.status(500).send('Cannot create new user');
+          }
         }
-      })
+      );
   }
 
   function login(req, res) {

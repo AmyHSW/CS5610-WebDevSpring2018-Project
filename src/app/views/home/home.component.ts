@@ -11,7 +11,7 @@ import {ProductService} from "../../services/product.service.client";
 export class HomeComponent implements OnInit {
   products: [any];
   searchText: String;
-  user: any;
+  noUser: boolean;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -27,7 +27,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.sharedService.user;
+    this.noUser = (this.sharedService.user === '');
+    console.log(this.sharedService.user);
+    console.log(this.noUser);
   }
 
 }

@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {UserService} from "../../../services/user.service.client";
 import {Router} from "@angular/router";
-import {SharedService} from "../../../services/shared.service";
 
 @Component({
   selector: 'app-register',
@@ -17,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
   errorFlag: boolean;
   errorMsg: String;
-  passwordFlag; boolean;
+  passwordFlag: boolean;
   passwordMsg: String;
   errorAlert: String;
   passwordAlert: String;
