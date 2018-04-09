@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid row">
     <div class="navbar-text pull-left">
-      <a routerLink=".." class="cl-text-black cl-icon-padding">
+      <a [routerLink]="['/profile']" class="cl-text-black cl-icon-padding">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </div>
@@ -12,7 +12,7 @@
       </a>
     </div>
     <a class="navbar-brand cl-text-white cl-text-bold" routerLink=".">
-      Reviews
+      My Review History
     </a>
   </div>
 </nav>
@@ -21,10 +21,11 @@
   <ul class="list-group cl-list-group-borderless">
     <li *ngFor="let review of reviews" class="list-group-item cl-list-item-borderless">
       <div>
-        <h3>{{review.summary}}</h3>
-        <h3><small>created by {{review._user.username}} at {{review.dateCreated}}</small></h3>
-        <h3>{{review.rating}}</h3>
-        <h4>{{review.content}}</h4>
+        <h3>Created at {{review.dateCreated}}</h3>
+        <h3>Product: {{review._product.productName}}</h3>
+        <h3>Summary: {{review.summary}}</h3>
+        <h3>Rating: {{review.rating}}</h3>
+        <h4>Content: {{review.content}}</h4>
       </div>
     </li>
   </ul>
