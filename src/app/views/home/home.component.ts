@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SharedService} from "../../services/shared.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service.client";
+import {UserService} from "../../services/user.service.client";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private sharedService: SharedService,
-              private productService: ProductService) { }
+              private productService: ProductService,
+              private userService: UserService) { }
 
   searchProducts() {
     this.productService.findProductsByProductName(this.searchText).subscribe(
@@ -27,7 +29,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.noUser = (this.sharedService.user === '');
+    this.userService.loggedIn().subscribe(
+      (isLoggedIn) => {
+        this.noUser = !isLoggedIn;
+      }
+    )
+    //this.noUser = (this.sharedService.user === '');
     console.log(this.sharedService.user);
     console.log(this.noUser);
   }
