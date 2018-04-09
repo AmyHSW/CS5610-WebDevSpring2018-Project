@@ -109,6 +109,20 @@ export class UserService {
       });
   }
 
+  findFavoritesForUser(userId: String) {
+    return this.http.get(this.baseUrl + '/api/user/' + userId + '/favorites')
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  deleteFavorite(userId: String, productId: String) {
+    return this.http.delete(this.baseUrl + '/api/user/' + userId + '/product/' + productId)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
   loggedIn() {
     this.options.withCredentials = true;
     return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)

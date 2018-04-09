@@ -25,12 +25,13 @@ import { ProfileReviewerComponent } from './views/user/profile/profile-reviewer/
 import { HomeComponent } from './views/home/home.component';
 import { UserListComponent } from './views/user/user-list/user-list.component';
 
-import {ReviewListComponent} from "./views/review/review-list/review-list.component";
+import {ReviewListComponent} from "./views/review/review-list-of-product/review-list.component";
 import {ReviewNewComponent} from "./views/review/review-new/review-new.component";
 import { ProfileObserverComponent } from './views/user/profile/profile-observer/profile-observer.component';
 import { ProfileBusinessComponent } from './views/user/profile/profile-business/profile-business.component';
 import {ReviewService} from "./services/review.service.client";
 import { ProductListObserverComponent } from './views/product/product-list-observer/product-list-observer.component';
+import { ReviewListOfReviewerComponent } from './views/review/review-list-of-reviewer/review-list-of-reviewer.component';
 
 
 
@@ -53,7 +54,8 @@ import { ProductListObserverComponent } from './views/product/product-list-obser
     ReviewNewComponent,
     ProfileObserverComponent,
     ProfileBusinessComponent,
-    ProductListObserverComponent
+    ProductListObserverComponent,
+    ReviewListOfReviewerComponent
   ],
   imports: [
     BrowserModule,
