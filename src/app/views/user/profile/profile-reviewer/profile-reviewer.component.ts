@@ -10,7 +10,6 @@ import {SharedService} from "../../../../services/shared.service";
 })
 export class ProfileReviewerComponent implements OnInit {
   user: {};
-  userId: String;
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -35,7 +34,6 @@ export class ProfileReviewerComponent implements OnInit {
   ngOnInit() {
     //.log(this.sharedService.user);
     this.user = this.sharedService.user;
-    this.userId = this.user['_id'];
     //console.log(this.userId);
   }
 
