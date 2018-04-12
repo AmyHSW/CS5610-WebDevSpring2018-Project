@@ -33,10 +33,7 @@ export class HomeComponent implements OnInit {
       (isLoggedIn) => {
         this.noUser = !isLoggedIn;
       }
-    )
-    //this.noUser = (this.sharedService.user === '');
-    console.log(this.sharedService.user);
-    console.log(this.noUser);
+    );
   }
 
 }
