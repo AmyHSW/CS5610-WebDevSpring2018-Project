@@ -8,6 +8,6 @@ export class AuthGuard implements CanActivate {
   constructor(private userService: UserService) {}
 
   canActivate() {
-    return this.userService.loggedIn();
+    return this.userService.loggedInUser();
   }
 }

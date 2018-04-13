@@ -135,12 +135,30 @@ export class UserService {
           const user = res.json();
           //console.log(user !== 0);
           if (user !== 0) {
-            console.log('loggedIn: ' + user.username);
+            // console.log('loggedIn: ' + user.username);
             this.sharedService.user = user; // setting user as global variable using shared service
             return true;
           } else {
-            console.log('loggedIn: fail');
-            //this.router.navigate(['']);
+            // console.log('loggedIn: fail');
+            return false;
+          }
+        }
+      );
+  }
+  loggedInUser() {
+    this.options.withCredentials = true;
+    return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
+      .map(
+        (res: Response) => {
+          const user = res.json();
+          //console.log(user !== 0);
+          if (user !== 0) {
+            // console.log('loggedIn: ' + user.username);
+            this.sharedService.user = user; // setting user as global variable using shared service
+            return true;
+          } else {
+            // console.log('loggedIn: fail');
+            this.router.navigate(['/login']);
             return false;
           }
         }

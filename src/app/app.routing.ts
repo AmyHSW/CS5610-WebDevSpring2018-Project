@@ -27,18 +27,22 @@ const appRoutes: Routes = [
   {path: 'product', component: ProductListComponent},
   {path: 'product/:productId', component: ProductDetailComponent},
   {path: 'product/:productId/review', component: ReviewListComponent},
-  {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuardReviewer]},
+
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+
+  {path: 'user/all', component: UserListComponent, canActivate: [AuthGuardAdmin]},
+
+  {path: 'user/reviewers', component: UserListComponent, canActivate: [AuthGuardReviewer]},
+  {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuardReviewer]},
-  {path: 'user/all', component: UserListComponent, canActivate: [AuthGuardAdmin]},
+  {path: 'user/review', component: ReviewListOfReviewerComponent, canActivate: [AuthGuardReviewer]},
+
   {path: 'user/favorite', component: ProductListObserverComponent, canActivate: [AuthGuardObserver]},
+
   {path: 'user/product', component: ProductListBusinessComponent, canActivate: [AuthGuardBusiness]},
   {path: 'user/product/new', component: ProductNewComponent, canActivate: [AuthGuardBusiness]},
   {path: 'user/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuardBusiness]},
-  {path: 'user/review', component: ReviewListOfReviewerComponent, canActivate: [AuthGuardReviewer]}
-
-
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
