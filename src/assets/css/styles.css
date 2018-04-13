@@ -1,3 +1,8 @@
+/*body {*/
+  /*padding-top: 70px;*/
+  /*padding-bottom: 70px;*/
+/*}*/
+
 .homepage-background {
   background: url("./../../assets/images/home-image3.jpg") no-repeat;
   height: 550px;
@@ -47,6 +52,7 @@
   min-height: 100vh;
   min-width: 100vw;
 }
+
 
 input.form-control {
   margin-bottom: 5px;
@@ -158,3 +164,29 @@ a:hover{
   height:750px;
   left:20px;
 }
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+.mid{
+  text-align: center;
+}
+
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.login-background
+{
+  background-image: url("./../../assets/images/background-image-cover-1.jpg");
+  height: 600px;
+  position: relative;
+  background-size: cover;
+}
+
+
+
