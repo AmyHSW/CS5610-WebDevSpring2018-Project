@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../../services/product.service.client';
 import {SharedService} from '../../../services/shared.service';
+import {UserService} from "../../../services/user.service.client";
 
 @Component({
   selector: 'app-product-list',
@@ -9,15 +9,24 @@ import {SharedService} from '../../../services/shared.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products = [{}];
-  constructor(private productService: ProductService, private sharedService: SharedService) { }
+  products: [any];
+  noUser: boolean;
+  constructor(private productService: ProductService,
+              private sharedService: SharedService,
+              private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.loggedIn().subscribe(
+      (isLoggedIn) => {
+        this.noUser = !isLoggedIn;
+      }
+    );
     this.productService.findAllProduct().subscribe(
-      (products: any[]) => {
+      (products) => {
         this.products = products;
       }
     );
+
   }
 
 }

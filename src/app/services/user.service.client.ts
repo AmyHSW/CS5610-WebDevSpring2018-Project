@@ -140,7 +140,7 @@ export class UserService {
             return true;
           } else {
             console.log('loggedIn: fail');
-            this.router.navigate(['']);
+            //this.router.navigate(['']);
             return false;
           }
         }
