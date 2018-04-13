@@ -1,42 +1,52 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid row">
-    <div class="navbar-text pull-left">
-      <a [routerLink]="['/profile']" class="cl-text-black cl-icon-padding">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-    </div>
-    <div class="navbar-text pull-right">
-      <a routerLink="./new" class="cl-icon-padding cl-text-black">
-              <span class="glyphicon glyphicon-plus">
-              </span>
-      </a>
-    </div>
-    <a class="navbar-brand cl-text-white cl-text-bold" routerLink=".">
-      My Review History
-    </a>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand thick" [routerLink]="['/profile']"><b><i class="fas fa-angle-left"></i></b></a>
+  <a class="navbar-brand thick" [routerLink]="['.']"><b>My Review History</b></a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['']">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/product']">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/reviewers']">Reviewers</a>
+        </li>
+      </ul>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name = "login">
+        <a [routerLink]="['/login']">Login</a>
+        <a [routerLink]="['/register']">Register</a>
+      </div>
+      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
+        <a [routerLink]="['/profile']">My Profile</a>
+      </div>
+    </form>
   </div>
 </nav>
 
-<div class="container-fluid cl-container-padding">
+<div class="container-fluid">
   <ul class="list-group cl-list-group-borderless">
     <li *ngFor="let review of reviews" class="list-group-item cl-list-item-borderless">
-      <div>
-        <h3>Created at {{review.dateCreated}}</h3>
-        <h3>Product: {{review._product.productName}}</h3>
-        <h3>Summary: {{review.summary}}</h3>
-        <h3>Rating: {{review.rating}}</h3>
-        <h4>Content: {{review.content}}</h4>
+      <div class="card border-success mb-3 review-card">
+        <div class="card-header bg-transparent border-success">
+          <a [routerLink]="['/product', review._product._id]">
+            Product: {{review._product.productName}}
+          </a>
+          (Rating: {{review.rating}})
+        </div>
+        <div class="card-body text-success">
+          <h5 class="card-title">{{review.summary}}</h5>
+          <p class="card-text">{{review.content}}</p>
+        </div>
+        <div class="card-footer bg-transparent border-success">
+          Created at {{review.dateCreated}}
+        </div>
       </div>
     </li>
   </ul>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid row">
-    <div class="pull-right navbar-text">
-      <a [routerLink]="['/profile']" class="cl-icon-padding">
-        <span class="glyphicon glyphicon-user"></span>
-      </a>
-    </div>
-  </div>
-</nav>

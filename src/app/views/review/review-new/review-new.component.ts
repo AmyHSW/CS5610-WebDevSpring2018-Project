@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ReviewService} from "../../../services/review.service.client";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SharedService} from "../../../services/shared.service";
+import {UserService} from "../../../services/user.service.client";
 
 @Component({
   selector: 'app-review-new',
@@ -10,6 +11,7 @@ import {SharedService} from "../../../services/shared.service";
 })
 export class ReviewNewComponent implements OnInit {
 
+  noUser: boolean;
   user: any;
   review: any;
   productId: String;
@@ -23,9 +25,15 @@ export class ReviewNewComponent implements OnInit {
   constructor(private reviewService: ReviewService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private sharedService: SharedService) { }
+              private sharedService: SharedService,
+              private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.loggedIn().subscribe(
+      (isLoggedIn) => {
+        this.noUser = !isLoggedIn;
+      }
+    );
     this.user = this.sharedService.user;
     this.errorFlag = false;
     this.activatedRoute.params.subscribe((params: any) => {
@@ -40,7 +48,7 @@ export class ReviewNewComponent implements OnInit {
     if (this.review.summary === undefined || this.review.summary === '') {
       this.summaryFlag = true;
       this.summaryAlert = '* Please enter summary';
-    } else if (this.review.rating === undefined || this.review.rating === '' 
+    } else if (this.review.rating === undefined || this.review.rating === ''
       || this.review.rating < 0 || this.review.rating > 5) {
       this.ratingFlag = true;
       this.ratingAlert = '* Please enter rating: 0.0 - 5.0';

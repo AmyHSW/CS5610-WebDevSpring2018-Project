@@ -10,6 +10,7 @@ import {SharedService} from "../../../services/shared.service";
 })
 export class ProductListObserverComponent implements OnInit {
 
+  noUser: boolean;
   user: any;
   products: any;
   constructor(private userService: UserService,
@@ -17,6 +18,11 @@ export class ProductListObserverComponent implements OnInit {
               private sharedService: SharedService) { }
 
   ngOnInit() {
+    this.userService.loggedIn().subscribe(
+      (isLoggedIn) => {
+        this.noUser = !isLoggedIn;
+      }
+    );
     this.user = this.sharedService.user;
     this.userService.findFavoritesForUser(this.user._id).subscribe(
       (products: any) => {

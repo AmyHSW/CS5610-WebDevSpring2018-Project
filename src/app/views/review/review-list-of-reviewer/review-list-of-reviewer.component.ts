@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ReviewService} from "../../../services/review.service.client";
 import {ActivatedRoute} from "@angular/router";
 import {SharedService} from "../../../services/shared.service";
+import {UserService} from "../../../services/user.service.client";
 
 @Component({
   selector: 'app-review-list-of-reviewer',
@@ -12,11 +13,19 @@ export class ReviewListOfReviewerComponent implements OnInit {
 
   user: any;
   reviews: any;
+  noUser: boolean;
+
   constructor(private reviewService: ReviewService,
               private activatedRoute: ActivatedRoute,
-              private sharedService: SharedService) { }
+              private sharedService: SharedService,
+              private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.loggedIn().subscribe(
+      (isLoggedIn) => {
+        this.noUser = !isLoggedIn;
+      }
+    );
     this.user = this.sharedService.user;
     this.reviewService.findAllReviewsForUser(this.user._id).subscribe(
       (reviews: any) => {
