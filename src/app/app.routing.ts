@@ -29,10 +29,10 @@ const appRoutes: Routes = [
   {path: 'product/:productId/review', component: ReviewListComponent},
 
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'reviewers', component: UserListComponent, canActivate: [AuthGuard]},
 
   {path: 'user/all', component: UserListComponent, canActivate: [AuthGuardAdmin]},
 
-  {path: 'user/reviewers', component: UserListComponent, canActivate: [AuthGuardReviewer]},
   {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuardReviewer]},
