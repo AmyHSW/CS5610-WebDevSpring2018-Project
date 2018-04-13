@@ -1,5 +1,26 @@
+.homepage-background {
+  background: url("./../../assets/images/home-image3.jpg") no-repeat;
+  height: 550px;
+  position: relative;
+  background-size: cover;
+}
+
+.bg-color {
+  background-color: #483D8B;
+}
+.homepage-position{
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.homepage-middle {
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
 body {
-  padding-top: 70px;
   padding-bottom: 70px;
 }
 input.form-control {
