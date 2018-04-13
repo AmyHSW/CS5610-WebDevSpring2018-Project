@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
         }
       );
   }
-  register() {
-    this.router.navigate(['/register']);
-  }
+  // register() {
+  //   this.router.navigate(['/register']);
+  // }
 
   ngOnInit() {
     this.errorFlag = false;
