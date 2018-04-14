@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ReviewService} from "../../../services/review.service.client";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SharedService} from "../../../services/shared.service";
 import {UserService} from "../../../services/user.service.client";
 
@@ -18,6 +18,7 @@ export class ReviewListOfReviewerComponent implements OnInit {
   constructor(private reviewService: ReviewService,
               private activatedRoute: ActivatedRoute,
               private sharedService: SharedService,
+              private router: Router,
               private userService: UserService) { }
 
   ngOnInit() {
@@ -34,4 +35,13 @@ export class ReviewListOfReviewerComponent implements OnInit {
     );
   }
 
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => {
+          this.sharedService.user = '';
+          this.router.navigate(['/login']);
+        }
+      );
+  }
 }

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ReviewService} from "../../../services/review.service.client";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SharedService} from "../../../services/shared.service";
-import {UserService} from "../../../services/user.service.client";
 
 @Component({
   selector: 'app-review-new',
@@ -11,7 +10,6 @@ import {UserService} from "../../../services/user.service.client";
 })
 export class ReviewNewComponent implements OnInit {
 
-  noUser: boolean;
   user: any;
   review: any;
   productId: String;
@@ -25,15 +23,9 @@ export class ReviewNewComponent implements OnInit {
   constructor(private reviewService: ReviewService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private sharedService: SharedService,
-              private userService: UserService) { }
+              private sharedService: SharedService) { }
 
   ngOnInit() {
-    this.userService.loggedIn().subscribe(
-      (isLoggedIn) => {
-        this.noUser = !isLoggedIn;
-      }
-    );
     this.user = this.sharedService.user;
     this.errorFlag = false;
     this.activatedRoute.params.subscribe((params: any) => {

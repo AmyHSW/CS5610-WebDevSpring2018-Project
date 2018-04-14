@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../services/user.service.client";
 import {SharedService} from "../../../services/shared.service";
 
@@ -10,19 +10,14 @@ import {SharedService} from "../../../services/shared.service";
 })
 export class ProductListObserverComponent implements OnInit {
 
-  noUser: boolean;
   user: any;
   products: any;
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
+              private router: Router,
               private sharedService: SharedService) { }
 
   ngOnInit() {
-    this.userService.loggedIn().subscribe(
-      (isLoggedIn) => {
-        this.noUser = !isLoggedIn;
-      }
-    );
     this.user = this.sharedService.user;
     this.userService.findFavoritesForUser(this.user._id).subscribe(
       (products: any) => {
@@ -38,5 +33,14 @@ export class ProductListObserverComponent implements OnInit {
           console.log('deleted favorite');
         }
       )
+  }
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => {
+          this.sharedService.user = '';
+          this.router.navigate(['/login']);
+        }
+      );
   }
 }

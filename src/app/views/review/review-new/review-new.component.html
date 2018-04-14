@@ -16,11 +16,7 @@
       </ul>
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
-      <div class="navbar-header navbar-toggler-right" *ngIf="noUser">
-        <a [routerLink]="['/login']">Login</a>
-        <a [routerLink]="['/register']">Register</a>
-      </div>
-      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser">
+      <div class="navbar-header navbar-toggler-right">
         <a [routerLink]="['/profile']">My Profile</a>
       </div>
     </form>

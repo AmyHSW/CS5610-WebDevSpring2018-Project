@@ -24,8 +24,7 @@
 
 <div class="container-fluid row">
 
-  <div class="col-4">
-    <br/>
+  <div class="col-4 cl-container-padding">
     <ul class="list-group cl-list-group-borderless">
       <li class="list-group-item cl-list-item-borderless">
         <a [routerLink]="['/profile']">
@@ -40,9 +39,7 @@
     </ul>
   </div>
 
-  <div class="col-8 col-sm-8 col-md-8 col-lg-8">
-    <br/>
-    <br/>
+  <div class="col-8 col-sm-8 col-md-8 col-lg-8 cl-container-padding">
 
     <div *ngIf="updateFlag" class="alert alert-success">
       {{updateMsg}}
