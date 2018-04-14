@@ -7,6 +7,7 @@ var UserSchema = mongoose.Schema({
   firstName:String,
   lastName: String,
   email: String,
+  photo: String,
   followers: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
   followings: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
   favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProductModel'}],

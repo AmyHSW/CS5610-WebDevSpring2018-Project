@@ -1,7 +1,6 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-color">
-  <a class="navbar-brand thick" [routerLink]="['/profile']"><b><i class="fas fa-angle-left"></i></b></a>
-  <a class="navbar-brand thick" [routerLink]="['.']"><b>My Review History</b></a>
+  <a class="navbar-brand thick" [routerLink]="['.']"><b>My Profile</b></a>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <ul class="navbar-nav">
@@ -17,36 +16,60 @@
       </ul>
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
-      <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name = "login">
-        <a [routerLink]="['/login']">Login</a>
-        <a [routerLink]="['/register']">Register</a>
-      </div>
-      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
-        <a [routerLink]="['/profile']">My Profile</a>
+      <div class="navbar-header navbar-toggler-right">
+        <a (click)="logout()" [routerLink]="['/login']">Log Out</a>
       </div>
     </form>
   </div>
 </nav>
 
-<div class="container-fluid">
-  <ul class="list-group cl-list-group-borderless">
-    <li *ngFor="let review of reviews" class="list-group-item cl-list-item-borderless">
-      <div class="card border-success mb-3 review-card">
-        <div class="card-header bg-transparent border-success">
-          <a [routerLink]="['/product', review._product._id]">
-            Product: {{review._product.productName}}
-          </a>
-          (Rating: {{review.rating}})
+<div class="container-fluid row">
+
+  <div class="col-4 cl-container-padding">
+    <ul class="list-group cl-list-group-borderless">
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/profile']">
+          Edit Profile
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'review']">
+          My Review History
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'followers']">
+          My Followers
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'followings']">
+          My Followings
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-8 col-sm-8 col-md-8 col-lg-8 cl-container-padding">
+    <ul class="list-group cl-list-group-borderless">
+      <li *ngFor="let review of reviews" class="list-group-item cl-list-item-borderless">
+        <div class="card border-success mb-3 review-card">
+          <div class="card-header bg-transparent border-success">
+            <a [routerLink]="['/product', review._product._id]">
+              Product: {{review._product.productName}}
+            </a>
+            (Rating: {{review.rating}})
+          </div>
+          <div class="card-body text-success">
+            <h5 class="card-title">{{review.summary}}</h5>
+            <p class="card-text">{{review.content}}</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            Created at {{review.dateCreated}}
+          </div>
         </div>
-        <div class="card-body text-success">
-          <h5 class="card-title">{{review.summary}}</h5>
-          <p class="card-text">{{review.content}}</p>
-        </div>
-        <div class="card-footer bg-transparent border-success">
-          Created at {{review.dateCreated}}
-        </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </div>
 

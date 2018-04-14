@@ -240,4 +240,10 @@ export class UserService {
         }
       );
   }
+  deleteFollow(followerId: String, followeeId: String) {
+    return this.http.delete(this.baseUrl + '/api/follower/' + followerId + '/followee/' + followeeId)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
 }

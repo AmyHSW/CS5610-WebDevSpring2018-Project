@@ -18,6 +18,8 @@ import {AuthGuardReviewer} from "./services/auth-guard-reviewer.service";
 import {AuthGuardAdmin} from "./services/auth-guard-admin.service";
 import {AuthGuardObserver} from "./services/auth-guard-observer.service";
 import {AuthGuardBusiness} from "./services/auth-guard-business.service";
+import {UserFollowersComponent} from "./views/user/user-followers/user-followers.component";
+import {UserFollowingsComponent} from "./views/user/user-followings/user-followings.component";
 
 
 const appRoutes: Routes = [
@@ -38,8 +40,8 @@ const appRoutes: Routes = [
 
   // require REVIEWER logged in
   {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuardReviewer]},
-  {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuardReviewer]},
-  {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuardReviewer]},
+  {path: 'user/followers', component: UserFollowersComponent, canActivate: [AuthGuardReviewer]},
+  {path: 'user/followings', component: UserFollowingsComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/review', component: ReviewListOfReviewerComponent, canActivate: [AuthGuardReviewer]},
 
   // require OBSERVER logged in

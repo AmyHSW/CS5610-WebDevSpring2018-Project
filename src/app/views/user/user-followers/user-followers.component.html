@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-color">
   <a class="navbar-brand thick" [routerLink]="['.']"><b>My Profile</b></a>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -32,8 +33,18 @@
         </a>
       </li>
       <li class="list-group-item cl-list-item-borderless">
-        <a [routerLink]="['/user', 'favorite']">
-          My Favorite List
+        <a [routerLink]="['/user', 'review']">
+          My Review History
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'followers']">
+          My Followers
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'followings']">
+          My Followings
         </a>
       </li>
     </ul>
@@ -41,9 +52,13 @@
 
   <div class="col-8 col-sm-8 col-md-8 col-lg-8 cl-container-padding">
     <ul class="list-group cl-list-group-borderless">
-      <li *ngFor="let product of products" class="list-group-item cl-list-item-borderless">
-        <button (click)="deleteFavorite(product._id)"><span class="glyphicon glyphicon-minus pull-right"></span></button>
-        <a [routerLink]="['/product', product._id]">{{product.productName}}</a>
+      <li *ngFor="let follower of followers" class="list-group-item cl-list-item-borderless">
+        <div class="card review-card">
+          <img class="card-img-top" src={{follower.photo}} alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{follower.username}}</h5>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
