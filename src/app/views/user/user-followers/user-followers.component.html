@@ -52,20 +52,11 @@
 
   <div class="col-8 col-sm-8 col-md-8 col-lg-8 cl-container-padding">
     <ul class="list-group cl-list-group-borderless">
-      <li *ngFor="let review of reviews" class="list-group-item cl-list-item-borderless">
-        <div class="card border-success mb-3 review-card">
-          <div class="card-header bg-transparent border-success">
-            <a [routerLink]="['/product', review._product._id]">
-              Product: {{review._product.productName}}
-            </a>
-            (Rating: {{review.rating}})
-          </div>
-          <div class="card-body text-success">
-            <h5 class="card-title">{{review.summary}}</h5>
-            <p class="card-text">{{review.content}}</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            Created at {{review.dateCreated}}
+      <li *ngFor="let follower of followers" class="list-group-item cl-list-item-borderless">
+        <div class="card review-card">
+          <img class="card-img-top" src={{follower.photo}} alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{follower.username}}</h5>
           </div>
         </div>
       </li>
