@@ -21,6 +21,7 @@ import {AuthGuardBusiness} from "./services/auth-guard-business.service";
 
 
 const appRoutes: Routes = [
+  // guest pages
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
@@ -28,18 +29,23 @@ const appRoutes: Routes = [
   {path: 'product/:productId', component: ProductDetailComponent},
   {path: 'product/:productId/review', component: ReviewListComponent},
 
+  // require user logged in
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'reviewers', component: UserListComponent, canActivate: [AuthGuard]},
 
+  // require ADMIN logged in
   {path: 'user/all', component: UserListComponent, canActivate: [AuthGuardAdmin]},
 
+  // require REVIEWER logged in
   {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/followers', component: UserListComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/followings', component: UserListComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/review', component: ReviewListOfReviewerComponent, canActivate: [AuthGuardReviewer]},
 
+  // require OBSERVER logged in
   {path: 'user/favorite', component: ProductListObserverComponent, canActivate: [AuthGuardObserver]},
 
+  // require BUSINESS logged in
   {path: 'user/product', component: ProductListBusinessComponent, canActivate: [AuthGuardBusiness]},
   {path: 'user/product/new', component: ProductNewComponent, canActivate: [AuthGuardBusiness]},
   {path: 'user/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuardBusiness]},
