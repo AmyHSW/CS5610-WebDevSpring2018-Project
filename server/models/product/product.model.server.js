@@ -27,8 +27,6 @@ function findAllProductsForUser(userId) {
   return ProductModel.find({_user: userId});
 }
 
-
-
 function updateProduct(productId, product){
   return ProductModel.update({_id: productId}, product);
 }
@@ -36,7 +34,6 @@ function updateProduct(productId, product){
 function deleteProduct(productId) {
   return ProductModel.remove({_id: productId});
 }
-
 
 function createProduct(product){
   console.log(product);

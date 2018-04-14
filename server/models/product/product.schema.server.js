@@ -8,7 +8,8 @@ var ProductSchema = mongoose.Schema({
   price: Number,
   url : String,
   width : String,
-  dateCreated: {type: Date, default: Date.now}
+  dateCreated: {type: Date, default: Date.now},
+  lastViewed: {type: Date}
 }, {collection: 'product'});
 
 module.exports = ProductSchema;

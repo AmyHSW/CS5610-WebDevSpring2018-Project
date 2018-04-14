@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../services/user.service.client";
 import {SharedService} from "../../../services/shared.service";
+import {ProductService} from "../../../services/product.service.client";
+import {ReviewService} from "../../../services/review.service.client";
 
 @Component({
   selector: 'app-product-list-observer',
@@ -13,6 +15,8 @@ export class ProductListObserverComponent implements OnInit {
   user: any;
   products: any;
   constructor(private userService: UserService,
+              private productService: ProductService,
+              private reviewService: ReviewService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private sharedService: SharedService) { }
@@ -42,5 +46,40 @@ export class ProductListObserverComponent implements OnInit {
           this.router.navigate(['/login']);
         }
       );
+  }
+  viewProduct(productId) {
+    this.productService.findProductById(productId)
+      .subscribe(
+        (product: any) => {
+          product.lastViewed = Date.now();
+          this.productService.updateProduct(productId, product)
+            .subscribe(
+              (data: any) => {
+                this.router.navigate(['/product', productId]);
+              }
+            )
+          }
+        )
+  }
+  newReviewCount(productId) {
+    let count = 0;
+    this.productService.findProductById(productId)
+      .subscribe(
+        (product: any) => {
+          const lastViewed = new Date(product.lastViewed);
+          this.reviewService.findAllReviewsForProduct(productId)
+            .subscribe(
+              (reviews: any) => {
+                for (let i = 0; i < reviews.length; i++) {
+                  const created = new Date(reviews[i].dateCreated);
+                  if (created > lastViewed) {
+                    count++;
+                  }
+                }
+              }
+            )
+        }
+      );
+    return count;
   }
 }

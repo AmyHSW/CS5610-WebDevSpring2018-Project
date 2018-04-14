@@ -46,7 +46,7 @@ module.exports = function(app){
     ProductModel
       .updateProduct(productId, product)
       .then(function (stats) {
-          console.log(stats);
+          // console.log(stats);
           res.send(200);
         },
         function (err) {
