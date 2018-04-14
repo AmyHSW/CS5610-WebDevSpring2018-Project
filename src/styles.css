@@ -6,6 +6,10 @@
 /*padding-bottom: 70px;*/
 /*}*/
 
+.review-card {
+  max-width: 18rem;
+}
+
 .homepage-background {
   background: url("assets/images/home-image3.jpg") no-repeat;
   height: 550px;
