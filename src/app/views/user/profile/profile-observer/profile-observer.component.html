@@ -14,68 +14,92 @@
         </li>
       </ul>
     </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right">
+        <a (click)="logout()" [routerLink]="['/login']">Log Out</a>
+      </div>
+    </form>
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid row">
 
-  <div *ngIf="updateFlag" class="alert alert-success">
-    {{updateMsg}}
+  <div class="col-4">
+    <br/>
+    <ul class="list-group cl-list-group-borderless">
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/profile']">
+          Edit Profile
+        </a>
+      </li>
+      <li class="list-group-item cl-list-item-borderless">
+        <a [routerLink]="['/user', 'favorite']">
+          My Favorite List
+        </a>
+      </li>
+    </ul>
   </div>
 
-  <div *ngIf="errorFlag" class="alert alert-danger">
-    {{errorMsg}}
+  <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+    <br/>
+    <br/>
+
+    <div *ngIf="updateFlag" class="alert alert-success">
+      {{updateMsg}}
+    </div>
+
+    <div *ngIf="errorFlag" class="alert alert-danger">
+      {{errorMsg}}
+    </div>
+
+    <form>
+
+      <div class="form-group" *ngIf="user">
+        <label for="username">Username</label>
+        <input [(ngModel)]="username"
+               [ngClass]="{'red-border-class': errorFlag}"
+               id="username"
+               type="text"
+               class="form-control"
+               placeholder="Username"
+               [ngModelOptions]="{standalone: true}"/>
+        <span class="alert-class" *ngIf="errorFlag">{{alert}}</span>
+      </div>
+
+      <div class="form-group" *ngIf="user">
+        <label for="email">Email address</label>
+        <input [(ngModel)]="user.email"
+               id="email"
+               type="email"
+               class="form-control"
+               placeholder="alice@wonderland.com"
+               [ngModelOptions]="{standalone: true}"/>
+      </div>
+
+      <div class="form-group" *ngIf="user">
+        <label for="first-name">First Name</label>
+        <input [(ngModel)]="user.firstName"
+               id="first-name"
+               type="text"
+               class="form-control"
+               placeholder="Alice"
+               [ngModelOptions]="{standalone: true}"/>
+      </div>
+
+      <div class="form-group" *ngIf="user">
+        <label for="last-name">Last Name</label>
+        <input [(ngModel)]="user.lastName"
+               id="last-name"
+               type="text"
+               class="form-control"
+               placeholder="Wonderland"
+               [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <br/>
+
+      <button type="button" class="btn btn-outline-primary btn-block"
+              (click)="updateUser()">Save Changes</button>
+
+    </form>
   </div>
-
-  <form>
-
-    <div class="form-group" *ngIf="user">
-      <label for="username">Username</label>
-      <input [(ngModel)]="username"
-             [ngClass]="{'red-border-class': errorFlag}"
-             id="username"
-             type="text"
-             class="form-control"
-             placeholder="Username"
-             [ngModelOptions]="{standalone: true}"/>
-      <span class="alert-class" *ngIf="errorFlag">{{alert}}</span>
-    </div>
-
-    <div class="form-group" *ngIf="user">
-      <label for="email">Email address</label>
-      <input [(ngModel)]="user.email"
-             id="email"
-             type="email"
-             class="form-control"
-             placeholder="alice@wonderland.com"
-             [ngModelOptions]="{standalone: true}"/>
-    </div>
-
-    <div class="form-group" *ngIf="user">
-      <label for="first-name">First Name</label>
-      <input [(ngModel)]="user.firstName"
-             id="first-name"
-             type="text"
-             class="form-control"
-             placeholder="Alice"
-             [ngModelOptions]="{standalone: true}"/>
-    </div>
-
-    <div class="form-group" *ngIf="user">
-      <label for="last-name">Last Name</label>
-      <input [(ngModel)]="user.lastName"
-             id="last-name"
-             type="text"
-             class="form-control"
-             placeholder="Wonderland"
-             [ngModelOptions]="{standalone: true}"/>
-    </div>
-
-    <button class="btn btn-success btn-block"
-            [routerLink]="['/user', 'favorite']">Favorite List</button>
-
-    <button class="btn btn-warning btn-block"
-            (click)="logout()">Logout</button>
-
-  </form>
 </div>
