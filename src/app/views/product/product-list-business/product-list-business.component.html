@@ -15,28 +15,35 @@
       </ul>
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
-      <div class="navbar-header navbar-toggler-right" name = "new">
-        <a [routerLink]="['./new']">Create a product</a>
+      <div class="navbar-header navbar-toggler-right">
+        <a (click)="logout()" [routerLink]="['/login']">Log Out</a>
       </div>
     </form>
   </div>
 </nav>
 
 <div class="body-grey body-padding">
-  <h2><b>Created Products</b></h2>
+  <h2><b>My Products</b></h2>
+
+  <button type="button" class="btn btn-outline-primary float-right"
+          routerLink="./new">Create</button>
+
   <div class="container">
     <div class="row" *ngIf="products">
       <div *ngFor="let product of products">
         <div class="card card-padding">
           <div class="row">
             <div class="col-md-3">
-              <img src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"height="215" width="215">
+              <img src="{{product.url}}" height="215" width="215">
             </div>
             <div class="col-md-9">
               <div class="card-block">
-                <h4 class="card-title cl-text-bold">{{product.productName}}</h4>
+                <h4 class="card-title cl-text-bold">{{product.productName}}  {{product.price}}$</h4>
+                <p class="card-text">{{product.brand}}</p>
                 <p class="card-text">{{product.description}}</p>
-                <p class="card-text">show one review</p>
+                <button routerLink="./{{product._id}}/edit" >
+                  Edit Product
+                </button>
               </div>
             </div>
           </div>

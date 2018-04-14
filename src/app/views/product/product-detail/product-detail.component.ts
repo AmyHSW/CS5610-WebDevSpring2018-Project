@@ -3,6 +3,7 @@ import {SharedService} from '../../../services/shared.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../services/product.service.client';
 import {ReviewService} from '../../../services/review.service.client';
+import {UserService} from '../../../services/user.service.client';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,8 +14,9 @@ export class ProductDetailComponent implements OnInit {
   productId: String;
   product = {};
   reviews = [{}];
+  isReviewer: boolean;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
-              private sharedService: SharedService, private reviewService: ReviewService) { }
+              private sharedService: SharedService, private reviewService: ReviewService, private userService: UserService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
@@ -32,6 +34,11 @@ export class ProductDetailComponent implements OnInit {
       (data: any) => {
         this.reviews = data;
         console.log(this.reviews);
+      }
+    );
+    this.userService.loggedInReviewer().subscribe(
+      (data) => {
+        this.isReviewer = data;
       }
     );
   }

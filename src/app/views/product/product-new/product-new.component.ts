@@ -19,7 +19,7 @@ export class ProductNewComponent implements OnInit {
     this.productService.createProduct(this.userId, this.product).subscribe(
       (data: any) => {
         this.product = data;
-        this.router.navigate(['/product']);
+        this.router.navigate(['/user/product']);
         console.log(this.product);
       }
     );
