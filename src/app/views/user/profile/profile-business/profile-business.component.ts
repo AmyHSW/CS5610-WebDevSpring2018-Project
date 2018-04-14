@@ -25,6 +25,7 @@ export class ProfileBusinessComponent implements OnInit {
     private sharedService: SharedService) { }
 
   updateUser() {
+    this.updateFlag = false;
     this.errorFlag = false;
     if (this.username !== this.user.username) {
       if (this.username === '') {

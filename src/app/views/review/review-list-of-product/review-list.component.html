@@ -31,20 +31,17 @@
 <div class="container-fluid">
   <ul class="list-group cl-list-group-borderless">
     <li *ngFor="let review of reviews" class="list-group-item cl-list-item-borderless">
-      <div class="card border-success mb-3 review-card">
-        <div class="card-header bg-transparent border-success">{{review.summary}}</div>
-        <div class="card-body text-success">
-          <h5 class="card-title">{{review.rating}}</h5>
-          <p class="card-text">{{review.content}}</p>
+      <div class="card">
+        <div class="card-header">
+          {{review.summary}} (Rating: {{review.rating}})
         </div>
-        <div class="card-footer bg-transparent border-success">
-          Created by {{review._user.username}} at {{review.dateCreated}}
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>{{review.content}}</p>
+            <footer class="blockquote-footer">Created by <cite title="Source Title">{{review._user.username}}</cite> {{review.dateCreated}}</footer>
+          </blockquote>
         </div>
       </div>
     </li>
   </ul>
 </div>
-
-<!--<nav class="navbar fixed-bottom navbar-dark bg-color">
-  &lt;!&ndash;<a class="navbar-brand" href="#">Fixed bottom</a>&ndash;&gt;
-</nav>-->

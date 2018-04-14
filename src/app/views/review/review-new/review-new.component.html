@@ -23,7 +23,7 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid cl-container-padding">
 
   <div *ngIf="errorFlag" class="alert alert-danger">
     {{errorMsg}}
@@ -64,5 +64,8 @@
              name="content"/>
     </div>
 
+    <br/>
+    <button type="button" class="btn btn-outline-primary btn-block"
+            (click)="createReview()">Create</button>
   </form>
 </div>

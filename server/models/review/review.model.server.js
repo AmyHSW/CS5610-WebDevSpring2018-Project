@@ -22,12 +22,14 @@ function findReviewById(reviewId){
 function findAllReviewsForUser(userId) {
   return ReviewModel.find({_user: userId})
     .populate('_user', 'username')
+    .populate('_product', 'productName')
     .exec();
 }
 
 function findAllReviewsForProduct(productId) {
   return ReviewModel.find({_product: productId})
     .populate('_product', 'productName')
+    .populate('_user', 'username')
     .exec();
 }
 
