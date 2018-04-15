@@ -87,17 +87,21 @@ function deleteFollow(followerId, followeeId) {
 function addFavorite(userId, productId) {
   return UserModel.findOne({_id:userId})
     .then(function (user) {
-      user.favorites.push(ProductModel.findById(productId));
+      ProductModel.findProductById(productId)
+        .then(function(product) {
+          user.favorites.push(product);
+          user.save();
+      })
     })
 }
 
 function deleteFavorite(userId, productId) {
   return UserModel.findOne({_id:userId})
     .then(function (user) {
-      var favorites = user.favorites;
-      for (var i = 1; i < favorites.length; i++) {
-        if (favorites[i]._id === productId) {
-          favorites.splice(i, 1);
+      for (var i = 0; i < user.favorites.length; i++) {
+        if (user.favorites[i].equals(productId)) {
+          user.favorites.splice(i, 1);
+          return user.save();
         }
       }
     })

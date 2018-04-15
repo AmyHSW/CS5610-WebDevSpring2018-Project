@@ -20,7 +20,7 @@ function findAllProducts(){
 
 
 function findProductById(productId) {
-  return ProductModel.findById({_id: productId});
+  return ProductModel.findById(productId);
 }
 
 function findAllProductsForUser(userId) {
