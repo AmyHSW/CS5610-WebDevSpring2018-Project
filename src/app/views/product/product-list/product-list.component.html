@@ -33,10 +33,12 @@
         <div class="card card-padding">
           <div class="row">
             <div class="col-md-3">
-              <img src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"height="215" width="215">
+              <img src="{{product.url}}"height="215" width="215" *ngIf="product.url">
+              <img src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" height="215" width="215" *ngIf="!product.url">
             </div>
             <div class="col-md-9">
               <div class="card-block">
+                <button class="float-right" (click)="addFavorite(product._id)">favorite</button>
                 <h4><a class="card-title cl-text-bold" [routerLink]="['/product', product._id]">{{product.productName}}</a></h4>
                 <p class="card-text">{{product.description}}</p>
                 <p class="card-text">show one review</p>

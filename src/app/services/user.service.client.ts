@@ -127,6 +127,16 @@ export class UserService {
       });
   }
 
+  addFavorite(userId: String, productId: String) {
+    const url = this.baseUrl + '/api/user/' + userId + '/product/' + productId;
+    return this.http.put(url, userId)
+      .map(
+        (res: Response) => {
+          return 'Updated';
+        }
+      );
+  }
+
   loggedIn() {
     this.options.withCredentials = true;
     return this.http.post(this.baseUrl + '/api/loggedIn', '', this.options)
