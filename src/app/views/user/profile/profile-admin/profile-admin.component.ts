@@ -24,7 +24,9 @@ export class ProfileAdminComponent implements OnInit {
   logout() {
     this.userService.logout()
       .subscribe(
-        (data: any) => this.router.navigate(['/login'])
+        (data: any) => {
+          this.sharedService.user = '';
+          this.router.navigate(['/'])}
       );
   }
   ngOnInit() {

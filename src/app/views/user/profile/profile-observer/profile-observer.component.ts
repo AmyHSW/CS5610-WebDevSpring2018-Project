@@ -65,7 +65,7 @@ export class ProfileObserverComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.sharedService.user = '';
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
         }
       );
   }
