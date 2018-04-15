@@ -8,4 +8,6 @@ module.exports = db;
 // alice alice ADMIN
 // bob b REVIEWER
 // business b BUSINESS
-// observer
+// observer o OBSERVER
+// lily lily
+// reviewer r

@@ -100,7 +100,7 @@ export class UserService {
   }
 
   findAllUsers() {
-    return this.http.get(this.baseUrl + '/api/alluser')
+    return this.http.get(this.baseUrl + '/api/allUser')
       .map((response: Response) => {
         return response.json();
       });
@@ -252,6 +252,27 @@ export class UserService {
   }
   deleteFollow(followerId: String, followeeId: String) {
     return this.http.delete(this.baseUrl + '/api/follower/' + followerId + '/followee/' + followeeId)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  findAllReviewers() {
+    return this.http.get(this.baseUrl + '/api/allReviewer')
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  findReviewersByUsernameLike(username) {
+    return this.http.get(this.baseUrl + '/api/reviewerLike/' + username)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  findUsersByUsernameLike(username) {
+    return this.http.get(this.baseUrl + '/api/userLike/' + username)
       .map((response: Response) => {
         return response.json();
       });

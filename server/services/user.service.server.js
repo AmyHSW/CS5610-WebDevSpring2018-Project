@@ -16,9 +16,10 @@ module.exports = function (app) {
   app.delete("/api/follower/:followerId/followee/:followeeId", deleteFollow);
   app.put("/api/user/:userId/product/:productId", addFavorite);
   app.delete("/api/user/:userId/product/:productId", deleteFavorite);
-  app.get("/api/alluser", findAllUsers);
-  app.get("/api/userlike/:username", findUsersByUsernameLike);
-  app.get("/api/reviewerlike/:username", findReviewersByUsernameLike);
+  app.get("/api/allUser", findAllUsers);
+  app.get("/api/allReviewer", findAllReviewers);
+  app.get("/api/userLike/:username", findUsersByUsernameLike);
+  app.get("/api/reviewerLike/:username", findReviewersByUsernameLike);
 
   app.post('/api/logout', logout);
   app.post ('/api/register', register);
@@ -328,6 +329,19 @@ module.exports = function (app) {
       .then(
         function (users){
           console.log("find reviewers by username like");
+          res.json(users);
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).send(err);
+        });
+  }
+
+  function findAllReviewers(req, res) {
+    userModel.findAllReviewers()
+      .then(
+        function (users){
+          console.log("find all reviewers");
           res.json(users);
         },
         function (err) {

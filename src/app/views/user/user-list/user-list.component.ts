@@ -12,6 +12,8 @@ export class UserListComponent implements OnInit {
   href: string;
   userId: string;
   users: [any];
+  isAdmin: boolean;
+  searchText: string;
 
   constructor(
     private userService: UserService,
@@ -19,25 +21,40 @@ export class UserListComponent implements OnInit {
     private router: Router,
     private sharedService: SharedService) { }
 
-  deleteUser(deleteUserId) {
-    this.userService.deleteUser(deleteUserId).subscribe((status) => {
-      this.router.navigateByUrl(this.href);
-    });
-  }
-
-  ngOnInit() {
-    this.userId = this.sharedService.user['_id'];
-    this.href = this.router.url;
-    if (this.href.includes("followers")) {
-      this.userService.findFollowersForUser(this.userId).subscribe(
+  searchUsers() {
+    if (this.href.includes("reviewers")) {
+      this.userService.findReviewersByUsernameLike(this.searchText).subscribe(
+        (reviewers) => {
+          this.users = reviewers;
+        }
+      );
+    } else {
+      this.userService.findUsersByUsernameLike(this.searchText).subscribe(
         (users) => {
           this.users = users;
         }
       );
-    } else if (this.href.includes("followings")) {
-      this.userService.findFollowingsForUser(this.userId).subscribe(
-        (users) => {
-          this.users = users;
+    }
+  }
+
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => {
+          this.sharedService.user = '';
+          (data: any) => this.router.navigate(['/'])
+        }
+      );
+  }
+
+  ngOnInit() {
+    this.userId = this.sharedService.user['_id'];
+    this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
+    this.href = this.router.url;
+    if (this.href.includes("reviewers")) {
+      this.userService.findAllReviewers().subscribe(
+        (reviewers) => {
+          this.users = reviewers;
         }
       );
     } else {
