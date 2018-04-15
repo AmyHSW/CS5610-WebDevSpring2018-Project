@@ -38,6 +38,7 @@ import {AuthGuardObserver} from "./services/auth-guard-observer.service";
 import {AuthGuardBusiness} from "./services/auth-guard-business.service";
 import { UserFollowersComponent } from './views/user/user-followers/user-followers.component';
 import { UserFollowingsComponent } from './views/user/user-followings/user-followings.component';
+import { ProfileOtherComponent } from './views/user/profile-other/profile-other.component';
 
 
 
@@ -63,7 +64,8 @@ import { UserFollowingsComponent } from './views/user/user-followings/user-follo
     ProductListObserverComponent,
     ReviewListOfReviewerComponent,
     UserFollowersComponent,
-    UserFollowingsComponent
+    UserFollowingsComponent,
+    ProfileOtherComponent
   ],
   imports: [
     BrowserModule,

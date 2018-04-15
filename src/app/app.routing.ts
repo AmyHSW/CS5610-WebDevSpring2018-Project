@@ -35,6 +35,7 @@ const appRoutes: Routes = [
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'reviewers', component: UserListComponent, canActivate: [AuthGuard]},
 
+
   // require ADMIN logged in
   {path: 'user/all', component: UserListComponent, canActivate: [AuthGuardAdmin]},
 

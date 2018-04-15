@@ -212,5 +212,31 @@ img.avatar {
   text-align: center;
 }
 
+.register_form {
+  background: #fff;
+  padding: 2em 4em 3em;
+  max-width: 400px;
+  margin: 10px auto 0;
+  box-shadow: 0 0 1em #222;
+  border-radius: 2px;
+}
 
+.register_form h2 {
+  margin:0 0 30px 0;
+  padding:10px;
+  text-align:center;
+  font-size:30px;
+  color: #666666;
+  border-bottom:solid 1px #e5e5e5;
+}
 
+.form-group {
+  margin-bottom: 1.3rem;
+}
+.small-input-bottom-margin {
+  margin-bottom: 0.9rem;
+}
+
+.large-input-bottom-margin {
+  margin-bottom: 1.7rem;
+}

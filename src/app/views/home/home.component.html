@@ -1,17 +1,20 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-color">
-  <a class="navbar-brand thick" href="#"><b>Rate the Product</b></a>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+  <a class="navbar-brand thick cl-text-white" [routerLink]="['.']"><b>Rate the Product</b></a>
+  <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" [routerLink]="['/']">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/product']">Products</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Reviewers</a>
+        <li class="nav-item" *ngIf="!isAdmin">
+          <a class="nav-link" [routerLink]="['/reviewers']">Influencers</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" [routerLink]="['/user/all']">Users</a>
         </li>
       </ul>
     </ul>

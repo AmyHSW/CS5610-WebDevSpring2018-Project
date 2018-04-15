@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   products: [any];
   searchText: String;
   noUser: boolean;
+  isAdmin: boolean;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -34,6 +35,12 @@ export class HomeComponent implements OnInit {
         this.noUser = !isLoggedIn;
       }
     );
+
+    this.userService.loggedInAdmin().subscribe(
+      (isAdmin) => {
+        this.isAdmin = isAdmin;
+      }
+    )
   }
 
 }

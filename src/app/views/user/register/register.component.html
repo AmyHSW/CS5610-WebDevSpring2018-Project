@@ -1,74 +1,90 @@
-<div class="container-fluid">
-
-  <h1>Register</h1>
-
-  <div *ngIf="errorFlag" class="alert alert-danger">
-    {{errorMsg}}
+<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand thick cl-text-white" [routerLink]="['.']"><b>Rate the Product</b></a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/product']">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/reviewers']">Influencers</a>
+        </li>
+      </ul>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right" name = "login">
+        <a [routerLink]="['/login']">Login</a>
+      </div>
+    </form>
   </div>
+</nav>
+<div class="container-fluid body-grey body-padding">
+  <div class = "register_form">
+    <h2><b>Sign Up</b></h2>
+    <div *ngIf="errorFlag" class="alert alert-danger">
+      {{errorMsg}}
+    </div>
 
-  <div *ngIf="passwordFlag" class="alert alert-warning">
-    {{passwordMsg}}
+    <div *ngIf="passwordFlag" class="alert alert-warning">
+      {{passwordMsg}}
+    </div>
+
+    <form (ngSubmit)="register()" #f="ngForm">
+
+      <div class="form-group">
+        <input id="username"
+               name="username"
+               placeholder="username"
+               type="text"
+               class="form-control"
+               [ngClass]="{'red-border-class': errorFlag}"
+               ngModel
+               required
+               #username="ngModel"/>
+        <span class="alert-class" *ngIf="errorFlag">{{errorAlert}}</span>
+      </div>
+
+      <div class="form-group">
+        <input id="password2"
+               name="password"
+               placeholder="password"
+               type="password"
+               class="form-control"
+               [ngClass]="{'red-border-class': passwordFlag}"
+               ngModel
+               required
+               #password="ngModel"/>
+        <span class="alert-class" *ngIf="passwordFlag">{{passwordAlert}}</span>
+      </div>
+
+      <div class="form-group small-input-bottom-margin">
+        <input id="v_password"
+               name="v_password"
+               placeholder="verify password"
+               type="password"
+               class="form-control"
+               ngModel
+               required
+               #v_password="ngModel"/>
+      </div>
+
+      <div class="form-group large-input-bottom-margin">
+        <label for="FormControlSelect"><small><b>Select account type</b></small></label>
+        <select class = "form-control" (change)="filterChanged($event.target.value)" id="FormControlSelect">
+          <option *ngFor="let type of filterTypes" [value]="type.value">{{type.display}}
+          </option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary btn-block"
+              type="submit"
+              [disabled]="!f.valid">Create My Account</button>
+
+    </form>
   </div>
-
-  <form (ngSubmit)="register()" #f="ngForm">
-
-    <div class="form-group">
-      <input id="username"
-             name="username"
-             placeholder="username"
-             type="text"
-             class="form-control"
-             [ngClass]="{'red-border-class': errorFlag}"
-             ngModel
-             required
-             #username="ngModel"/>
-      <span class="alert-class" *ngIf="errorFlag">{{errorAlert}}</span>
-    </div>
-
-    <div class="form-group">
-      <input id="password"
-             name="password"
-             placeholder="password"
-             type="password"
-             class="form-control"
-             [ngClass]="{'red-border-class': passwordFlag}"
-             ngModel
-             required
-             #password="ngModel"/>
-      <span class="alert-class" *ngIf="passwordFlag">{{passwordAlert}}</span>
-    </div>
-
-    <div class="form-group">
-      <input id="v_password"
-             name="v_password"
-             placeholder="verify password"
-             type="password"
-             class="form-control"
-             ngModel
-             required
-             #v_password="ngModel"/>
-    </div>
-
-    <div class="form-group">
-      <input id="type"
-             name="type"
-             placeholder="type"
-             type="text"
-             class="form-control"
-             ngModel
-             required
-             #v_password="ngModel"/>
-    </div>
-
-    <button class="btn btn-primary btn-block"
-            type="submit"
-            [disabled]="!f.valid">Register</button>
-
-    <button class="btn btn-danger btn-block"
-            type="button"
-            (click)="cancel()">Cancel</button>
-
-  </form>
 
 </div>
 
