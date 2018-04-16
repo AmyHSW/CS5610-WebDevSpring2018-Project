@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SharedService} from "../../../services/shared.service";
 import {UserService} from "../../../services/user.service.client";
 import {ActivatedRoute} from "@angular/router";
-import { ViewChild } from '@angular/core';
+import {ReviewService} from "../../../services/review.service.client";
 
 
 @Component({
@@ -12,16 +12,30 @@ import { ViewChild } from '@angular/core';
 })
 export class ProfileOtherComponent implements OnInit {
   isAdmin: boolean;
-  user: any;
+  profileUser: any;
+  loginUser: any;
   username: String;
+  reviews: [any];
+  followers: [any];
+  followings: [any];
 
   constructor(
     private sharedService: SharedService,
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private reviewService: ReviewService
   ) { }
 
+  follow() {
+    this.userService.addFollow(this.loginUser._id, this.profileUser._id).subscribe(
+      (any) => {
+        alert("successfully follow!" + this.profileUser.username);
+      }
+    )
+  }
+
   ngOnInit() {
+    this.loginUser = this.sharedService.user;
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
     this.activatedRoute.params.subscribe(
       (params: any) => {
@@ -30,14 +44,24 @@ export class ProfileOtherComponent implements OnInit {
     );
     this.userService.findUserByUsername(this.username).subscribe(
       (user) => {
-        this.user = user;
+        this.profileUser = user;
+        this.reviewService.findAllReviewsForUser(this.profileUser._id).subscribe(
+          (reviews) => {
+            this.reviews = reviews;
+          }
+        )
+        this.userService.findFollowersForUser(this.profileUser._id).subscribe(
+          (followers) => {
+            this.followers = followers;
+          }
+        );
+        this.userService.findFollowingsForUser(this.profileUser._id).subscribe(
+          (followings) => {
+            this.followings = followings;
+          }
+        )
       }
-    )
-  }
-  @ViewChild('tabs') public test;
-
-  changeTab() {
-    this.test.setActiveTab(3);
+    );
   }
 
 }

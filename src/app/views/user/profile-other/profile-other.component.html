@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-color">
   <a class="navbar-brand thick" [routerLink]="['.']"><b>Rate the Product</b></a>
   <div class="collapse navbar-collapse">
@@ -19,7 +18,7 @@
       </ul>
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
-      <div class="navbar-header navbar-toggler-right" name = "profile">
+      <div class="navbar-header navbar-toggler-right" name="profile">
         <a [routerLink]="['/profile']">Profile</a>
       </div>
     </form>
@@ -28,26 +27,86 @@
 
 
 <div class="body-grey body-padding">
-  <div class = "user-other-container" >
-    <div class="jumbotron jumbotron-fluid" *ngIf="user">
-      <img class="mr-3 rounded-circle" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
-           alt="Generic placeholder image" width="100" height="100">
-      <h5 class="mt-0"><b>{{user.username}}</b></h5>
-    </div>
+  <div class="user-other-container">
+    <div class="jumbotron jumbotron-fluid" *ngIf="profileUser">
 
-    <div>
-      <tabset [justified]="true">
-        <tab heading="Reviews">Show Reviewers</tab>
-        <tab heading="Followers">Show Followers</tab>
-        <tab heading="Following">Show Followings</tab>
-      </tabset>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+          </div>
+          <div class="col-sm">
+            <img class="mx-auto d-block rounded-circle image-decorate"
+                 src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                 alt="Generic placeholder image" width="100" height="100">
+          </div>
+          <div class="col-sm">
+            <div class="container d-flex h-100">
+              <div class="row justify-content-center align-self-center">
+                <button type="button" (click)="follow()" class="btn btn-outline-primary btn-sm ">Follow</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <b>{{profileUser.username}}</b>
+      </div>
+
+
+      <div>
+        <tabset [justified]="true">
+          <tab heading="Reviews">
+            <ul class="list-group cl-list-group-borderless">
+              <li *ngFor="let review of reviews" class="list-group-item cl-list-item-borderless">
+                <div class="card border-info mb-3">
+                  <div class="card-header">
+                    <a [routerLink]="['/product', review._product._id]">
+                      Product: {{review._product.productName}}
+                    </a>
+                    (Rating: {{review.rating}})
+                  </div>
+                  <div class="card-body text-info">
+                    <h5 class="card-title">{{review.summary}}</h5>
+                    <p class="card-text">{{review.content}}</p>
+                  </div>
+                  <div class="card-footer">
+                    {{review.dateCreated}}
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </tab>
+          <tab heading="Followers">
+            <ul class="list-group cl-list-group-borderless">
+              <li *ngFor="let follower of followers" class="list-group-item cl-list-item-borderless">
+                <div class="media">
+                  <img class="mr-3" src={{follower.photo}}
+                       alt="Generic placeholder image" width="64" height="64">
+                  <div class="media-body">
+                    <h5><a class="mt-0" [routerLink]="['/username', follower.username]">{{follower.username}}</a></h5>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </tab>
+          <tab heading="Following">
+            <ul class="list-group cl-list-group-borderless">
+              <li *ngFor="let following of followings" class="list-group-item cl-list-item-borderless">
+                <div class="media">
+                  <img class="mr-3" src={{following.photo}}
+                       alt="Generic placeholder image" width="64" height="64">
+                  <div class="media-body">
+                    <h5><a class="mt-0" [routerLink]="['/username', following.username]">{{following.username}}</a></h5>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </tab>
+        </tabset>
+      </div>
     </div>
   </div>
-
-
-
-
-
 </div>
 
 

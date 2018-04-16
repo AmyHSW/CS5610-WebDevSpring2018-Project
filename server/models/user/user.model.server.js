@@ -97,7 +97,7 @@ function addFavorite(userId, productId) {
           console.log(product);
           user.favorites.push(product);
           user.save();
-          return product.save();
+          product.save();
       })
     })
 }
@@ -105,6 +105,7 @@ function addFavorite(userId, productId) {
 function deleteFavorite(userId, productId) {
   return UserModel.findOne({_id:userId})
     .then(function (user) {
+      console.log(user);
       for (var i = 0; i < user.favorites.length; i++) {
         if (user.favorites[i].equals(productId)) {
           user.favorites.splice(i, 1);

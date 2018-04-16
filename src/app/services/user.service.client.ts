@@ -284,4 +284,15 @@ export class UserService {
         return response.json();
       });
   }
+
+
+  addFollow(followerId, followeeId) {
+    return this.http.get(this.baseUrl + '/api/follower/' + followerId + '/followee/' + followeeId)
+      .map(
+        (res: Response) => {
+          console.log(res.json());
+          return res.json();
+        }
+      );
+  }
 }
