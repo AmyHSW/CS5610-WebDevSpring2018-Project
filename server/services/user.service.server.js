@@ -200,9 +200,27 @@ module.exports = function (app) {
     var userId = req.params["userId"];
     userModel
       .findUserById(userId)
-      .then(function (user) {
-          console.log("find followers for user: userId = " + userId);
-          res.status(200).json(user.followers);
+      .then(function (targetUser) {
+        let followers = [];
+        let index = 0;
+        let promise = userModel.findUserById(targetUser.followers[index]);
+          for (var i = 1; i < targetUser.followers.length; i++) {
+            promise = promise.then(user => {
+              followers.push(user);
+              index++;
+              return userModel.findUserById(targetUser.followers[index]);
+            })
+          }
+          return promise.then( user => {
+            if (user) {
+              followers.push(user);
+            }
+            console.log("find followers for user: userId = " + userId);
+            console.log("total: " + followers.length + " followers");
+            res.status(200).json(followers);
+          }
+          )
+
         },
         function (err) {
           console.log(err);
@@ -214,9 +232,27 @@ module.exports = function (app) {
     var userId = req.params["userId"];
     userModel
       .findUserById(userId)
-      .then(function (user) {
-          console.log("find followings for user: userId = " + userId);
-          res.status(200).json(user.followings);
+      .then(function (targetUser) {
+          let followings = [];
+          let index = 0;
+          let promise = userModel.findUserById(targetUser.followings[index]);
+          for (var i = 1; i < targetUser.followings.length; i++) {
+            promise = promise.then(user => {
+              followings.push(user);
+              index++;
+              return userModel.findUserById(targetUser.followings[index]);
+            })
+          }
+          return promise.then(user => {
+              if (user != null) {
+                followings.push(user);
+              }
+              console.log("find followings for user: userId = " + userId);
+              console.log("total: " + followings.length + " followings");
+              res.status(200).json(followings);
+            }
+          )
+
         },
         function (err) {
           console.log(err);

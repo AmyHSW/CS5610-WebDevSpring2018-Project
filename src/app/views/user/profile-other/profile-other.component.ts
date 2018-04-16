@@ -53,11 +53,13 @@ export class ProfileOtherComponent implements OnInit {
         this.userService.findFollowersForUser(this.profileUser._id).subscribe(
           (followers) => {
             this.followers = followers;
+            console.log(followers);
           }
         );
         this.userService.findFollowingsForUser(this.profileUser._id).subscribe(
           (followings) => {
             this.followings = followings;
+            console.log(followings);
           }
         )
       }
