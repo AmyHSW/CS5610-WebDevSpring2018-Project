@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SharedService} from "../../../services/shared.service";
 import {UserService} from "../../../services/user.service.client";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ReviewService} from "../../../services/review.service.client";
 
 
@@ -18,18 +18,45 @@ export class ProfileOtherComponent implements OnInit {
   reviews: [any];
   followers: [any];
   followings: [any];
+  isFollowing: boolean;
 
   constructor(
     private sharedService: SharedService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private router: Router
   ) { }
 
   follow() {
     this.userService.addFollow(this.loginUser._id, this.profileUser._id).subscribe(
       (any) => {
-        alert("successfully follow!" + this.profileUser.username);
+        this.userService.findFollowersForUser(this.profileUser._id).subscribe(
+          (followers) => {
+            console.log("add follow success!!")
+            this.followers = followers;
+            console.log(followers);
+            this.isFollowing = true;
+            alert("successfully follow " + this.profileUser.username + "!");
+          }
+        );
+      }
+    )
+    console.log(this.followers);
+  }
+
+  unfollow() {
+    this.userService.deleteFollow(this.loginUser._id, this.profileUser._id).subscribe(
+      (any) => {
+        this.userService.findFollowersForUser(this.profileUser._id).subscribe(
+          (followers) => {
+            console.log("delete follow success!!");
+            this.followers = followers;
+            console.log(followers);
+            this.isFollowing = false;
+            //this.router.navigateByUrl(this.router.url);
+          }
+        );
       }
     )
   }
@@ -53,13 +80,17 @@ export class ProfileOtherComponent implements OnInit {
         this.userService.findFollowersForUser(this.profileUser._id).subscribe(
           (followers) => {
             this.followers = followers;
-            console.log(followers);
+            for (let i = 0; i < followers.length; i++) {
+              if (followers[i]._id === this.loginUser._id) {
+                this.isFollowing = true;
+                return;
+              }
+            }
           }
         );
         this.userService.findFollowingsForUser(this.profileUser._id).subscribe(
           (followings) => {
             this.followings = followings;
-            console.log(followings);
           }
         )
       }

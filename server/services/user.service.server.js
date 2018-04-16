@@ -283,7 +283,7 @@ module.exports = function (app) {
       .then(function (status) {
           console.log("add follow: followerId = " + followerId + " followeeId = " + followeeId);
           //console.log(status);
-          res.status(200);
+          res.status(200).send("add follow success!");
         },
         function (err) {
           console.log(err);
@@ -298,7 +298,7 @@ module.exports = function (app) {
       .deleteFollow(followerId, followeeId)
       .then(function (status) {
           console.log("delete follow: followerId = " + followerId + " followeeId = " + followeeId);
-          res.json(status);
+          res.status(200).send("delete follow success!");
         },
         function (err) {
           console.log(err);

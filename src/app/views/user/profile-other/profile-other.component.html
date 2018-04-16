@@ -42,7 +42,10 @@
           <div class="col-sm">
             <div class="container d-flex h-100">
               <div class="row justify-content-center align-self-center">
-                <button type="button" (click)="follow()" class="btn btn-outline-primary btn-sm ">Follow</button>
+                <button type="button" *ngIf="!isFollowing"
+                        (click)="follow()" class="btn btn-outline-primary btn-sm">Follow</button>
+                <button type="button" *ngIf="isFollowing"
+                        (click)="unfollow()" class="btn btn-outline-danger btn-sm">Unfollow</button>
               </div>
             </div>
           </div>
@@ -78,16 +81,18 @@
             </ul>
           </tab>
           <tab heading="Followers">
-            <ul class="list-group cl-list-group-borderless" *ngIf="followers">
-              <li *ngFor="let follower of followers" class="list-group-item cl-list-item-borderless">
-                <div class="media">
-                  <img class="mr-3" src={{follower.photo}}
-                       alt="Generic placeholder image" width="64" height="64">
-                  <div class="media-body">
-                    <h5><a class="mt-0" [routerLink]="['/username', follower.username]">{{follower.username}}</a></h5>
+            <ul class="list-group" *ngIf="followers">
+              <div *ngFor="let follower of followers" class="container-fluid">
+                <li class="list-group-item blue">
+                  <div class="media">
+                    <img class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                         alt="Generic placeholder image" width="64" height="64">
+                    <div class="media-body">
+                      <h5 class="mt-0"><a routerLink="/username/{{follower.username}}"><b>{{follower.username}}</b></a></h5>
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              </div>
             </ul>
           </tab>
           <tab heading="Following">

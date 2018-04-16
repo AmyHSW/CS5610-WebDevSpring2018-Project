@@ -253,7 +253,8 @@ export class UserService {
   deleteFollow(followerId: String, followeeId: String) {
     return this.http.delete(this.baseUrl + '/api/follower/' + followerId + '/followee/' + followeeId)
       .map((response: Response) => {
-        return response.json();
+        //console.log(response)
+        return response;
       });
   }
 
@@ -290,8 +291,8 @@ export class UserService {
     return this.http.get(this.baseUrl + '/api/follower/' + followerId + '/followee/' + followeeId)
       .map(
         (res: Response) => {
-          console.log(res.json());
-          return res.json();
+          //console.log(res);
+          return res;
         }
       );
   }
