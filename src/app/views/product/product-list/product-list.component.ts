@@ -13,10 +13,13 @@ export class ProductListComponent implements OnInit {
   noUser: boolean;
   user = {};
   userId: String;
+  isAdmin: boolean;
+  searchText: string;
   constructor(private productService: ProductService,
               private sharedService: SharedService,
               private userService: UserService) { }
   ngOnInit() {
+    this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
     this.userService.loggedIn().subscribe(
       (isLoggedIn) => {
         this.noUser = !isLoggedIn;
@@ -37,5 +40,17 @@ export class ProductListComponent implements OnInit {
   }
 
 
+  searchProducts() {
+    this.productService.findProductsByProductName(this.searchText).subscribe(
+      (products) => {
+        this.products = products;
+      }
+    );
+  }
+
+  addFavorite(productId) {
+    this.userService.addFavorite(this.userId, productId);
+    alert('successfully add to favorite');
+  }
 
 }

@@ -20,14 +20,25 @@ export class RegisterComponent implements OnInit {
   passwordMsg: String;
   errorAlert: String;
   passwordAlert: String;
+  selectedValue: String;
+  public filterTypes = [
+    {value:'REVIEWER', display:'Reviewer'},
+    {value:'OBSERVER', display:'Observer'},
+    {value:'BUSINESS', display:'Business'}
+  ];
 
   constructor(private userService: UserService,
               private router: Router) { }
 
+  filterChanged(selectedValue:string){
+    console.log('value is ',selectedValue);
+    this.selectedValue = selectedValue;
+  }
+
   register() {
     this.user.username = this.registerForm.value.username;
     this.user.password = this.registerForm.value.password;
-    this.user.type = this.registerForm.value.type;
+    this.user.type = this.selectedValue;
     this.v_password = this.registerForm.value.v_password;
 
     this.errorFlag = false;
@@ -64,6 +75,7 @@ export class RegisterComponent implements OnInit {
     this.errorAlert = '* Please enter username';
     this.passwordAlert = '* Please enter password';
     this.user = UserService.getNewUser();
+    this.selectedValue = 'REVIEWER'
   }
 
 }

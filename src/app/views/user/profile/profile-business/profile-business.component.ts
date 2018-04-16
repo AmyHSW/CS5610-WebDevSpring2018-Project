@@ -64,6 +64,7 @@ export class ProfileBusinessComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.sharedService.user = '';
+          (data: any) => this.router.navigate(['/'])
         }
       );
   }

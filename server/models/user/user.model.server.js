@@ -16,6 +16,10 @@ UserModel.deleteFollow =  deleteFollow;
 UserModel.addFavorite =  addFavorite;
 UserModel.deleteFavorite =  deleteFavorite;
 UserModel.findAllUsers = findAllUsers;
+UserModel.findUsersByUsernameLike = findUsersByUsernameLike;
+UserModel.findReviewersByUsernameLike = findReviewersByUsernameLike;
+UserModel.findAllReviewers = findAllReviewers;
+
 
 module.exports = UserModel;
 
@@ -111,6 +115,17 @@ function findAllUsers() {
   return UserModel.find();
 }
 
+function findUsersByUsernameLike(userName) {
+  return UserModel.find({username: {'$regex': '.*' + userName + '.*'}});
+}
+
+function findReviewersByUsernameLike(userName) {
+  return UserModel.find({$and:[{username: {'$regex': '.*' + userName + '.*'}}, {type: "REVIEWER"}]});
+}
+
+function findAllReviewers() {
+  return UserModel.find({type: "REVIEWER"})
+}
 
 
 

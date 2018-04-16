@@ -16,7 +16,10 @@ module.exports = function (app) {
   app.delete("/api/follower/:followerId/followee/:followeeId", deleteFollow);
   app.put("/api/user/:userId/product/:productId", addFavorite);
   app.delete("/api/user/:userId/product/:productId", deleteFavorite);
-  app.get("/api/alluser", findAllUsers);
+  app.get("/api/allUser", findAllUsers);
+  app.get("/api/allReviewer", findAllReviewers);
+  app.get("/api/userLike/:username", findUsersByUsernameLike);
+  app.get("/api/reviewerLike/:username", findReviewersByUsernameLike);
 
   app.post('/api/logout', logout);
   app.post ('/api/register', register);
@@ -304,5 +307,46 @@ module.exports = function (app) {
         console.log(err);
         res.status(500).send(err);
       });
+  }
+
+  function findUsersByUsernameLike(req, res) {
+    var username = req.params["username"];
+    userModel.findUsersByUsernameLike(username)
+      .then(
+        function (users){
+          console.log("find users by username like");
+          res.json(users);
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).send(err);
+        });
+  }
+
+  function findReviewersByUsernameLike(req, res) {
+    var username = req.params["username"];
+    userModel.findReviewersByUsernameLike(username)
+      .then(
+        function (users){
+          console.log("find reviewers by username like");
+          res.json(users);
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).send(err);
+        });
+  }
+
+  function findAllReviewers(req, res) {
+    userModel.findAllReviewers()
+      .then(
+        function (users){
+          console.log("find all reviewers");
+          res.json(users);
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).send(err);
+        });
   }
 };
