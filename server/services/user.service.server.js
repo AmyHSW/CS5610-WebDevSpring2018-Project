@@ -227,9 +227,10 @@ module.exports = function (app) {
   function findFavoritesForUser(req, res){
     var userId = req.params["userId"];
     userModel
-      .findUserById(userId)
+      .findFavoritesForUser(userId)
       .then(function (user) {
-          console.log("find favorites for user: userId = " + userId);
+          // console.log(user);
+          // console.log("find favorites for user: userId = " + userId);
           res.status(200).json(user.favorites);
         },
         function (err) {
@@ -290,8 +291,8 @@ module.exports = function (app) {
     userModel
       .deleteFavorite(userId, productId)
       .then(function (status) {
-          console.log("delete favorite: userId = " + userId + " productId :" + productId);
-          res.json(status);
+          console.log("delete favorite: userId = " + userId + " productId = " + productId);
+          res.status(200).json({});
         },
         function (err) {
           console.log(err);

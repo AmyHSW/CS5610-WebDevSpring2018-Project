@@ -19,7 +19,7 @@ UserModel.findAllUsers = findAllUsers;
 UserModel.findUsersByUsernameLike = findUsersByUsernameLike;
 UserModel.findReviewersByUsernameLike = findReviewersByUsernameLike;
 UserModel.findAllReviewers = findAllReviewers;
-
+UserModel.findFavoritesForUser = findFavoritesForUser;
 
 module.exports = UserModel;
 
@@ -88,6 +88,12 @@ function deleteFollow(followerId, followeeId) {
     })
 }
 
+function findFavoritesForUser(userId) {
+  return UserModel.findOne({_id: userId})
+    .populate({path: 'favorites', model: 'ProductModel'})
+    .exec();
+}
+
 function addFavorite(userId, productId) {
   return UserModel.findOne({_id:userId})
     .then(function (user) {
@@ -103,9 +109,9 @@ function addFavorite(userId, productId) {
 }
 
 function deleteFavorite(userId, productId) {
-  return UserModel.findOne({_id:userId})
+  return UserModel.findOne({_id: userId})
     .then(function (user) {
-      console.log(user);
+      //console.log(user);
       for (var i = 0; i < user.favorites.length; i++) {
         if (user.favorites[i].equals(productId)) {
           user.favorites.splice(i, 1);

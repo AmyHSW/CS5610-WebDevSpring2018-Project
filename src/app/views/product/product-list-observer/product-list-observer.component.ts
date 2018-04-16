@@ -52,19 +52,15 @@ export class ProductListObserverComponent implements OnInit {
         }
       );
   }
-  viewProduct(productId) {
-    this.productService.findProductById(productId)
+  viewProduct(product) {
+    product.lastViewed = new Date();
+    this.productService.updateProduct(product._id, product)
       .subscribe(
-        (product: any) => {
-          product.lastViewed = Date.now();
-          this.productService.updateProduct(productId, product)
-            .subscribe(
-              (data: any) => {
-                this.router.navigate(['/product', productId]);
-              }
-            )
-          }
-        )
+        (data: any) => {
+          console.log('updated lastViewed');
+          this.router.navigate(['/product', product._id]);
+        }
+      )
   }
   newReviewCount(productId) {
     let count = 0;

@@ -42,12 +42,12 @@ module.exports = function(app){
   function updateProduct(req,res) {
     var productId = req.params.productId;
     var product = req.body;
-
+    console.log(product);
     ProductModel
       .updateProduct(productId, product)
       .then(function (stats) {
           // console.log(stats);
-          res.send(200);
+          res.status(200).send({});
         },
         function (err) {
           res.sendStatus(500).send(err);
