@@ -252,6 +252,14 @@ img.avatar {
   padding-right: 200px;
 }
 
+.user-other-container {
+  margin-left: 200px;
+  margin-right: 200px;
+  background-color: white;
+  min-height: 90vh;
+
+}
+
 .product-page-container {
   padding-top: 30px;
   padding-left: 100px;
@@ -263,6 +271,13 @@ img.avatar {
 }
 
 .jumbotron {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   background-color: white;
+  border-bottom: 0;
+  margin-bottom: 0;
 }
 
+.background-white {
+  background-color: white;
+}

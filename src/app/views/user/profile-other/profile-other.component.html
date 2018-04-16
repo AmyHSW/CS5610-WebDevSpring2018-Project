@@ -27,17 +27,16 @@
 </nav>
 
 
-<div class="body-grey">
-  <div class = "user-page-container" >
+<div class="body-grey body-padding">
+  <div class = "user-other-container" >
     <div class="jumbotron jumbotron-fluid" *ngIf="user">
       <img class="mr-3 rounded-circle" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
            alt="Generic placeholder image" width="100" height="100">
-      <h5 class="mt-0"><a routerLink="/user/{{user.username}}"><b>{{user.username}}</b></a></h5>
-      {{user.followers.length}} followers
+      <h5 class="mt-0"><b>{{user.username}}</b></h5>
     </div>
 
     <div>
-      <tabset [justified]="true">
+      <tabset class="background-white" [justified]="true">
         <tab heading="Justified">Justified content</tab>
         <tab heading="SJ">Short Labeled Justified content</tab>
         <tab heading="Long Justified">Long Labeled Justified content</tab>
