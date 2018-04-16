@@ -19,6 +19,7 @@ import {AuthGuardObserver} from "./services/auth-guard-observer.service";
 import {AuthGuardBusiness} from "./services/auth-guard-business.service";
 import {UserFollowersComponent} from "./views/user/user-followers/user-followers.component";
 import {UserFollowingsComponent} from "./views/user/user-followings/user-followings.component";
+import {ProfileOtherComponent} from "./views/user/profile-other/profile-other.component";
 
 
 const appRoutes: Routes = [
@@ -33,7 +34,7 @@ const appRoutes: Routes = [
   // require user logged in
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'reviewers', component: UserListComponent, canActivate: [AuthGuard]},
-
+  {path: 'username/:username', component: ProfileOtherComponent, canActivate: [AuthGuard]},
 
   // require ADMIN logged in
   {path: 'user/all', component: UserListComponent, canActivate: [AuthGuardAdmin]},

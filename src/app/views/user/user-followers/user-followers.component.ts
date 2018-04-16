@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../../services/user.service.client";
 import {SharedService} from "../../../services/shared.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-followers',
@@ -12,7 +13,8 @@ export class UserFollowersComponent implements OnInit {
   followers: any;
   user: any;
   constructor(private userService: UserService,
-              private sharedService: SharedService) { }
+              private sharedService: SharedService,
+              private router: Router) { }
 
   ngOnInit() {
     this.user = this.sharedService.user;
@@ -29,6 +31,7 @@ export class UserFollowersComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.sharedService.user = '';
+          this.router.navigate(['/']);
         }
       );
   }

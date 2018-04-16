@@ -32,6 +32,7 @@ export class ProductListBusinessComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.sharedService.user = '';
+          this.router.navigate(['/']);
         }
       );
   }

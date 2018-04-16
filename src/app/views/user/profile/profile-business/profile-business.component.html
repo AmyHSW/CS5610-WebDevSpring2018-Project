@@ -16,7 +16,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
       <div class="navbar-header navbar-toggler-right">
-        <a (click)="logout()" [routerLink]="['/login']">Log Out</a>
+        <a (click)="logout()" href=".">Log Out</a>
       </div>
     </form>
   </div>
@@ -25,8 +25,7 @@
 <div class="container-fluid row">
 
 
-  <div class="col-3">
-    <br/>
+  <div class="col-3 cl-container-padding">
     <ul class="list-group cl-list-group-borderless">
       <li class="list-group-item cl-list-item-borderless">
         <a [routerLink]="['/profile']">
@@ -41,9 +40,7 @@
     </ul>
   </div>
 
-  <div class="col-9 col-sm-9 col-md-9 col-lg-9">
-    <br/>
-    <br/>
+  <div class="col-9 col-sm-9 col-md-9 col-lg-9 cl-container-padding">
     <div *ngIf="updateFlag" class="alert alert-success">
       {{updateMsg}}
     </div>

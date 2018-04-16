@@ -31,6 +31,7 @@ export class UserFollowingsComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.sharedService.user = '';
+          this.router.navigate(['/']);
         }
       );
   }

@@ -16,7 +16,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
       <div class="navbar-header navbar-toggler-right">
-        <a (click)="logout()" [routerLink]="['/login']">Log Out</a>
+        <a (click)="logout()" href=".">Log Out</a>
       </div>
     </form>
   </div>
@@ -40,18 +40,23 @@
   </div>
 
   <div class="col-9 col-sm-9 col-md-9 col-lg-9 cl-container-padding">
+
+    <div *ngIf="deleteFlag" class="alert alert-success">
+      {{deleteMsg}}
+    </div>
+
     <ul class="list-group cl-list-group-borderless">
       <li *ngFor="let product of products"
           class="list-group-item cl-list-item-borderless d-flex justify-content-between align-items-center">
         <a (click)="viewProduct(product._id)">{{product.productName}}
           <span class="badge badge-primary badge-pill">{{newReviewCount(product._id)}}</span>
         </a>
-        <a (click)="deleteFavorite(product._id)"><i class="fas fa-times"></i></a>
+        <a class="color-red" (click)="deleteFavorite(product._id)"><i class="fas fa-times"></i></a>
       </li>
 
       <li class="list-group-item cl-list-item-borderless d-flex justify-content-between align-items-center">
         <a>name   <span class="badge badge-primary badge-pill">14</span></a>
-        <a><i class="fas fa-times"></i></a>
+        <a class="color-red"><i class="fas fa-times"></i></a>
       </li>
     </ul>
   </div>
