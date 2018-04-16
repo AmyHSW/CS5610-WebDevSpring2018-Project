@@ -13,7 +13,7 @@ module.exports = function (app) {
   app.get("/api/user/:userId/followers", findFollowersForUser);
   app.get("/api/user/:userId/followings", findFollowingsForUser);
   app.get("/api/user/:userId/favorites", findFavoritesForUser);
-  app.put("/api/follower/:followerId/followee/:followeeId", addFollow);
+  app.get("/api/follower/:followerId/followee/:followeeId", addFollow);
   app.delete("/api/follower/:followerId/followee/:followeeId", deleteFollow);
   app.put("/api/user/:userId/product/:productId", addFavorite);
   app.delete("/api/user/:userId/product/:productId", deleteFavorite);
@@ -246,7 +246,8 @@ module.exports = function (app) {
       .addFollow(followerId, followeeId)
       .then(function (status) {
           console.log("add follow: followerId = " + followerId + " followeeId = " + followeeId);
-          res.json(status);
+          //console.log(status);
+          res.status(200);
         },
         function (err) {
           console.log(err);
