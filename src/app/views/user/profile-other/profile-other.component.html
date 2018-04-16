@@ -10,10 +10,10 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/product']">Products</a>
         </li>
-        <li class="nav-item active" *ngIf="!isAdmin">
+        <li class="nav-item" *ngIf="!isAdmin">
           <a class="nav-link" [routerLink]="['/reviewers']">Influencers</a>
         </li>
-        <li class="nav-item active" *ngIf="isAdmin">
+        <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" [routerLink]="['/user/all']">Users</a>
         </li>
       </ul>
@@ -36,10 +36,10 @@
     </div>
 
     <div>
-      <tabset class="background-white" [justified]="true">
-        <tab heading="Justified">Justified content</tab>
-        <tab heading="SJ">Short Labeled Justified content</tab>
-        <tab heading="Long Justified">Long Labeled Justified content</tab>
+      <tabset [justified]="true">
+        <tab heading="Reviews">Show Reviewers</tab>
+        <tab heading="Followers">Show Followers</tab>
+        <tab heading="Following">Show Followings</tab>
       </tabset>
     </div>
   </div>
