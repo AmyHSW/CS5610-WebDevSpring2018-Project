@@ -4,7 +4,6 @@ import {ProductListComponent} from './views/product/product-list/product-list.co
 import {ProductNewComponent} from './views/product/product-new/product-new.component';
 import {ProductListBusinessComponent} from './views/product/product-list-business/product-list-business.component';
 import {ProductDetailComponent} from './views/product/product-detail/product-detail.component';
-import {ProductEditComponent} from './views/product/product-edit/product-edit.component';
 import {ProfileComponent} from './views/user/profile/profile.component';
 import {UserListComponent} from './views/user/user-list/user-list.component';
 import {ReviewListComponent} from './views/review/review-list-of-product/review-list.component';
@@ -36,7 +35,7 @@ const appRoutes: Routes = [
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'user/:username', component: ProfileOtherComponent, canActivate: [AuthGuard]},
   {path: 'reviewers', component: UserListComponent, canActivate: [AuthGuard]},
-
+  {path: 'username/:username', component: ProfileOtherComponent, canActivate: [AuthGuard]},
 
   // require ADMIN logged in
   {path: 'user/all', component: UserListComponent, canActivate: [AuthGuardAdmin]},
@@ -53,7 +52,6 @@ const appRoutes: Routes = [
   // require BUSINESS logged in
   {path: 'user/product', component: ProductListBusinessComponent, canActivate: [AuthGuardBusiness]},
   {path: 'user/product/new', component: ProductNewComponent, canActivate: [AuthGuardBusiness]},
-  {path: 'user/product/:productId/edit', component: ProductEditComponent, canActivate: [AuthGuardBusiness]},
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

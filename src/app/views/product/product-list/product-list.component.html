@@ -47,7 +47,6 @@
             </div>
             <div class="col-md-9">
               <div class="card-block">
-                <button class="float-right" (click)="addFavorite(product._id)">favorite</button>
                 <h4><a class="card-title cl-text-bold" [routerLink]="['/product', product._id]">{{product.productName}}</a></h4>
                 <p class="card-text">{{product.description}}</p>
                 <p class="card-text">show one review</p>

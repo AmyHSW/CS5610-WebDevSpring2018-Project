@@ -14,6 +14,9 @@ export class ProductListObserverComponent implements OnInit {
 
   user: any;
   products: any;
+  deleteFlag: boolean;
+  deleteMsg: String;
+
   constructor(private userService: UserService,
               private productService: ProductService,
               private reviewService: ReviewService,
@@ -23,18 +26,20 @@ export class ProductListObserverComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.sharedService.user;
+    this.deleteMsg = 'Successfully deleted favorite product!';
     this.userService.findFavoritesForUser(this.user._id).subscribe(
       (products: any) => {
         this.products = products;
       }
     );
   }
-
   deleteFavorite(productId: String) {
+    this.deleteFlag = false;
     this.userService.deleteFavorite(this.user._id, productId)
       .subscribe(
         (data: any) => {
           console.log('deleted favorite');
+          this.deleteFlag = true;
         }
       )
   }
@@ -43,7 +48,7 @@ export class ProductListObserverComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.sharedService.user = '';
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
         }
       );
   }

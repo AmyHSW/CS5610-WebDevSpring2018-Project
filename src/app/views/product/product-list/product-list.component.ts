@@ -39,6 +39,7 @@ export class ProductListComponent implements OnInit {
 
   }
 
+
   searchProducts() {
     this.productService.findProductsByProductName(this.searchText).subscribe(
       (products) => {
