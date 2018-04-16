@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-color">
-  <a class="navbar-brand thick" href="#"><b>Create a Product</b></a>
+  <a class="navbar-brand thick" routerLink="/profile"><b>My Profile</b></a>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <ul class="navbar-nav">
@@ -17,18 +17,18 @@
   </div>
   <form class="form-inline my-2 my-lg-0 cl-text-white">
     <div class="navbar-header navbar-toggler-right">
-      <a (click)="logout()" [routerLink]="['/login']">Log Out</a>
+      <a (click)="logout()" [routerLink]="['/']">Log Out</a>
     </div>
   </form>
 </nav>
 
 <div class="container-fluid row">
-  <div class="col-4">
+  <div class="col-3">
     <br/>
     <ul class="list-group cl-list-group-borderless">
       <li class="list-group-item cl-list-item-borderless">
-        <a [routerLink]="['/user/product/new']">
-          Create Product
+        <a [routerLink]="['/profile']">
+          Edit Profile
         </a>
       </li>
       <li class="list-group-item cl-list-item-borderless">
@@ -39,7 +39,7 @@
     </ul>
   </div>
 
-  <div class="col-8 col-sm-8 col-md-8 col-lg-8">
+  <div class="col-9 col-sm-9 col-md-9 col-lg-9">
     <br/>
 <form #f="ngForm">
       <div class="form-group">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../services/product.service.client';
 import {SharedService} from '../../../services/shared.service';
+import {UserService} from '../../../services/user.service.client';
 
 @Component({
   selector: 'app-product-new',
@@ -13,7 +14,7 @@ export class ProductNewComponent implements OnInit {
   userId: String;
   product = {};
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
-              private sharedService: SharedService) { }
+              private sharedService: SharedService, private userService: UserService) { }
 
   createProduct() {
     this.productService.createProduct(this.userId, this.product).subscribe(
@@ -30,4 +31,12 @@ export class ProductNewComponent implements OnInit {
     this.userId = this.user['_id'];
   }
 
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => {
+          this.sharedService.user = '';
+        }
+      );
+  }
 }

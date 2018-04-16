@@ -36,9 +36,6 @@ export class ProductListComponent implements OnInit {
 
   }
 
-  addFavorite(productId) {
-    this.userService.addFavorite(this.userId, productId);
-    alert('successfully add to favorite');
-  }
+
 
 }

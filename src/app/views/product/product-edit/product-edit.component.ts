@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../../services/product.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../../services/shared.service';
+import {UserService} from '../../../services/user.service.client';
 
 @Component({
   selector: 'app-product-edit',
@@ -15,7 +16,7 @@ export class ProductEditComponent implements OnInit {
   products = [{}];
   product: {};
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
-              private sharedService: SharedService) { }
+              private sharedService: SharedService, private userService: UserService) { }
 
   deleteProduct() {
     this.productService.deleteProduct(this.productId).subscribe(
@@ -57,4 +58,12 @@ export class ProductEditComponent implements OnInit {
     );
   }
 
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data: any) => {
+          this.sharedService.user = '';
+        }
+      );
+  }
 }
