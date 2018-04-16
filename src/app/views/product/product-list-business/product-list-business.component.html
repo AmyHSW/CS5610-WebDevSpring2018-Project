@@ -45,6 +45,8 @@
 
   <button type="button" class="btn btn-outline-primary float-right"
           routerLink="./new">Create</button>
+    <br/>
+    <br/>
 
   <div class="container">
     <div class="row" *ngIf="products">
@@ -59,11 +61,60 @@
                 <h4 class="card-title cl-text-bold">{{product.productName}}  {{product.price}}$</h4>
                 <p class="card-text">{{product.brand}}</p>
                 <p class="card-text">{{product.description}}</p>
-                <button routerLink="./{{product._id}}/edit" >
+                <!--<button routerLink="./{{product._id}}/edit" >-->
+                  <!--Edit Product-->
+                <!--</button>-->
+                <button (click)="editProduct()">
                   Edit Product
                 </button>
               </div>
             </div>
+
+            <div class="card border-info mb-3" *ngIf="isClick">
+            <form #f="ngForm">
+              <div class="form-group card-header">
+                <label for="product-name">Name</label>
+                <input id="product-name"  placeholder="Name"
+                       [(ngModel)]="product.productName" required
+                       name="name"/>
+
+                <span class="form-group">
+    <label for="product-brand">Brand</label>
+    <input id="product-brand" placeholder="Description"
+           [(ngModel)]="product.brand" required
+           name="description">
+  </span></div>
+              <div class="card-body">
+              <div class="form-group">
+                <label for="product-price">Price</label>
+                <input id="product-price" placeholder="Price"
+                       [(ngModel)]="product.price" required
+                       name="description">
+              </div>
+              <div class="form-group">
+                <label for="product-description">Description</label>
+                <input id="product-description" class="form-control" placeholder="Description"
+                          [(ngModel)]="product.description" required
+                          name="description">
+              </div>
+              <div class="form-group">
+                <label for="product-url">Product Image URL</label>
+                <input [(ngModel)]="product.url" id="product-url"  placeholder="url" name="url">
+              </div>
+              <div class="form-group">
+                <label for="product-width">Product Image Width</label>
+                <input [(ngModel)]="product.width" id="product-width" placeholder="width" name="width">
+              </div>
+              <button type="button" class="btn btn-outline-primary btn-block"
+                      (click)="updateProduct(product._id, product)">Update</button>
+              </div>
+              <br>
+              <br>
+            </form>
+            </div>
+
+
+
           </div>
         </div>
       </div>

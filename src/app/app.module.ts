@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ProductNewComponent } from './views/product/product-new/product-new.component';
-import { ProductEditComponent } from './views/product/product-edit/product-edit.component';
 import { ProductListComponent } from './views/product/product-list/product-list.component';
 import { LoginComponent } from './views/user/login/login.component';
 import {routing} from './app.routing';
@@ -46,7 +45,6 @@ import { ProfileOtherComponent } from './views/user/profile-other/profile-other.
   declarations: [
     AppComponent,
     ProductNewComponent,
-    ProductEditComponent,
     ProductListComponent,
     LoginComponent,
     ProductListBusinessComponent,
