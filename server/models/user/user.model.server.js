@@ -93,8 +93,11 @@ function addFavorite(userId, productId) {
     .then(function (user) {
       ProductModel.findProductById(productId)
         .then(function(product) {
+          product.lastViewed = new Date();
+          console.log(product);
           user.favorites.push(product);
           user.save();
+          return product.save();
       })
     })
 }

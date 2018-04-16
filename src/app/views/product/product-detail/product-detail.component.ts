@@ -17,6 +17,7 @@ export class ProductDetailComponent implements OnInit {
   isReviewer: boolean;
   isObserver: boolean;
   isFavorite: boolean;
+  noUser: boolean;
   user = {};
   userId: String;
   favorites = [{}];
@@ -26,6 +27,11 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
     this.user = this.sharedService.user;
     this.userId = this.user['_id'];
+    this.userService.loggedIn().subscribe(
+      (isLoggedIn) => {
+        this.noUser = !isLoggedIn;
+      }
+    );
     this.activatedRoute.params.subscribe(
       (params: any) => {
         this.productId = params['productId'];
@@ -48,7 +54,7 @@ export class ProductDetailComponent implements OnInit {
         this.favorites = data;
         console.log(this.favorites);
         for (const favorite of this.favorites) {
-          if ((favorite['_id']) === this.productId) {
+          if (favorite === this.productId) {
             this.isFavorite = true;
           }
         }
