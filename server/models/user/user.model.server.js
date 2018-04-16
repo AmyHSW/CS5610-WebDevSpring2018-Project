@@ -100,7 +100,7 @@ function addFavorite(userId, productId) {
       ProductModel.findProductById(productId)
         .then(function(product) {
           product.lastViewed = new Date();
-          console.log(product);
+          // console.log(product);
           user.favorites.push(product);
           user.save();
           product.save();

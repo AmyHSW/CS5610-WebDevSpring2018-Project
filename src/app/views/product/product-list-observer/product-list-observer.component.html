@@ -48,8 +48,8 @@
     <ul class="list-group cl-list-group-borderless">
       <li *ngFor="let product of products"
           class="list-group-item cl-list-item-borderless d-flex justify-content-between align-items-center">
-        <a (click)="viewProduct(product)" href=".">{{product.productName}}
-          <span class="badge badge-primary badge-pill">{{newReviewCount(product._id)}}</span>
+        <a (click)="viewProduct(product)">{{product.productName}}
+          <span class="badge badge-primary badge-pill">{{product.count}}</span>
         </a>
         <a style="color: red" (click)="deleteFavorite(product._id)"><i class="fas fa-times"></i></a>
       </li>

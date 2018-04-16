@@ -312,7 +312,7 @@ module.exports = function (app) {
     userModel
       .addFavorite(userId, productId)
       .then(function (status) {
-          console.log("add favorite: userId = " + userId + " productId :" + productId);
+          // console.log("add favorite: userId = " + userId + " productId :" + productId);
           res.json(status);
         },
         function (err) {
@@ -327,7 +327,7 @@ module.exports = function (app) {
     userModel
       .deleteFavorite(userId, productId)
       .then(function (status) {
-          console.log("delete favorite: userId = " + userId + " productId = " + productId);
+          // console.log("delete favorite: userId = " + userId + " productId = " + productId);
           res.status(200).json({});
         },
         function (err) {

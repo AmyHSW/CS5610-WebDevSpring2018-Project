@@ -30,8 +30,24 @@ export class ProductListObserverComponent implements OnInit {
     this.userService.findFavoritesForUser(this.user._id).subscribe(
       (products: any) => {
         this.products = products;
-      }
-    );
+        for (let i = 0; i < this.products.length; i++) {
+          this.products[i].count = 0;
+          const lastViewed = this.products[i].lastViewed;
+          this.reviewService.findAllReviewsForProduct(this.products[i]._id)
+            .subscribe(
+              (reviews: any) => {
+                for (let i = 0; i < reviews.length; i++) {
+                  const created = reviews[i].dateCreated;
+                  // console.log('created: ' + created);
+                  if (created > lastViewed) {
+                    this.products[i].count++;
+                    // console.log('count++: ' + this.products[i].count);
+                  }
+                }
+              }
+            );
+        }
+      });
   }
   deleteFavorite(productId: String) {
     this.deleteFlag = false;
@@ -40,6 +56,11 @@ export class ProductListObserverComponent implements OnInit {
         (data: any) => {
           console.log('deleted favorite');
           this.deleteFlag = true;
+          this.userService.findFavoritesForUser(this.user._id).subscribe(
+            (products: any) => {
+              this.products = products;
+            }
+          );
         }
       )
   }
@@ -54,6 +75,7 @@ export class ProductListObserverComponent implements OnInit {
   }
   viewProduct(product) {
     product.lastViewed = new Date();
+    // console.log(product);
     this.productService.updateProduct(product._id, product)
       .subscribe(
         (data: any) => {
@@ -61,26 +83,5 @@ export class ProductListObserverComponent implements OnInit {
           this.router.navigate(['/product', product._id]);
         }
       )
-  }
-  newReviewCount(productId) {
-    let count = 0;
-    this.productService.findProductById(productId)
-      .subscribe(
-        (product: any) => {
-          const lastViewed = new Date(product.lastViewed);
-          this.reviewService.findAllReviewsForProduct(productId)
-            .subscribe(
-              (reviews: any) => {
-                for (let i = 0; i < reviews.length; i++) {
-                  const created = new Date(reviews[i].dateCreated);
-                  if (created > lastViewed) {
-                    count++;
-                  }
-                }
-              }
-            )
-        }
-      );
-    return count;
   }
 }
