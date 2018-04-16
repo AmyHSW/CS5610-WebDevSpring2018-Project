@@ -75,7 +75,7 @@ function deleteFollow(followerId, followeeId) {
         for (var i = 0; i < followee.followers.length; i++) {
           if (followee.followers[i].equals(followerId)) {
             followee.followers.splice(i, 1);
-            return followee.save();
+            followee.save();
           }
         }
         for (var i = 0; i < follower.followings.length; i++) {

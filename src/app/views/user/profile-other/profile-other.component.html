@@ -78,7 +78,7 @@
             </ul>
           </tab>
           <tab heading="Followers">
-            <ul class="list-group cl-list-group-borderless">
+            <ul class="list-group cl-list-group-borderless" *ngIf="followers">
               <li *ngFor="let follower of followers" class="list-group-item cl-list-item-borderless">
                 <div class="media">
                   <img class="mr-3" src={{follower.photo}}
@@ -91,16 +91,18 @@
             </ul>
           </tab>
           <tab heading="Following">
-            <ul class="list-group cl-list-group-borderless">
-              <li *ngFor="let following of followings" class="list-group-item cl-list-item-borderless">
-                <div class="media">
-                  <img class="mr-3" src={{following.photo}}
-                       alt="Generic placeholder image" width="64" height="64">
-                  <div class="media-body">
-                    <h5><a class="mt-0" [routerLink]="['/username', following.username]">{{following.username}}</a></h5>
+            <ul class="list-group" *ngIf="followings">
+              <div *ngFor="let following of followings" class="container-fluid">
+                <li class="list-group-item blue">
+                  <div class="media">
+                    <img class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                         alt="Generic placeholder image" width="64" height="64">
+                    <div class="media-body">
+                      <h5 class="mt-0"><a routerLink="/username/{{following.username}}"><b>{{following.username}}</b></a></h5>
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              </div>
             </ul>
           </tab>
         </tabset>

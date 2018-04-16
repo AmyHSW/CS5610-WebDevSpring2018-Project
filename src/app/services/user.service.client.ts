@@ -93,7 +93,7 @@ export class UserService {
   }
 
   findFollowingsForUser(userId) {
-    return this.http.get(this.baseUrl + '/api/user/' + userId + '/followers')
+    return this.http.get(this.baseUrl + '/api/user/' + userId + '/followings')
       .map((response: Response) => {
         return response.json();
       });
