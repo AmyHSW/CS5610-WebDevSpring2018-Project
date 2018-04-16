@@ -6,6 +6,7 @@ module.exports = function (app) {
   app.post("/api/user", createUser);
   app.get("/api/user", findUser);
   app.get("/api/user/:userId", findUserById);
+  app.get("/api/username/:username", findUserByUsername);
   app.put("/api/user/:userId", updateUser);
   app.delete("/api/user/:userId", deleteUser);
   app.get("/api/userType/:userType", findUsersByType);
@@ -32,7 +33,7 @@ module.exports = function (app) {
 
   function localStrategy(username, password, done) {
     userModel
-      .findUserByUserName(username)
+      .findUserByUsername(username)
       .then(
         function (user) {
           if (user && bcrypt.compareSync(password, user.password)) {
@@ -342,6 +343,20 @@ module.exports = function (app) {
       .then(
         function (users){
           console.log("find all reviewers");
+          res.json(users);
+        },
+        function (err) {
+          console.log(err);
+          res.status(500).send(err);
+        });
+  }
+
+  function findUserByUsername(req, res) {
+    var username = req.params["username"];
+    userModel.findUserByUsername(username)
+      .then(
+        function (users){
+          console.log("find user by username: " + username);
           res.json(users);
         },
         function (err) {

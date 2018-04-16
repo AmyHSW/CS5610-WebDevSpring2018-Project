@@ -38,6 +38,7 @@ import {AuthGuardBusiness} from "./services/auth-guard-business.service";
 import { UserFollowersComponent } from './views/user/user-followers/user-followers.component';
 import { UserFollowingsComponent } from './views/user/user-followings/user-followings.component';
 import { ProfileOtherComponent } from './views/user/profile-other/profile-other.component';
+import {TabsModule} from "ngx-bootstrap";
 
 
 
@@ -69,7 +70,8 @@ import { ProfileOtherComponent } from './views/user/profile-other/profile-other.
     BrowserModule,
     routing,
     FormsModule,
-    HttpModule
+    HttpModule,
+    TabsModule.forRoot()
   ],
   providers: [UserService, ProductService, ReviewService, SharedService, AuthGuard, AuthGuardAdmin, AuthGuardReviewer,
   AuthGuardObserver, AuthGuardBusiness],

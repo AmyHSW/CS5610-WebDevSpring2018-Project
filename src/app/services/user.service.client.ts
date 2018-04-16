@@ -107,7 +107,7 @@ export class UserService {
   }
 
   findUserByUsername(username: String) {
-    return this.http.get(this.baseUrl + '/api/user?username=' + username)
+    return this.http.get(this.baseUrl + '/api/username/' + username)
       .map((response: Response) => {
         return response.json();
       });
@@ -273,6 +273,13 @@ export class UserService {
 
   findUsersByUsernameLike(username) {
     return this.http.get(this.baseUrl + '/api/userLike/' + username)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  findUserById(userId) {
+    return this.http.get(this.baseUrl + '/api/user/' + userId)
       .map((response: Response) => {
         return response.json();
       });

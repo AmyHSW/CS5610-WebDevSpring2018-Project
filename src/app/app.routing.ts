@@ -33,6 +33,7 @@ const appRoutes: Routes = [
 
   // require user logged in
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'user/:username', component: ProfileOtherComponent, canActivate: [AuthGuard]},
   {path: 'reviewers', component: UserListComponent, canActivate: [AuthGuard]},
   {path: 'username/:username', component: ProfileOtherComponent, canActivate: [AuthGuard]},
 

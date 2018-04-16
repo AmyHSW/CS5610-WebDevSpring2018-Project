@@ -261,3 +261,8 @@ img.avatar {
 .list-group-item {
   margin: 15px;
 }
+
+.jumbotron {
+  background-color: white;
+}
+

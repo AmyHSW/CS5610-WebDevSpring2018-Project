@@ -6,7 +6,7 @@ var ProductModel = mongoose.model("ProductModel", ProductSchema);
 
 UserModel.createUser = createUser;
 UserModel.findUserById = findUserById;
-UserModel.findUserByUserName = findUserByUserName;
+UserModel.findUserByUsername = findUserByUsername;
 UserModel.findUserByCredentials = findUserByCredentials;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
@@ -34,7 +34,7 @@ function findUserById(userId){
   return UserModel.findById(userId);
 }
 
-function findUserByUserName(username){
+function findUserByUsername(username){
   return UserModel.findOne({username: username});
 }
 
