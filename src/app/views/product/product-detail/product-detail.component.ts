@@ -46,7 +46,6 @@ export class ProductDetailComponent implements OnInit {
     this.reviewService.findAllReviewsForProduct(this.productId).subscribe(
       (data: any) => {
         this.reviews = data;
-
       }
     );
     this.userService.findFavoritesForUser(this.userId).subscribe(
@@ -54,8 +53,9 @@ export class ProductDetailComponent implements OnInit {
         this.favorites = data;
         console.log(this.favorites);
         for (const favorite of this.favorites) {
-          if (favorite === this.productId) {
+          if (favorite['_id'] === this.productId) {
             this.isFavorite = true;
+            break;
           }
         }
       }
