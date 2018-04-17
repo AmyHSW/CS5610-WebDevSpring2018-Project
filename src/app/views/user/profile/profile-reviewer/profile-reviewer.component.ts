@@ -24,29 +24,29 @@ export class ProfileReviewerComponent implements OnInit {
     private sharedService: SharedService) { }
 
   updateUser() {
-    this.updateFlag = false;
-    this.errorFlag = false;
-    if (this.username !== this.user.username) {
-      if (this.username === '') {
-        this.errorFlag = true;
-        this.errorMsg = 'Please enter username!';
-        return;
+      this.updateFlag = false;
+      this.errorFlag = false;
+      if (this.username !== this.user.username) {
+        if (this.username === '') {
+          this.errorFlag = true;
+          this.errorMsg = 'Please enter username!';
+          return;
+        }
+        this.userService.findUserByUsername(this.username).subscribe(
+          (user: any) => {
+            if (user) {
+              this.errorFlag = true;
+              this.errorMsg = 'The username is in use. Please enter a different name.';
+            } else {
+              this.user.username = this.username;
+              this.update();
+            }
+          },
+          (error: any) => console.log(error)
+        );
+      } else {
+        this.update();
       }
-      this.userService.findUserByUsername(this.username).subscribe(
-        (user: any) => {
-          if (user) {
-            this.errorFlag = true;
-            this.errorMsg = 'The username is in use. Please enter a different name.';
-          } else {
-            this.user.username = this.username;
-            this.update();
-          }
-        },
-        (error: any) => console.log(error)
-      );
-    } else {
-      this.update();
-    }
 
   }
   update() {

@@ -42,9 +42,7 @@
 
 .card-padding {
   padding: 25px;
-  margin: 15px;
-  width: 65rem;
-  height: 18rem
+  margin: 20px;
 }
 .card-img-bottom {
   color: #fff;
@@ -290,4 +288,8 @@ img.avatar {
   padding: 2px;
   margin-top: 15px;
   margin-bottom: 5px;
+}
+
+.product-card {
+  background-color: white;
 }
