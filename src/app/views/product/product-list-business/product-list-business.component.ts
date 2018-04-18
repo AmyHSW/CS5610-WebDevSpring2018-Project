@@ -38,7 +38,11 @@ export class ProductListBusinessComponent implements OnInit {
   }
 
   editProduct() {
-    this.isClick = true;
+    if (!this.isClick) {
+      this.isClick = true;
+    } else {
+      this.isClick = false;
+    }
   }
 
 
@@ -49,6 +53,15 @@ export class ProductListBusinessComponent implements OnInit {
         this.router.navigate(['./'], {relativeTo: this.activatedRoute});
         console.log(product);
         this.isClick = false;
+      }
+    );
+  }
+
+  deleteProduct(productId) {
+    this.productService.deleteProduct(productId).subscribe(
+      () => {
+        this.isClick = false;
+        this.router.navigate(['./'], {relativeTo: this.activatedRoute});
       }
     );
   }

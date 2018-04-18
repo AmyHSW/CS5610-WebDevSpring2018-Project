@@ -74,11 +74,23 @@
     <label for="product-width">Product Image Width</label>
     <input [(ngModel)]="product.width" id="product-width" class="form-control" placeholder="width" name="width">
   </div>
+</form>
+
+    <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
+      <label for="myFile">Upload Image</label>
+      <input  name="myFile" id="myFile"  type="file" class="form-control form-group"/>
+      <input  name="productName" value="{{product.productName}}" style="display: none"/>
+      <input  name="brand" value="{{product.brand}}" style="display: none"/>
+      <input  name="price" value="{{product.price}}" style="display: none"/>
+      <input  name="description" value="{{product.description}}" style="display: none"/>
+      <input  name="userId" value="{{userId}}" style="display: none"/>
+      <button type="submit" class="btn btn-outline-primary btn-block">Upload Image</button>
+      <br/>
+    </form>
   <button type="button" class="btn btn-outline-primary btn-block"
           (click)="createProduct()">Create</button>
   <br>
   <br>
-</form>
   </div>
 </div>
 
