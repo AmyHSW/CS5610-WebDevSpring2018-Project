@@ -76,12 +76,14 @@ function deleteFollow(followerId, followeeId) {
           if (followee.followers[i].equals(followerId)) {
             followee.followers.splice(i, 1);
             followee.save();
+            break;
           }
         }
         for (var i = 0; i < follower.followings.length; i++) {
           if (follower.followings[i].equals(followeeId)) {
             follower.followings.splice(i, 1);
             follower.save();
+            break;
           }
         }
       })

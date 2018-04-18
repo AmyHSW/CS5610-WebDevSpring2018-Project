@@ -296,13 +296,13 @@ module.exports = function (app) {
     var followeeId = req.params["followeeId"];
     userModel
       .deleteFollow(followerId, followeeId)
-      .then(function (status) {
+      .then(function (followee) {
           console.log("delete follow: followerId = " + followerId + " followeeId = " + followeeId);
-          res.status(200).send("delete follow success!");
+          res.status(200).json("delete follow success!");
         },
         function (err) {
           console.log(err);
-          res.status(500).send(err);
+          res.status(500).json(err);
         });
   }
 

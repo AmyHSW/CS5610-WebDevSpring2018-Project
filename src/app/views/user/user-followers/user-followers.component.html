@@ -51,10 +51,11 @@
   </div>
 
   <div class="col-9 col-sm-9 col-md-9 col-lg-9 cl-container-padding">
+    <h2><b>My Followers</b></h2>
     <ul class="list-group cl-list-group-borderless">
       <li *ngFor="let follower of followers" class="list-group-item cl-list-item-borderless">
         <div class="media">
-          <img class="mr-3" src={{follower.photo}}
+          <img class="mr-3" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
                alt="Generic placeholder image" width="64" height="64">
           <div class="media-body">
             <h5><a class="mt-0" [routerLink]="['/username', follower.username]">{{follower.username}}</a></h5>

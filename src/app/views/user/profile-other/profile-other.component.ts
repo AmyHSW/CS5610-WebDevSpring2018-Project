@@ -65,7 +65,7 @@ export class ProfileOtherComponent implements OnInit {
   ngOnInit() {
     this.loginUser = this.sharedService.user;
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
-    this.isAdmin = this.sharedService.user['type'] == 'REVIEWER';
+    this.isReviewer = this.sharedService.user['type'] == 'REVIEWER';
     this.activatedRoute.params.subscribe(
       (params: any) => {
         this.username = params['username'];

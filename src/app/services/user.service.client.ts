@@ -17,14 +17,14 @@ export class UserService {
   options = new RequestOptions();
 
   static getNewUser() {
-    return {username: undefined, password: undefined, type: undefined};
+    return {username: undefined, password: undefined, type: undefined,
+    photo: "https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"};
   }
 
   findUserByCredential(username: String, password: String) {
     return this.http.get(this.baseUrl + '/api/user?username=' + username + '&password=' + password)
       .map((res: Response) => {
-        const data = res.json();
-        return data;
+        return res.json();
       });
   }
 
@@ -39,19 +39,19 @@ export class UserService {
     return this.http.post(this.baseUrl + '/api/login', body, this.options)
       .map(
         (res: Response) => {
-          const data = res.json();
-          return data;
+          return res.json();
         }
       );
   }
 
-  register (username, password, type) {
+  register (username, password, type, photo) {
     const url = this.baseUrl + '/api/register';
     // create an object to keep track of the username and password
     const credentials = {
       username: username,
       password: password,
-      type: type
+      type: type,
+      photo: photo
     };
     // turn on credentials to make sure the communication is secure
     this.options.withCredentials = true;

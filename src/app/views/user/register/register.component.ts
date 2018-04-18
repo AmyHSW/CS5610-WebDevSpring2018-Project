@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
           this.errorFlag = true;
           this.errorMsg = 'This username is in use. Please enter a different one.';
         } else {
-          return this.userService.register(this.user.username, this.user.password, this.user.type)
+          return this.userService.register(this.user.username, this.user.password, this.user.type, this.user.photo)
             .subscribe(
               (newUser: any) => {
                 console.log(newUser['type']);
