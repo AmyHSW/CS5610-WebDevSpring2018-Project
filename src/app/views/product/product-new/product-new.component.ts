@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../services/product.service.client';
 import {SharedService} from '../../../services/shared.service';
 import {UserService} from '../../../services/user.service.client';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-product-new',
@@ -13,6 +14,7 @@ export class ProductNewComponent implements OnInit {
   user = {};
   userId: String;
   product = {};
+  baseUrl = environment.baseUrl;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
               private sharedService: SharedService, private userService: UserService) { }
 

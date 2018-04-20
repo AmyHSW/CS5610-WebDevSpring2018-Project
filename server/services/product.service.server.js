@@ -1,4 +1,7 @@
 module.exports = function(app){
+  var multer = require('multer'); // npm install multer --save
+  var upload = multer({ dest: __dirname+'/../../dist/assets/uploads' });
+  app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
   var ProductModel = require("../models/product/product.model.server");
   app.post("/api/user/:userId/product", createProduct);
@@ -8,6 +11,25 @@ module.exports = function(app){
   app.put("/api/product/:productId",updateProduct);
   app.delete("/api/product/:productId",deleteProduct);
   app.get("/api/products/:productName",findProductsByProductName);
+
+
+  function uploadImage(req, res) {
+    var userId = req.body.userId;
+    var productName = req.body.productName;
+    var brand = req.body.brand;
+    var price = req.body.price;
+
+    var description     = req.body.description;
+    var myFile        = req.file;
+    var filename      = myFile.filename;     // new file name in upload folder
+    var product = {'productName': productName, price: price, 'brand': brand, 'description': description, 'width':"100%", 'url':"assets/uploads/" + filename};
+    product._user= userId;
+    ProductModel.createProduct(product);
+    const jumpurl = 'http://localhost:3100/user/product';
+    res.redirect(jumpurl);
+  }
+
+
 
   function findAllProducts(req, res){
     ProductModel

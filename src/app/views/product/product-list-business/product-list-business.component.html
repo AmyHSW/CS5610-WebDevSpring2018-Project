@@ -49,14 +49,13 @@
     <br/>
 
   <div class="container">
-    <div class="row" *ngIf="products">
       <div *ngFor="let product of products">
         <div class="card card-padding">
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
               <img src="{{product.url}}" height="215" width="215">
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
               <div class="card-block">
                 <h4 class="card-title cl-text-bold">{{product.productName}}  {{product.price}}$</h4>
                 <p class="card-text">{{product.brand}}</p>
@@ -107,6 +106,8 @@
               </div>
               <button type="button" class="btn btn-outline-primary btn-block"
                       (click)="updateProduct(product._id, product)">Update</button>
+                <button type="button" class="btn btn-outline-primary btn-block"
+                        (click)="deleteProduct(product._id)">Delete</button>
               </div>
               <br>
               <br>
@@ -120,6 +121,5 @@
       </div>
     </div>
   </div>
-</div>
 </div>
 
