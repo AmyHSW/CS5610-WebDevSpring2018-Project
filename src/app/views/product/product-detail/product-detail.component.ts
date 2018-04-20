@@ -21,6 +21,9 @@ export class ProductDetailComponent implements OnInit {
   user = {};
   userId: String;
   favorites = [{}];
+  length: Number;
+  reviewPage: any;
+  pages = new Array();
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
               private sharedService: SharedService, private reviewService: ReviewService, private userService: UserService) { }
 
@@ -35,6 +38,7 @@ export class ProductDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       (params: any) => {
         this.productId = params['productId'];
+        this.reviewPage = params['reviewPage'];
       }
     );
     this.productService.findProductById(this.productId).subscribe(
@@ -46,6 +50,11 @@ export class ProductDetailComponent implements OnInit {
     this.reviewService.findAllReviewsForProduct(this.productId).subscribe(
       (data: any) => {
         this.reviews = data;
+        console.log(Math.ceil(this.reviews.length / 5));
+        for (let i = 0; i < Math.ceil(this.reviews.length / 5); i++) {
+          this.pages[i] = i;
+          console.log(this.pages);
+        }
       }
     );
     this.userService.findFavoritesForUser(this.userId).subscribe(

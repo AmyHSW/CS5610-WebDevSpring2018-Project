@@ -46,18 +46,27 @@
 
   <br/>
   <ul class="list-group cl-list-group-borderless">
-    <li *ngFor = "let review of reviews">
-      {{review._user}} : {{review.rating}}
-      <br>
+    <div *ngFor = "let review of reviews;  let i=index">
+      <div *ngIf="i>=reviewPage*5&&i<reviewPage*5+5">
+        <p class="thick">{{review._user.username}} : {{review.rating}}</p>
       {{review.summery}}
-      <br>
+        <br/>
       {{review.content}}
-    </li>
+        <br>
+        <br>
+      </div>
+    </div>
+  </ul>
+   <br/>
+
+  <ul class="pagination">
+    <li *ngFor = "let page of pages"class="page-item"><a class="page-link" routerLink="../{{page}}">{{page+1}}</a></li>
   </ul>
   <br/>
   <br/>
   <button type="button" class="btn btn-outline-primary" *ngIf="isReviewer"
-          routerLink="./review/new">Create Review</button>
+          routerLink="../review/new">Create Review</button>
+  <br/>
 </div>
 </div>
 

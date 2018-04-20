@@ -49,7 +49,7 @@ export class ReviewNewComponent implements OnInit {
       this.reviewService.createReview(this.user._id, this.review).subscribe(
         (reviews: any) => {
           console.log('created review');
-          this.router.navigate(['../..'], {relativeTo: this.activatedRoute});
+          this.router.navigate(['../../0'], {relativeTo: this.activatedRoute});
         },
         (error: any) => {
           this.errorFlag = true;

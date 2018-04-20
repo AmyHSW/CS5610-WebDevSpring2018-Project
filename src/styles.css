@@ -293,3 +293,5 @@ img.avatar {
 .product-card {
   background-color: white;
 }
+
+p.thick {font-weight:bold;}

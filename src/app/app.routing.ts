@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'product', component: ProductListComponent},
-  {path: 'product/:productId', component: ProductDetailComponent},
+  {path: 'product/:productId/:reviewPage', component: ProductDetailComponent},
   {path: 'product/:productId/review', component: ReviewListComponent},
 
   // require user logged in
