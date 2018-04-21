@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+<nav class="navbar navbar-expand-lg navbar-dark bg-color" xmlns="http://www.w3.org/1999/html">
   <a class="navbar-brand thick" href="#"><b>Rate the Product</b></a>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -48,10 +48,10 @@
   <ul class="list-group cl-list-group-borderless">
     <div *ngFor = "let review of reviews;  let i=index">
       <div *ngIf="i>=reviewPage*5&&i<reviewPage*5+5">
-        <p class="thick" *ngIf="review._user">{{review._user.username}} : {{review.rating}}</p>
-      {{review.summery}}
+        <div *ngIf="review._user"><b>{{review._user.username}} : {{review.rating}}</b></div>
+        <b>summary: </b>{{review.summary}}
         <br/>
-      {{review.content}}
+        <b>content: </b>{{review.content}}
         <br>
         <br>
       </div>

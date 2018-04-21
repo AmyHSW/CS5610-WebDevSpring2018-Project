@@ -34,18 +34,21 @@ export class ProductDetailComponent implements OnInit {
         this.user = this.sharedService.user;
         //console.log(this.user);
         this.userId = this.user['_id'];
-        this.userService.findFavoritesForUser(this.userId).subscribe(
-          (data: any) => {
-            this.favorites = data;
-            console.log(this.favorites);
-            for (const favorite of this.favorites) {
-              if (favorite['_id'] === this.productId) {
-                this.isFavorite = true;
-                break;
+        if (!this.noUser) {
+          this.userService.findFavoritesForUser(this.userId).subscribe(
+            (data: any) => {
+              this.favorites = data;
+              console.log(this.favorites);
+              for (const favorite of this.favorites) {
+                if (favorite['_id'] === this.productId) {
+                  this.isFavorite = true;
+                  break;
+                }
               }
             }
-          }
-        );
+          );
+        }
+
       }
     );
     this.activatedRoute.params.subscribe(
