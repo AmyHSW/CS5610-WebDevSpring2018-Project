@@ -48,7 +48,7 @@
   <ul class="list-group cl-list-group-borderless">
     <div *ngFor = "let review of reviews;  let i=index">
       <div *ngIf="i>=reviewPage*5&&i<reviewPage*5+5">
-        <p class="thick">{{review._user.username}} : {{review.rating}}</p>
+        <p class="thick" *ngIf="review._user">{{review._user.username}} : {{review.rating}}</p>
       {{review.summery}}
         <br/>
       {{review.content}}

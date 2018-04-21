@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.productService.findAllProduct().subscribe(
       (products) => {
         products.sort((a, b): number => {
-          return a.reviews.length - b.reviews.length;
+          return b.reviews.length - a.reviews.length;
         })
         this.products = products;
         this.selectedProducts = products.slice(0, 6);

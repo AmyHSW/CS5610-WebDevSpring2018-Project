@@ -28,11 +28,24 @@ export class ProductDetailComponent implements OnInit {
               private sharedService: SharedService, private reviewService: ReviewService, private userService: UserService) { }
 
   ngOnInit() {
-    this.user = this.sharedService.user;
-    this.userId = this.user['_id'];
     this.userService.loggedIn().subscribe(
       (isLoggedIn) => {
         this.noUser = !isLoggedIn;
+        this.user = this.sharedService.user;
+        //console.log(this.user);
+        this.userId = this.user['_id'];
+        this.userService.findFavoritesForUser(this.userId).subscribe(
+          (data: any) => {
+            this.favorites = data;
+            console.log(this.favorites);
+            for (const favorite of this.favorites) {
+              if (favorite['_id'] === this.productId) {
+                this.isFavorite = true;
+                break;
+              }
+            }
+          }
+        );
       }
     );
     this.activatedRoute.params.subscribe(
@@ -54,18 +67,6 @@ export class ProductDetailComponent implements OnInit {
         for (let i = 0; i < Math.ceil(this.reviews.length / 5); i++) {
           this.pages[i] = i;
           console.log(this.pages);
-        }
-      }
-    );
-    this.userService.findFavoritesForUser(this.userId).subscribe(
-      (data: any) => {
-        this.favorites = data;
-        console.log(this.favorites);
-        for (const favorite of this.favorites) {
-          if (favorite['_id'] === this.productId) {
-            this.isFavorite = true;
-            break;
-          }
         }
       }
     );

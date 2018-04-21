@@ -62,6 +62,15 @@ export class ProfileOtherComponent implements OnInit {
     )
   }
 
+  deleteUser() {
+    this.userService.deleteUser(this.profileUser._id).subscribe(
+      (any) => {
+        alert("successfully delete user: " + this.profileUser.username + "!");
+        this.router.navigate(["user/all"]);
+      }
+    )
+  }
+
   ngOnInit() {
     this.loginUser = this.sharedService.user;
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
