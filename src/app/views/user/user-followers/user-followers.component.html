@@ -17,7 +17,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
       <div class="navbar-header navbar-toggler-right">
-        <a (click)="logout()" href=".">Log Out</a>
+        <a (click)="logout()" routerLink=".">Log Out</a>
       </div>
     </form>
   </div>
@@ -55,7 +55,11 @@
     <ul class="list-group cl-list-group-borderless">
       <li *ngFor="let follower of followers" class="list-group-item cl-list-item-borderless">
         <div class="media">
-          <img class="mr-3" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+          <img *ngIf="!follower.photo"
+               class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+               alt="Generic placeholder image" width="64" height="64">
+          <img *ngIf="follower.photo"
+               class="mr-3 rounded" src={{follower.photo}}
                alt="Generic placeholder image" width="64" height="64">
           <div class="media-body">
             <h5><a class="mt-0" [routerLink]="['/username', follower.username]">{{follower.username}}</a></h5>

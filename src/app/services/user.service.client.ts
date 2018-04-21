@@ -67,6 +67,7 @@ export class UserService {
     this.options.withCredentials = true;
     return this.http.post(url, {}, this.options)
       .map((response: Response) => {
+        console.log("successfully logout");
         return response; // not return a json object
       });
   }

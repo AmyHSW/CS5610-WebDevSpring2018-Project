@@ -1,6 +1,9 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
+var multer = require('multer'); // npm install multer --save
+var upload = multer({ dest: __dirname+'/../../dist/assets/uploads' });
+
 
 module.exports = function (app) {
   app.post("/api/user", createUser);
@@ -26,10 +29,34 @@ module.exports = function (app) {
   app.post ('/api/register', register);
   app.post('/api/login', passport.authenticate('local'), login);
   app.post ('/api/loggedIn', loggedIn);
+
+  app.post ("/api/userUpload", upload.single('myFile'), uploadImage);
   passport.use(new LocalStrategy(localStrategy));
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
   var userModel = require("../models/user/user.model.server");
+
+  function uploadImage(req, res) {
+    var userId = req.body.userId;
+    var myFile        = req.file;
+    var filename      = myFile.filename;     // new file name in upload folder
+    userModel.findUserById(userId)
+      .then(function (user) {
+        user.photo = "/assets/uploads/" + filename;
+        userModel.updateUser(userId, user)
+          .then(
+            function(any){
+              console.log("upload successfully: " + user.photo);
+              const callbackUrl = '/profile';
+              res.redirect(callbackUrl);
+            },
+            function (err) {
+              console.log(err);
+              res.status(500).send(err);
+            })
+      })
+
+  }
 
   function localStrategy(username, password, done) {
     userModel
@@ -97,6 +124,7 @@ module.exports = function (app) {
 
   function logout(req, res) {
     req.logOut();
+    console.log("successfully logout");
     res.sendStatus(200);
   }
 

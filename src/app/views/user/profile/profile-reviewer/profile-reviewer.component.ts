@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../../services/user.service.client';
 import {SharedService} from "../../../../services/shared.service";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-profile-reviewer',
@@ -16,6 +17,7 @@ export class ProfileReviewerComponent implements OnInit {
   updateFlag: boolean;
   updateMsg: String;
   alert: String;
+  baseUrl: String;
 
   constructor(
     private userService: UserService,
@@ -69,6 +71,7 @@ export class ProfileReviewerComponent implements OnInit {
       );
   }
   ngOnInit() {
+    this.baseUrl = environment.baseUrl;
     this.getUser();
     this.updateFlag = false;
     this.errorFlag = false;

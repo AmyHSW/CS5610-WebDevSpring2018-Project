@@ -16,15 +16,19 @@
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
       <div class="navbar-header navbar-toggler-right">
-        <a (click)="logout()" href=".">Log Out</a>
+        <a (click)="logout()" routerLink=".">Log Out</a>
       </div>
     </form>
   </div>
 </nav>
 
 <div class="container-fluid row">
-
   <div class="col-3 cl-container-padding">
+    <img class="img-responsive mx-4" *ngIf="user.photo" src={{user.photo}}
+         height="120" width="120">
+    <img class="img-responsive mx-4" *ngIf="!user.photo"
+         src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+         height="120" width="120">
     <ul class="list-group cl-list-group-borderless">
       <li class="list-group-item cl-list-item-borderless">
         <a [routerLink]="['/profile']">
@@ -92,6 +96,14 @@
                placeholder="Wonderland"
                [ngModelOptions]="{standalone: true}"/>
       </div>
+      <form ngNoForm action="{{baseUrl}}/api/userUpload" method="post" enctype="multipart/form-data">
+        <input  name="myFile"   type="file" class="form-control"/>
+        <input  name="userId" value="{{user._id}}"   style="display: none"/>
+        <button type="submit" class="btn btn-block btn-outline-primary">Upload Image</button>
+        <br/>
+      </form>
+      <button class="btn btn-outline-primary btn-block"
+              [routerLink]="['/profile/flickr']" >Choose From Flickr</button>
       <br/>
 
       <button type="button" class="btn btn-outline-primary btn-block"

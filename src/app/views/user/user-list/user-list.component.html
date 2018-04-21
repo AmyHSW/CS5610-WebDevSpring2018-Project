@@ -25,7 +25,7 @@
   </div>
 </nav>
 
-<div class="body-grey">
+<div class="body-grey body-padding">
   <div class = "user-page-container" >
     <div class="input-group mb-3">
       <input [(ngModel)]="searchText" type="text" class="form-control" [ngModelOptions]="{standalone: true}">
@@ -35,7 +35,11 @@
     <div *ngFor="let user of users" class="container-fluid">
       <li class="list-group-item blue">
         <div class="media">
-          <img class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+          <img *ngIf="!user.photo"
+               class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+               alt="Generic placeholder image" width="64" height="64">
+          <img *ngIf="user.photo"
+               class="mr-3 rounded" src={{user.photo}}
                alt="Generic placeholder image" width="64" height="64">
           <div class="media-body">
             <h5 class="mt-0"><a routerLink="/username/{{user.username}}"><b>{{user.username}}</b></a></h5>

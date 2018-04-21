@@ -27,7 +27,9 @@ export class HomeComponent implements OnInit {
     this.userService.loggedIn().subscribe(
       (isLoggedIn) => {
         this.noUser = !isLoggedIn;
+        console.log("isloggedin:" + isLoggedIn);
       }
+
     );
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
     this.productService.findAllProduct().subscribe(

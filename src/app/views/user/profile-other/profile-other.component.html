@@ -35,8 +35,11 @@
           <div class="col-sm">
           </div>
           <div class="col-sm">
-            <img class="mx-auto d-block rounded-circle image-decorate"
+            <img class="mx-auto d-block rounded-circle image-decorate" *ngIf="!profileUser.photo"
                  src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                 alt="Generic placeholder image" width="100" height="100">
+            <img class="mx-auto d-block rounded-circle image-decorate" *ngIf="profileUser.photo"
+                 src={{profileUser.photo}}
                  alt="Generic placeholder image" width="100" height="100">
           </div>
           <div class="col-sm">
@@ -87,7 +90,11 @@
               <div *ngFor="let follower of followers" class="container-fluid">
                 <li class="list-group-item blue">
                   <div class="media">
-                    <img class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                    <img *ngIf="!follower.photo"
+                         class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                         alt="Generic placeholder image" width="64" height="64">
+                    <img *ngIf="follower.photo"
+                         class="mr-3 rounded" src={{follower.photo}}
                          alt="Generic placeholder image" width="64" height="64">
                     <div class="media-body">
                       <h5 class="mt-0"><a routerLink="/username/{{follower.username}}"><b>{{follower.username}}</b></a></h5>
@@ -102,7 +109,11 @@
               <div *ngFor="let following of followings" class="container-fluid">
                 <li class="list-group-item blue">
                   <div class="media">
-                    <img class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                    <img *ngIf="!following.photo"
+                         class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                         alt="Generic placeholder image" width="64" height="64">
+                    <img *ngIf="following.photo"
+                         class="mr-3 rounded" src={{following.photo}}
                          alt="Generic placeholder image" width="64" height="64">
                     <div class="media-body">
                       <h5 class="mt-0"><a routerLink="/username/{{following.username}}"><b>{{following.username}}</b></a></h5>

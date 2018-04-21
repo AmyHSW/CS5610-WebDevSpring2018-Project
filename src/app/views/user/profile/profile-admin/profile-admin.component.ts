@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SharedService} from "../../../../services/shared.service";
 import {UserService} from "../../../../services/user.service.client";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-profile-admin',
@@ -16,6 +17,7 @@ export class ProfileAdminComponent implements OnInit {
   updateFlag: boolean;
   updateMsg: String;
   alert: String;
+  baseUrl: String;
 
   constructor(
     private userService: UserService,
@@ -64,11 +66,13 @@ export class ProfileAdminComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.sharedService.user = '';
+          console.log("successfully logout");
           this.router.navigate(['/']);
         }
       );
   }
   ngOnInit() {
+    this.baseUrl = environment.baseUrl;
     this.getUser();
     this.updateFlag = false;
     this.errorFlag = false;

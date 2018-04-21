@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-color">
+<nav class="navbar navbar-expand-lg navbar-dark bg-color" xmlns="http://www.w3.org/1999/html">
   <a class="navbar-brand thick cl-text-white" [routerLink]="['.']"><b>Rate the Product</b></a>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -42,9 +42,11 @@
               <img class="img-responsive mr-4" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" height="215" width="215" *ngIf="!product.url">
             <div class="media-body">
               <h4><a class="mt-0" [routerLink]="['/product', product._id, '0']"><b>{{product.productName}}</b></a></h4>
-              <h6>{{product.description}}</h6>
-              <h6>show one review</h6>
-            </div>
+              <p class="text-concat">{{product.description}}</p>
+              <div *ngIf="product.reviews.length > 0">
+                <div *ngIf="product.reviews[0]._user"><b>{{product.reviews[0]._user.username}}</b></div>
+                :{{product.reviews[0].content}}
+              </div>
         </div>
       </div>
   </div>

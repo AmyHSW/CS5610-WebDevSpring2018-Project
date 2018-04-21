@@ -3,6 +3,7 @@ import {ProductService} from '../../../services/product.service.client';
 import {SharedService} from '../../../services/shared.service';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute} from "@angular/router";
+import {ReviewService} from "../../../services/review.service.client";
 
 @Component({
   selector: 'app-product-list',
@@ -19,7 +20,21 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService,
               private sharedService: SharedService,
               private userService: UserService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private reviewService: ReviewService) { }
+
+  getReview(product) {
+    if (product.reviews.length == 0) {
+      return "";
+    } else {
+      console.log(product.reviews[0]);
+      this.reviewService.findReviewById(product.reviews[0]).subscribe(
+        (review) => {
+          return review;
+        })
+    }
+
+  }
   ngOnInit() {
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
     this.activatedRoute

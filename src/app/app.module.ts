@@ -39,6 +39,8 @@ import { UserFollowersComponent } from './views/user/user-followers/user-followe
 import { UserFollowingsComponent } from './views/user/user-followings/user-followings.component';
 import { ProfileOtherComponent } from './views/user/profile-other/profile-other.component';
 import {TabsModule} from "ngx-bootstrap";
+import { FlickrComponent } from './views/user/profile/flickr/flickr.component';
+import {FlickrService} from "./services/flickr.service.client";
 
 
 
@@ -64,7 +66,8 @@ import {TabsModule} from "ngx-bootstrap";
     ReviewListOfReviewerComponent,
     UserFollowersComponent,
     UserFollowingsComponent,
-    ProfileOtherComponent
+    ProfileOtherComponent,
+    FlickrComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,7 @@ import {TabsModule} from "ngx-bootstrap";
     TabsModule.forRoot()
   ],
   providers: [UserService, ProductService, ReviewService, SharedService, AuthGuard, AuthGuardAdmin, AuthGuardReviewer,
-  AuthGuardObserver, AuthGuardBusiness],
+  AuthGuardObserver, AuthGuardBusiness, FlickrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

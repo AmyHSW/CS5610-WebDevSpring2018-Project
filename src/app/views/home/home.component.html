@@ -61,7 +61,7 @@
         <img class="card-img-top" src={{product.url}} height="250" alt="Card image cap">
         <div class="card-body">
           <h5><a class="mt-0" [routerLink]="['/product', product._id, '0']"><b>{{product.productName}}</b></a></h5>
-          <p class="card-text">{{product.description}}</p>
+          <p class="card-text text-concat">{{product.description}}</p>
         </div>
       </div>
     </div>
