@@ -37,7 +37,8 @@
 }
 
 .home-card-padding {
-  padding: 10px;
+  padding: 30px;
+  border: 30px;
 }
 
 .card-padding {
@@ -295,3 +296,4 @@ img.avatar {
 }
 
 p.thick {font-weight:bold;}
+

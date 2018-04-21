@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-color">
   <a class="navbar-brand thick cl-text-white" [routerLink]="['.']"><b>Rate the Product</b></a>
   <div class="collapse navbar-collapse">
@@ -19,11 +18,11 @@
       </ul>
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
-      <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name = "login">
+      <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name="login">
         <a [routerLink]="['/login']">Login</a>
         <a [routerLink]="['/register']">Register</a>
       </div>
-      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
+      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name="profile">
         <a [routerLink]="['/profile']">Profile</a>
       </div>
     </form>
@@ -35,14 +34,16 @@
 
 <div class="homepage-background">
   <div class="container homepage-middle">
-    <div class = "homepage-position">
+    <div class="homepage-position">
       <div class="text-center">
         <h1><strong class="cl-text-white">Know better, choose better.</strong></h1>
         <p class="lead cl-text-white">Reviews by people like you.</p>
         <div class="row">
           <div class="input-group mb-3">
             <input [(ngModel)]="searchText" type="text" class="form-control" [ngModelOptions]="{standalone: true}">
-            <button (click)="searchProducts()" type="button" class="cl-text-white btn btn-light bg-color">Search</button>
+            <button type="button" class="cl-text-white btn btn-light bg-color"
+                    routerLink="product" [queryParams]="{searchText: searchText}">Search
+            </button>
           </div>
         </div>
       </div>
@@ -53,72 +54,14 @@
 
 <div class="body-grey body-padding">
   <h2>Popular Products recommended for you</h2>
+  <br>
   <div class="card-columns">
-    <div class="card home-card-padding">
-      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title that wraps to a new line</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-    <div class="card body-padding">
-      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="card home-card-padding">
-      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title that wraps to a new line</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-    <div class="card body-padding">
-      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title that wraps to a new line</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-    <div class="card body-padding">
-      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="card body-padding">
-      <img class="card-img-top" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-  </div>
-
-  <!--https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg-->
-  <div class="container">
-    <div class="row" *ngIf="products">
-      <div *ngFor="let product of products">
-        <div class="card card-padding" style="width: 70rem; height: 20rem">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="card-img-bottom">
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="card-block">
-                <h4 class="card-title cl-text-bold">{{product.productName}}</h4>
-                <p class="card-text">{{product.description}}</p>
-                <p class="card-text">show one review</p>
-              </div>
-            </div>
-          </div>
+    <div *ngFor="let product of selectedProducts">
+      <div class="card home-card-padding">
+        <img class="card-img-top" src={{product.url}} height="250" alt="Card image cap">
+        <div class="card-body">
+          <h5><a class="mt-0" [routerLink]="['/product', product._id, '0']"><b>{{product.productName}}</b></a></h5>
+          <p class="card-text">{{product.description}}</p>
         </div>
       </div>
     </div>

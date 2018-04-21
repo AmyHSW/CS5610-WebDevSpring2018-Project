@@ -10,6 +10,7 @@ import {UserService} from "../../services/user.service.client";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  selectedProducts: [any];
   products: [any];
   searchText: String;
   noUser: boolean;
@@ -21,13 +22,6 @@ export class HomeComponent implements OnInit {
               private productService: ProductService,
               private userService: UserService) { }
 
-  searchProducts() {
-    this.productService.findProductsByProductName(this.searchText).subscribe(
-      (products) => {
-        this.products = products;
-      }
-    );
-  }
 
   ngOnInit() {
     this.userService.loggedIn().subscribe(
@@ -36,6 +30,15 @@ export class HomeComponent implements OnInit {
       }
     );
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
+    this.productService.findAllProduct().subscribe(
+      (products) => {
+        products.sort((a, b): number => {
+          return a.reviews.length - b.reviews.length;
+        })
+        this.products = products;
+        this.selectedProducts = products.slice(0, 6);
+      }
+    )
   }
 
 }

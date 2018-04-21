@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../../services/product.service.client';
 import {SharedService} from '../../../services/shared.service';
 import {UserService} from '../../../services/user.service.client';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-product-list',
@@ -17,9 +18,29 @@ export class ProductListComponent implements OnInit {
   searchText: string;
   constructor(private productService: ProductService,
               private sharedService: SharedService,
-              private userService: UserService) { }
+              private userService: UserService,
+              private activatedRoute: ActivatedRoute) { }
   ngOnInit() {
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
+    this.activatedRoute
+      .queryParams
+      .subscribe(params => {
+        // Defaults to 0 if no query param provided.
+        this.searchText = params['searchText'] || '';
+        if (this.searchText === '') {
+          this.productService.findAllProduct().subscribe(
+            (products) => {
+              this.products = products;
+            }
+          );
+        } else {
+          this.productService.findProductsByProductName(this.searchText).subscribe(
+            (products) => {
+              this.products = products;
+            }
+          );
+        }
+      });
     this.userService.loggedIn().subscribe(
       (isLoggedIn) => {
         this.noUser = !isLoggedIn;
@@ -31,12 +52,6 @@ export class ProductListComponent implements OnInit {
         }
       }
     );
-    this.productService.findAllProduct().subscribe(
-      (products) => {
-        this.products = products;
-      }
-    );
-
   }
 
 
