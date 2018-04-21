@@ -8,6 +8,7 @@ var ProductSchema = mongoose.Schema({
   price: Number,
   url : String,
   width : String,
+  reviews : [{type : mongoose.Schema.ObjectId, ref: 'ReviewModel'}],
   dateCreated: {type: Date, default: Date.now},
   lastViewed: {type: Date}
 }, {collection: 'product'});
