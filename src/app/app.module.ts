@@ -24,7 +24,6 @@ import { ProfileReviewerComponent } from './views/user/profile/profile-reviewer/
 import { HomeComponent } from './views/home/home.component';
 import { UserListComponent } from './views/user/user-list/user-list.component';
 
-import {ReviewListComponent} from "./views/review/review-list-of-product/review-list.component";
 import {ReviewNewComponent} from "./views/review/review-new/review-new.component";
 import { ProfileObserverComponent } from './views/user/profile/profile-observer/profile-observer.component';
 import { ProfileBusinessComponent } from './views/user/profile/profile-business/profile-business.component';
@@ -58,7 +57,6 @@ import {FlickrService} from "./services/flickr.service.client";
     ProfileReviewerComponent,
     HomeComponent,
     UserListComponent,
-    ReviewListComponent,
     ReviewNewComponent,
     ProfileObserverComponent,
     ProfileBusinessComponent,
