@@ -12,18 +12,18 @@ import {UserService} from '../../../services/user.service.client';
 })
 export class ProductDetailComponent implements OnInit {
   productId: String;
-  product = {};
+  product : any;
   reviews = [{}];
   isReviewer: boolean;
   isObserver: boolean;
   isFavorite: boolean;
   noUser: boolean;
-  user = {};
+  user : any;
   userId: String;
-  favorites = [{}];
+  favorites : [any];
   length: Number;
   reviewPage: any;
-  pages = new Array();
+  pages : [any];
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
               private sharedService: SharedService, private reviewService: ReviewService, private userService: UserService) { }
 

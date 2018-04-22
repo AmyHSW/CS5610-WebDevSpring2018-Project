@@ -11,9 +11,9 @@ import {environment} from '../../../../environments/environment';
   styleUrls: ['./product-new.component.css']
 })
 export class ProductNewComponent implements OnInit {
-  user = {};
+  user : any;
   userId: String;
-  product = {};
+  product : any;
   baseUrl = environment.baseUrl;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
               private sharedService: SharedService, private userService: UserService) { }
