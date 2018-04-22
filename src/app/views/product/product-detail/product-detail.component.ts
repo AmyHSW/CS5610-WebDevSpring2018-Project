@@ -34,6 +34,8 @@ export class ProductDetailComponent implements OnInit {
         this.user = this.sharedService.user;
         //console.log(this.user);
         this.userId = this.user['_id'];
+        this.isReviewer = (this.user['type'] === 'REVIEWER');
+        this.isObserver = (this.user['type'] === 'OBSERVER');
         if (!this.noUser) {
           this.userService.findFavoritesForUser(this.userId).subscribe(
             (data: any) => {
@@ -73,8 +75,7 @@ export class ProductDetailComponent implements OnInit {
         }
       }
     );
-    this.isReviewer = (this.user['type'] === 'REVIEWER');
-    this.isObserver = (this.user['type'] === 'OBSERVER');
+
   }
 
   clickFavoriteButton() {

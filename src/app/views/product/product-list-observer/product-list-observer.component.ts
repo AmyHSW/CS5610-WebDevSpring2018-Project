@@ -80,7 +80,7 @@ export class ProductListObserverComponent implements OnInit {
       .subscribe(
         (data: any) => {
           console.log('updated lastViewed');
-          this.router.navigate(['/product', product._id]);
+          this.router.navigate(['/product', product._id, '0']);
         }
       )
   }

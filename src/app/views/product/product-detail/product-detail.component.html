@@ -27,17 +27,17 @@
 </nav>
 
 <div class="container-fluid row">
-  <div class="col-4">
+  <div class="col-4" *ngIf="product">
     <br/>
     <img class="img-responsive img-rounded cl-widget-images" src="{{product.url}}">
   </div>
 
 
-<div class="col-8 col-sm-8 col-md-8 col-lg-8">
+<div class="col-8 col-sm-8 col-md-8 col-lg-8" *ngIf="product">
   <br/>
   <br/>
   <br/>
-  <h1>{{product.productName}}</h1>
+  <h1 >{{product.productName}}</h1>
   <h2>{{product.price}}$</h2>
   <h3>Brand: {{product.brand}}</h3>
   <h5>Description: {{product.description}}</h5>
