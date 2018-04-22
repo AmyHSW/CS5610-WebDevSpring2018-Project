@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: ''
+  baseUrl: "https://cs5610-spring2018-project.herokuapp.com"
 };
