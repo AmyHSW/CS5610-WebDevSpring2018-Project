@@ -25,7 +25,7 @@ module.exports = function(app){
     var product = {'productName': productName, price: price, 'brand': brand, 'description': description, 'width':"100%", 'url':"assets/uploads/" + filename};
     product._user= userId;
     ProductModel.createProduct(product);
-    const jumpurl = 'http://localhost:3100/user/product';
+    const jumpurl = '/user/product';
     res.redirect(jumpurl);
   }
 
