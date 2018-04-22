@@ -23,8 +23,13 @@
 </nav>
 
 <div class="container-fluid row">
-  <div class="col-3">
-    <br/>
+
+  <div class="col-3 cl-container-padding">
+    <img class="img-responsive mx-4" *ngIf="user.photo" src={{user.photo}}
+         height="120" width="120">
+    <img class="img-responsive mx-4" *ngIf="!user.photo"
+         src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+         height="120" width="120">
     <ul class="list-group cl-list-group-borderless">
       <li class="list-group-item cl-list-item-borderless">
         <a [routerLink]="['/profile']">
@@ -39,8 +44,7 @@
     </ul>
   </div>
 
-  <div class="col-9 col-sm-9 col-md-9 col-lg-9">
-    <br/>
+  <div class="col-9 col-sm-9 col-md-9 col-lg-9 cl-container-padding">
   <h2><b>My Products</b></h2>
 
   <button type="button" class="btn btn-outline-primary float-right"
