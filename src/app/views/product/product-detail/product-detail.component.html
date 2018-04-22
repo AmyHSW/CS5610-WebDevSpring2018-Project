@@ -9,8 +9,11 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/product']">Products</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Reviewers</a>
+        <li class="nav-item" *ngIf="!isAdmin">
+          <a class="nav-link" [routerLink]="['/reviewers']">Influencers</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" [routerLink]="['/user/all']">Users</a>
         </li>
       </ul>
     </ul>

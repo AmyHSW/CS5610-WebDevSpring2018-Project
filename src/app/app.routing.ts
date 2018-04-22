@@ -6,7 +6,6 @@ import {ProductListBusinessComponent} from './views/product/product-list-busines
 import {ProductDetailComponent} from './views/product/product-detail/product-detail.component';
 import {ProfileComponent} from './views/user/profile/profile.component';
 import {UserListComponent} from './views/user/user-list/user-list.component';
-import {ReviewListComponent} from './views/review/review-list-of-product/review-list.component';
 import {ReviewNewComponent} from './views/review/review-new/review-new.component';
 import {AuthGuard} from './services/auth-guard.service';
 import {RegisterComponent} from './views/user/register/register.component';

@@ -24,10 +24,12 @@ export class ProductDetailComponent implements OnInit {
   length: Number;
   reviewPage: any;
   pages : [any];
+  isAdmin: boolean;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
               private sharedService: SharedService, private reviewService: ReviewService, private userService: UserService) { }
 
   ngOnInit() {
+    this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
     this.userService.loggedIn().subscribe(
       (isLoggedIn) => {
         this.noUser = !isLoggedIn;
@@ -50,7 +52,6 @@ export class ProductDetailComponent implements OnInit {
             }
           );
         }
-
       }
     );
     this.activatedRoute.params.subscribe(
