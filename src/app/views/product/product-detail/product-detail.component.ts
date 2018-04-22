@@ -20,10 +20,10 @@ export class ProductDetailComponent implements OnInit {
   noUser: boolean;
   user : any;
   userId: String;
-  favorites : [any];
+  favorites = [];
   length: Number;
   reviewPage: any;
-  pages : [any];
+  pages = [];
   isAdmin: boolean;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
               private sharedService: SharedService, private reviewService: ReviewService, private userService: UserService) { }
@@ -34,7 +34,6 @@ export class ProductDetailComponent implements OnInit {
       (isLoggedIn) => {
         this.noUser = !isLoggedIn;
         this.user = this.sharedService.user;
-        //console.log(this.user);
         this.userId = this.user['_id'];
         this.isReviewer = (this.user['type'] === 'REVIEWER');
         this.isObserver = (this.user['type'] === 'OBSERVER');
@@ -69,7 +68,6 @@ export class ProductDetailComponent implements OnInit {
     this.reviewService.findAllReviewsForProduct(this.productId).subscribe(
       (data: any) => {
         this.reviews = data;
-        console.log(Math.ceil(this.reviews.length / 5));
         for (let i = 0; i < Math.ceil(this.reviews.length / 5); i++) {
           this.pages[i] = i;
           console.log(this.pages);
