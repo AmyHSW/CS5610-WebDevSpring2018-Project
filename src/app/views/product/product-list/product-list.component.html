@@ -44,8 +44,12 @@
               <h4><a class="mt-0" [routerLink]="['/product', product._id, '0']"><b>{{product.productName}}</b></a></h4>
               <p class="text-concat">{{product.description}}</p>
               <div *ngIf="product.reviews.length > 0">
-                <div *ngIf="product.reviews[0]._user"><b>{{product.reviews[0]._user.username}}</b></div>
-                :{{product.reviews[0].content}}
+                <div *ngIf="product.reviews[0]._user">
+                  <a [routerLink]="['/username', product.reviews[0]._user.username]">
+                    <b>{{product.reviews[0]._user.username}}</b>
+                  </a>
+                  :{{product.reviews[0].content}}
+                </div>
               </div>
         </div>
       </div>

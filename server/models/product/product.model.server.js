@@ -15,9 +15,10 @@ ProductModel.findProductsByProductName = findProductsByProductName;
 module.exports = ProductModel;
 
 function findAllProducts(){
-  return ProductModel.find();
+  return ProductModel.find()
+    .populate({path: 'reviews', model: 'ReviewModel', populate: { path: '_user'}})
+    .exec();
 }
-
 
 function findProductById(productId) {
   return ProductModel.findById(productId);
@@ -42,5 +43,7 @@ function createProduct(product){
 
 function findProductsByProductName(productName) {
   //console.log("model" + " productName")
-  return ProductModel.find({productName: {'$regex': '.*' + productName + '.*'}});
+  return ProductModel.find({productName: {'$regex': '.*' + productName + '.*'}})
+    .populate({path: 'reviews', model: 'ReviewModel', populate: { path: '_user'}})
+    .exec();
 }

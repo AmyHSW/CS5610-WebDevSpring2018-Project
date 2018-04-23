@@ -12,7 +12,6 @@ module.exports = function(app){
   app.delete("/api/product/:productId",deleteProduct);
   app.get("/api/products/:productName",findProductsByProductName);
 
-
   function uploadImage(req, res) {
     var userId = req.body.userId;
     var productName = req.body.productName;
@@ -28,8 +27,6 @@ module.exports = function(app){
     const jumpurl = '/user/product';
     res.redirect(jumpurl);
   }
-
-
 
   function findAllProducts(req, res){
     ProductModel
@@ -50,7 +47,7 @@ module.exports = function(app){
         res.json(product);});
   }
 
-  function findAllProductsForUser(req,res) {
+  function findAllProductsForUser(req, res) {
     var userId = req.params.userId;
     ProductModel
       .findAllProductsForUser(userId)
@@ -61,7 +58,7 @@ module.exports = function(app){
           res.sendStatus(500).send(err);
         });
   }
-  function updateProduct(req,res) {
+  function updateProduct(req, res) {
     var productId = req.params.productId;
     var product = req.body;
     console.log(product);
@@ -75,7 +72,7 @@ module.exports = function(app){
           res.sendStatus(500).send(err);
         });
   }
-  function findProductById(req,res ) {
+  function findProductById(req, res ) {
     var productId = req.params.productId;
     ProductModel
       .findProductById(productId)
@@ -87,7 +84,7 @@ module.exports = function(app){
         });
   }
 
-  function deleteProduct(req,res) {
+  function deleteProduct(req, res) {
     var productId = req.params.productId;
     ProductModel
       .deleteProduct(productId)
@@ -100,12 +97,14 @@ module.exports = function(app){
         });
   }
 
-  function findProductsByProductName(req,res) {
+  function findProductsByProductName(req, res) {
     var productName = req.params.productName;
     //console.log(productName);
     ProductModel
       .findProductsByProductName(productName)
-      .then(function (products) {
+      .then(
+        function (products) {
+          // console.log(products);
           res.json(products);
           //console.log(products);
         },

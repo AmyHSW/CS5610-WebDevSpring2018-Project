@@ -23,18 +23,6 @@ export class ProductListComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private reviewService: ReviewService) { }
 
-  getReview(product) {
-    if (product.reviews.length == 0) {
-      return "";
-    } else {
-      console.log(product.reviews[0]);
-      this.reviewService.findReviewById(product.reviews[0]).subscribe(
-        (review) => {
-          return review;
-        })
-    }
-
-  }
   ngOnInit() {
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
     this.activatedRoute
