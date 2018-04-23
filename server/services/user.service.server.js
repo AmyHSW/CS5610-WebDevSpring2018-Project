@@ -4,7 +4,6 @@ var bcrypt = require("bcrypt-nodejs");
 var multer = require('multer'); // npm install multer --save
 var upload = multer({ dest: __dirname+'/../../dist/assets/uploads' });
 
-
 module.exports = function (app) {
   app.post("/api/user", createUser);
   app.get("/api/user", findUser);
@@ -31,15 +30,17 @@ module.exports = function (app) {
   app.post ('/api/loggedIn', loggedIn);
 
   app.post ("/api/userUpload", upload.single('myFile'), uploadImage);
+
   passport.use(new LocalStrategy(localStrategy));
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
   var userModel = require("../models/user/user.model.server");
 
   function uploadImage(req, res) {
+    const callbackUrl = '/profile';
     var userId = req.body.userId;
-    var myFile        = req.file;
-    var filename      = myFile.filename;     // new file name in upload folder
+    var myFile = req.file;
+    var filename = myFile.filename;     // new file name in upload folder
     userModel.findUserById(userId)
       .then(function (user) {
         user.photo = "/assets/uploads/" + filename;
@@ -47,7 +48,6 @@ module.exports = function (app) {
           .then(
             function(any){
               console.log("upload successfully: " + user.photo);
-              const callbackUrl = '/profile';
               res.redirect(callbackUrl);
             },
             function (err) {
