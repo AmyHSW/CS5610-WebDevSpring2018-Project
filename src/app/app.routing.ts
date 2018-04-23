@@ -42,6 +42,7 @@ const appRoutes: Routes = [
   {path: 'user/all', component: UserListComponent, canActivate: [AuthGuardAdmin]},
 
   // require REVIEWER logged in
+  {path: 'productItem/:itemId/review/new', component: ReviewNewComponent, canActivate: [AuthGuardReviewer]},
   {path: 'product/:productId/review/new', component: ReviewNewComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/followers', component: UserFollowersComponent, canActivate: [AuthGuardReviewer]},
   {path: 'user/followings', component: UserFollowingsComponent, canActivate: [AuthGuardReviewer]},

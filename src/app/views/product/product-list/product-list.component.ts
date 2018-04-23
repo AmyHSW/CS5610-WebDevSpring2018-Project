@@ -19,6 +19,8 @@ export class ProductListComponent implements OnInit {
   isAdmin: boolean;
   searchText: string;
   walmartProducts: [any];
+  allProducts: [any];
+  allProductsName: String[];
   constructor(private productService: ProductService,
               private sharedService: SharedService,
               private userService: UserService,
@@ -38,6 +40,11 @@ export class ProductListComponent implements OnInit {
               products.sort((a, b): number => {
                 return b.reviews.length - a.reviews.length;
               });
+              this.allProducts = products;
+              this.allProductsName = [];
+              for (let i = 0; i < products.length; i++) {
+                this.allProductsName.push(products[i].productName);
+              }
               this.products = products;
             }
           );
@@ -75,14 +82,19 @@ export class ProductListComponent implements OnInit {
     this.walmartService.searchProducts(this.searchText).subscribe(
       (res) => {
         this.walmartProducts = res['items'];
+        let index = this.walmartProducts.length - 1;
+        console.log(this.allProductsName);
+        while (index >= 0) {
+          console.log(this.walmartProducts[index]);
+          if (this.allProductsName.indexOf(this.walmartProducts[index].name) > -1) {
+            this.walmartProducts.splice(index, 1);
+          }
+          index -= 1;
+        }
       }
     );
     console.log(this.walmartProducts);
   }
 
-  addFavorite(productId) {
-    this.userService.addFavorite(this.userId, productId);
-    alert('successfully add to favorite');
-  }
 
 }
