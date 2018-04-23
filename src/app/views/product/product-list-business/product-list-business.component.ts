@@ -10,8 +10,8 @@ import {UserService} from '../../../services/user.service.client';
   styleUrls: ['./product-list-business.component.css']
 })
 export class ProductListBusinessComponent implements OnInit {
-  user = {};
-  products = [{}];
+  user: any;
+  products: any;
   userId: String;
   isClick: boolean;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
@@ -38,11 +38,7 @@ export class ProductListBusinessComponent implements OnInit {
   }
 
   editProduct() {
-    if (!this.isClick) {
-      this.isClick = true;
-    } else {
-      this.isClick = false;
-    }
+    this.isClick = !this.isClick;
   }
 
 
