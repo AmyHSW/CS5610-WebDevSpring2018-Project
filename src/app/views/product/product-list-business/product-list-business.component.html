@@ -62,7 +62,7 @@
 
             <div class="col-8 col-sm-8 col-md-8 col-lg-8">
               <div class="card-block">
-                <h4 class="card-title cl-text-bold">{{product.productName}}  {{product.price}}$</h4>
+                <a class="card-title cl-text-bold" routerLink="/product/{{product._id}}/0">{{product.productName}}  {{product.price}}$</a>
                 <p class="card-text">{{product.brand}}</p>
                 <p class="card-text">{{product.description}}</p>
                 <button class="btn btn-outline-primary" (click)="editProduct()">
