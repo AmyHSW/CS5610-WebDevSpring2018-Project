@@ -4,6 +4,7 @@ import {ProductService} from "../../../services/product.service.client";
 import {SharedService} from "../../../services/shared.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../services/user.service.client";
+import {WalmartService} from "../../../services/walmart.service.client";
 
 @Component({
   selector: 'app-product-item-detail',
@@ -12,22 +13,20 @@ import {UserService} from "../../../services/user.service.client";
 })
 export class ProductItemDetailComponent implements OnInit {
 
-  productId: String;
+  itemId: String;
   product: any;
-  reviews: any;
   isReviewer: boolean;
   isObserver: boolean;
-  isFavorite: boolean;
   noUser: boolean;
   user : any;
   userId: String;
   favorites = [];
   length: Number;
-  reviewPage: any;
-  pages = [];
   isAdmin: boolean;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
-              private sharedService: SharedService, private reviewService: ReviewService, private userService: UserService) { }
+              private sharedService: SharedService, private reviewService: ReviewService,
+              private userService: UserService,
+              private walmartService: WalmartService) { }
 
   ngOnInit() {
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
@@ -38,62 +37,33 @@ export class ProductItemDetailComponent implements OnInit {
         this.userId = this.user['_id'];
         this.isReviewer = (this.user['type'] === 'REVIEWER');
         this.isObserver = (this.user['type'] === 'OBSERVER');
-        if (!this.noUser) {
-          this.userService.findFavoritesForUser(this.userId).subscribe(
-            (data: any) => {
-              this.favorites = data;
-              console.log(this.favorites);
-              for (const favorite of this.favorites) {
-                if (favorite['_id'] === this.productId) {
-                  this.isFavorite = true;
-                  break;
-                }
-              }
-            }
-          );
-        }
       }
     );
     this.activatedRoute.params.subscribe(
       (params: any) => {
-        this.productId = params['productId'];
-        this.reviewPage = params['reviewPage'];
+        this.itemId = params['itemId'];
+        this.walmartService.findProductByItemId(this.itemId).subscribe(
+          (item) => {
+            this.product = {};
+            this.product['productName'] = item.name;
+            this.product['description'] = item.shortDescription;
+            this.product['url'] = item.mediumImage;
+            this.product['price'] = item.price;
+            this.product['brand'] = item.brand;
+          }
+        )
       }
     );
-    this.productService.findProductById(this.productId).subscribe(
-      (data: any) => {
-        this.product = data;
-
-      }
-    );
-    this.reviewService.findAllReviewsForProduct(this.productId).subscribe(
-      (data: any) => {
-        this.reviews = data;
-        for (let i = 0; i < Math.ceil(this.reviews.length / 5); i++) {
-          this.pages[i] = i;
-          console.log(this.pages);
-        }
-      }
-    );
-
   }
 
   clickFavoriteButton() {
-    console.log(this.isFavorite);
-    console.log(this.isFavorite === true);
-    if (this.isFavorite) {
-      this.userService.deleteFavorite(this.userId, this.productId).subscribe(
-        (data: any) => {
-          alert('successfully delete from favorite');
-          this.isFavorite = false;
-        }
-      );
-    } else {
-      console.log(this.userId, this.productId);
-      this.userService.addFavorite(this.userId, this.productId).subscribe();
-      this.isFavorite = true;
-      alert('successfully add to favorite');
-    }
+    this.productService.createProduct(this.userId, this.product).subscribe(
+      (product) => {
+        this.userService.addFavorite(this.userId, product._id).subscribe();
+        alert('successfully add to favorite');
+        this.router.navigate(['/product',product._id,'0']);
+      }
+    )
   }
 
 }

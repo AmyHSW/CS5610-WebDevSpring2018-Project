@@ -45,44 +45,6 @@
     <a class="float-right" (click)="clickFavoriteButton()" *ngIf="isObserver&&!isFavorite"><i class="far fa-heart"></i></a>
     <button type="button" class="btn btn-outline-primary btn-block" *ngIf="isReviewer"
             routerLink="../review/new">Create Review</button>
-    <br/>
-    <h3>Reviews</h3>
-    <ul class="list-group cl-list-group-borderless">
-      <div *ngFor="let review of reviews; let i = index">
-        <div *ngIf="i >= reviewPage * 5 && i < reviewPage * 5 + 5">
-          <div class="card border-primary mb-3" *ngIf="review._user">
-            <div class="card-header">
-              Rating: {{review.rating}}
-            </div>
-            <div class="card-body text-primary">
-              <h5 class="card-title">{{review.summary}}</h5>
-              <p class="card-text">{{review.content}}</p>
-            </div>
-            <div class="card-footer">
-              By
-              <a [routerLink]="['/username', review._user.username]">
-                {{review._user.username}}
-              </a>
-              {{review.dateCreated}}
-            </div>
-          </div>
-        </div>
-
-        <!--      <div *ngIf="i>=reviewPage*5&&i<reviewPage*5+5">
-                <div *ngIf="review._user"><b>{{review._user.username}} : {{review.rating}}</b></div>
-                <b>summary: </b>{{review.summary}}
-                <br/>
-                <b>content: </b>{{review.content}}
-                <br>
-                <br>
-              </div>-->
-      </div>
-    </ul>
-    <br/>
-
-    <ul class="pagination">
-      <li *ngFor = "let page of pages"class="page-item"><a class="page-link" routerLink="../{{page}}">{{page+1}}</a></li>
-    </ul>
 
   </div>
 </div>

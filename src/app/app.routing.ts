@@ -30,7 +30,7 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'product', component: ProductListComponent},
   {path: 'product/:productId/:reviewPage', component: ProductDetailComponent},
-  {path: 'productItem/:itemId/:reviewPage', component: ProductItemDetailComponent},
+  {path: 'productItem/:itemId', component: ProductItemDetailComponent},
 
   // require user logged in
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},

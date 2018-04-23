@@ -15,19 +15,23 @@ export class WalmartService {
     const url = this.urlBase
       .replace('API_KEY', this.key)
       .replace('TEXT', searchTerm);
-    //return this._http.jsonp(url, 'callback');
     return this.jsonp.request(url, { method: 'Get' })
-      .subscribe((res) => {
-        console.log(res);
+      .map((res: Response) => {
+        console.log(res.json());
+        return res.json();
       });
   }
 
-  urlItemBase = 'https://api.walmartlabs.com/v1/items/ITEM_ID?apiKey=API_KEY&format=json';
+  urlItemBase = 'https://api.walmartlabs.com/v1/items/ITEM_ID?apiKey=API_KEY&format=json&callback=__ng_jsonp__.__req0.finished';
   //541357139
   findProductByItemId(itemId) {
     const url = this.urlItemBase
       .replace('API_KEY', this.key)
       .replace('ITEM_ID', itemId);
-    return this._http.get(url);
+    return this.jsonp.request(url, { method: 'Get' })
+      .map((res: Response) => {
+        console.log(res.json());
+        return res.json();
+      });
   }
 }
