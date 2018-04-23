@@ -18,11 +18,11 @@
       </ul>
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
-      <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name = "login">
+      <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name="login">
         <a [routerLink]="['/login']">Login</a>
         <a [routerLink]="['/register']">Register</a>
       </div>
-      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
+      <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name="profile">
         <a [routerLink]="['/profile']">Profile</a>
       </div>
     </form>
@@ -30,30 +30,36 @@
 </nav>
 
 <div class="body-grey body-padding">
-  <div class = "product-page-container" >
+  <div class="product-page-container">
     <div class="input-group mb-3">
       <input [(ngModel)]="searchText" type="text" class="form-control" [ngModelOptions]="{standalone: true}">
       <button (click)="searchProducts()" type="button" class="cl-text-white btn btn-light bg-color">Search</button>
     </div>
-  <div class="container" *ngIf="products">
+    <div class="container" *ngIf="products">
       <div *ngFor="let product of products">
-          <div class="row product-card card-padding media">
-              <img class="img-responsive mr-4" src="{{product.url}}"height="215" width="215" *ngIf="product.url">
-              <img class="img-responsive mr-4" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg" height="215" width="215" *ngIf="!product.url">
-            <div class="media-body">
-              <h4><a class="mt-0" [routerLink]="['/product', product._id, '0']"><b>{{product.productName}}</b></a></h4>
-              <p class="text-concat">{{product.description}}</p>
-              <div *ngIf="product.reviews.length > 0">
-                <div *ngIf="product.reviews[0]._user">
-                  <a [routerLink]="['/username', product.reviews[0]._user.username]">
-                    <b>{{product.reviews[0]._user.username}}</b>
-                  </a>
-                  :{{product.reviews[0].content}}
-                </div>
-              </div>
+        <div class="row product-card card-padding media">
+          <img class="img-responsive mr-4" src="{{product.url}}" height="215" width="215" *ngIf="product.url">
+          <img class="img-responsive mr-4" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+               height="215" width="215" *ngIf="!product.url">
+          <div class="media-body">
+            <h4><a class="mt-0" [routerLink]="['/product', product._id, '0']"><b>{{product.productName}}</b></a></h4>
+            <p class="text-concat">{{product.description}}</p>
+          </div>
         </div>
       </div>
-  </div>
+      <div *ngFor="let wProduct of walmartProducts">
+        <div class="row product-card card-padding media">
+          <img class="img-responsive mr-4" src="{{wProduct.mediumImage}}" height="215" width="215"
+               *ngIf="wProduct.mediumImage">
+          <img class="img-responsive mr-4" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+               height="215" width="215" *ngIf="!wProduct.mediumImage">
+          <div class="media-body">
+            <h4><a class="mt-0" [routerLink]="['/product', product._id, '0']"><b>{{product.productName}}</b></a></h4>
+            <p class="text-concat">{{wProduct.shortDescription}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

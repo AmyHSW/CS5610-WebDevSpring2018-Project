@@ -4,6 +4,7 @@ import {SharedService} from '../../../services/shared.service';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute} from "@angular/router";
 import {ReviewService} from "../../../services/review.service.client";
+import {WalmartService} from "../../../services/walmart.service.client";
 
 @Component({
   selector: 'app-product-list',
@@ -17,10 +18,12 @@ export class ProductListComponent implements OnInit {
   userId: String;
   isAdmin: boolean;
   searchText: string;
+  walmartProducts: [any];
   constructor(private productService: ProductService,
               private sharedService: SharedService,
               private userService: UserService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private walmartService: WalmartService) { }
 
   ngOnInit() {
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
@@ -69,6 +72,9 @@ export class ProductListComponent implements OnInit {
         this.products = products;
       }
     );
+
+
+    this.walmartProducts = this.walmartService.searchProducts(this.searchText)['items'];
   }
 
   addFavorite(productId) {

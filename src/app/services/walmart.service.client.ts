@@ -9,10 +9,19 @@ export class WalmartService {
 
   constructor(private _http: Http) {}
 
-  searchPhotos(searchTerm: any) {
+  searchProducts(searchTerm: any) {
     const url = this.urlBase
       .replace('API_KEY', this.key)
       .replace('TEXT', searchTerm);
+    return this._http.get(url);
+  }
+
+  urlItemBase = 'http://api.walmartlabs.com/v1/items/ITEM_ID?apiKey=API_KEY&format=json';
+  //541357139
+  findProductByItemId(itemId) {
+    const url = this.urlItemBase
+      .replace('API_KEY', this.key)
+      .replace('ITEM_ID', itemId);
     return this._http.get(url);
   }
 }

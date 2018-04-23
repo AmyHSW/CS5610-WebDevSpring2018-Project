@@ -40,6 +40,7 @@ import { ProfileOtherComponent } from './views/user/profile-other/profile-other.
 import {TabsModule} from "ngx-bootstrap";
 import { FlickrComponent } from './views/user/profile/flickr/flickr.component';
 import {FlickrService} from "./services/flickr.service.client";
+import {WalmartService} from "./services/walmart.service.client";
 
 
 
@@ -75,7 +76,7 @@ import {FlickrService} from "./services/flickr.service.client";
     TabsModule.forRoot()
   ],
   providers: [UserService, ProductService, ReviewService, SharedService, AuthGuard, AuthGuardAdmin, AuthGuardReviewer,
-  AuthGuardObserver, AuthGuardBusiness, FlickrService],
+  AuthGuardObserver, AuthGuardBusiness, FlickrService, WalmartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
