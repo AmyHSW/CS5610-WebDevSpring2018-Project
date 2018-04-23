@@ -12,8 +12,8 @@ import {UserService} from '../../../services/user.service.client';
 })
 export class ProductDetailComponent implements OnInit {
   productId: String;
-  product : any;
-  reviews = [{}];
+  product: any;
+  reviews: any;
   isReviewer: boolean;
   isObserver: boolean;
   isFavorite: boolean;
