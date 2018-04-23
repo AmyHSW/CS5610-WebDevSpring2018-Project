@@ -3,7 +3,9 @@ Thanks for visiting our website: Rate the product. This is a platform for users 
 
 First of all, open our web’s url: https://cs5610-spring2018-project.herokuapp.com/, and you can see our homepage. 
 
-Here, you can click the “product” in the navbar to jump to the product list. In this product list, you can search the product that you are interested in (or you can also do that in homepage because homepage also has search bar to search product). For example, search “WPC” and you can get the item WPC 002 Connecticut River. Click it and you can see the image of the product, the brand, price, description and the first page of the reviews. Pay attention here, we have pagination and every page just have 5 reviews. You can find pagination at the bottom and jump to the page you want to jump to. As a visitor, that’s all what you can do
+Here, you can click the “product” in the navbar to jump to the product list. In this product list, you can search the product 
+that you are interested in (or you can also do that in homepage because homepage also has search bar to search product). For example, 
+search “WPC” and you can get the item WPC 002 Connecticut River. Click it and you can see the image of the product, the brand, price, description and the first page of the reviews. Pay attention here, we have pagination and every page just have 5 reviews. You can find pagination at the bottom and jump to the page you want to jump to. As a visitor, that’s all what you can do
 
 Now return to homepage please, click login at the right of the navbar. Firstly, you can use “alice”,  “alice” to login as an admin. Now you can edit your profile, try to change your profile page from Flickr. Then, you can click the user in the navbar to see all the users and their detail information. Try to click one specific user to see what you can do. You should see users’ reviews, followings and followers. You can also delete a user. Go to your profile, logout.
 
