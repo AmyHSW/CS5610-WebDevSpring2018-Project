@@ -8,6 +8,7 @@ var UserSchema = mongoose.Schema({
   lastName: String,
   email: String,
   photo: String,
+  reviewCount: {type: Number, default: 0 },
   followers: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
   followings: [{type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
   favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'ProductModel'}],

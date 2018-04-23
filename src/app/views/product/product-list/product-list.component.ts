@@ -33,6 +33,9 @@ export class ProductListComponent implements OnInit {
         if (this.searchText === '') {
           this.productService.findAllProduct().subscribe(
             (products) => {
+              products.sort((a, b): number => {
+                return b.reviews.length - a.reviews.length;
+              });
               this.products = products;
             }
           );
@@ -61,6 +64,9 @@ export class ProductListComponent implements OnInit {
   searchProducts() {
     this.productService.findProductsByProductName(this.searchText).subscribe(
       (products) => {
+      products.sort((a, b): number => {
+          return b.reviews.length - a.reviews.length;
+        });
         this.products = products;
       }
     );

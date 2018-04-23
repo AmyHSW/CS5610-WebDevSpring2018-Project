@@ -11,7 +11,6 @@ import {UserService} from "../../services/user.service.client";
 })
 export class HomeComponent implements OnInit {
   selectedProducts: [any];
-  products: [any];
   searchText: String;
   noUser: boolean;
   isAdmin: boolean;
@@ -37,7 +36,6 @@ export class HomeComponent implements OnInit {
         products.sort((a, b): number => {
           return b.reviews.length - a.reviews.length;
         })
-        this.products = products;
         this.selectedProducts = products.slice(0, 6);
       }
     )

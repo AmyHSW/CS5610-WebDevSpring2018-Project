@@ -54,7 +54,10 @@ export class UserListComponent implements OnInit {
     if (this.href.includes("reviewers")) {
       this.userService.findAllReviewers().subscribe(
         (reviewers) => {
-          this.users = reviewers;
+          reviewers.sort((a, b): number => {
+            return b.followers.length - a.followers.length;
+          });
+          this.users = reviewers.splice(0, 10);
         }
       );
     } else {

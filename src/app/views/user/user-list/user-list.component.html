@@ -18,7 +18,7 @@
       </ul>
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
-      <div class="navbar-header navbar-toggler-right" name = "profile">
+      <div class="navbar-header navbar-toggler-right" name="profile">
         <a [routerLink]="['/profile']">Profile</a>
       </div>
     </form>
@@ -26,28 +26,42 @@
 </nav>
 
 <div class="body-grey body-padding">
-  <div class = "user-page-container" >
+  <div class="user-page-container">
     <div class="input-group mb-3">
       <input [(ngModel)]="searchText" type="text" class="form-control" [ngModelOptions]="{standalone: true}">
       <button (click)="searchUsers()" type="button" class="cl-text-white btn btn-light bg-color">Search</button>
     </div>
-  <ul class="list-group">
-    <div *ngFor="let user of users" class="container-fluid">
-      <li class="list-group-item blue">
-        <div class="media">
-          <img *ngIf="!user.photo"
-               class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
-               alt="Generic placeholder image" width="64" height="64">
-          <img *ngIf="user.photo"
-               class="mr-3 rounded" src={{user.photo}}
-               alt="Generic placeholder image" width="64" height="64">
-          <div class="media-body">
-            <h5 class="mt-0"><a routerLink="/username/{{user.username}}"><b>{{user.username}}</b></a></h5>
-            <h6>{{user.followers.length}} followers</h6>
+    <ul class="list-group">
+      <div *ngFor="let user of users" class="container-fluid">
+        <li class="list-group-item blue" *ngIf="!isAdmin">
+          <div class="media">
+            <img *ngIf="!user.photo"
+                 class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                 alt="Generic placeholder image" width="64" height="64">
+            <img *ngIf="user.photo"
+                 class="mr-3 rounded" src={{user.photo}}
+                 alt="Generic placeholder image" width="64" height="64">
+            <div class="media-body">
+              <h5 class="mt-0"><a routerLink="/username/{{user.username}}"><b>{{user.username}}</b></a></h5>
+              <h6>{{user.followers.length}} followers {{user.reviewCount}} reviews</h6>
+            </div>
           </div>
-        </div>
-      </li>
-    </div>
-  </ul>
+        </li>
+        <li class="list-group-item blue" *ngIf="isAdmin">
+          <div class="media">
+            <img *ngIf="!user.photo"
+                 class="mr-3 rounded" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+                 alt="Generic placeholder image" width="64" height="64">
+            <img *ngIf="user.photo"
+                 class="mr-3 rounded" src={{user.photo}}
+                 alt="Generic placeholder image" width="64" height="64">
+            <div class="media-body">
+              <h5 class="mt-0"><a routerLink="/username/{{user.username}}"><b>{{user.username}}</b></a></h5>
+              <h6>type: {{user.type}}</h6>
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
   </div>
 </div>
