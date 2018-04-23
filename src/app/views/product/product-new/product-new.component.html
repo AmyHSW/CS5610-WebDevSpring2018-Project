@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-color">
-  <a class="navbar-brand thick" routerLink="/profile"><b>My Profile</b></a>
+  <a class="navbar-brand thick" [routerLink]="['/profile']"><b>My Profile</b></a>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <ul class="navbar-nav">
@@ -14,17 +14,22 @@
         </li>
       </ul>
     </ul>
+    <form class="form-inline my-2 my-lg-0 cl-text-white">
+      <div class="navbar-header navbar-toggler-right">
+        <a (click)="logout()" routerLink=".">Log Out</a>
+      </div>
+    </form>
   </div>
-  <form class="form-inline my-2 my-lg-0 cl-text-white">
-    <div class="navbar-header navbar-toggler-right">
-      <a (click)="logout()" [routerLink]="['/']">Log Out</a>
-    </div>
-  </form>
 </nav>
 
 <div class="container-fluid row">
-  <div class="col-3">
-    <br/>
+
+  <div class="col-3 cl-container-padding">
+    <img class="img-responsive mx-4" *ngIf="user.photo" src={{user.photo}}
+         height="120" width="120">
+    <img class="img-responsive mx-4" *ngIf="!user.photo"
+         src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
+         height="120" width="120">
     <ul class="list-group cl-list-group-borderless">
       <li class="list-group-item cl-list-item-borderless">
         <a [routerLink]="['/profile']">
@@ -39,58 +44,64 @@
     </ul>
   </div>
 
-  <div class="col-9 col-sm-9 col-md-9 col-lg-9">
+  <div class="col-9 col-sm-9 col-md-9 col-lg-9 cl-container-padding">
+    <h2><b>Create New Product</b></h2>
     <br/>
-<form #f="ngForm">
+    <form #f="ngForm">
       <div class="form-group">
         <label for="product-name">Name</label>
         <input id="product-name"  placeholder="Name"
                [(ngModel)]="product.productName" required
                name="name"/>
 
-  <span class="form-group">
-    <label for="product-brand">Brand</label>
-    <input id="product-brand" placeholder="Description"
-              [(ngModel)]="product.brand" required
-              name="description">
-  </span></div>
-  <div class="form-group">
-    <label for="product-price">Price</label>
-    <input id="product-price" class="form-control" placeholder="Price"
-              [(ngModel)]="product.price" required
-              name="description">
-  </div>
+        <span class="form-group">
+          <label for="product-brand">Brand</label>
+          <input id="product-brand" placeholder="Description"
+                    [(ngModel)]="product.brand" required
+                    name="product-brand">
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="product-price">Price</label>
+        <input id="product-price" class="form-control" placeholder="Price"
+                  [(ngModel)]="product.price" required
+                  name="product-price">
+      </div>
       <div class="form-group">
         <label for="product-description">Description</label>
         <textarea id="product-description" class="form-control" rows="3" placeholder="Description"
                   [(ngModel)]="product.description" required
-                  name="description"></textarea>
+                  name="product-description">
+        </textarea>
       </div>
-  <div class="form-group">
-    <label for="product-url">Product Image URL</label>
-    <input [(ngModel)]="product.url" id="product-url" class="form-control" placeholder="url" name="url">
-  </div>
-  <div class="form-group">
-    <label for="product-width">Product Image Width</label>
-    <input [(ngModel)]="product.width" id="product-width" class="form-control" placeholder="width" name="width">
-  </div>
-</form>
+      <div class="form-group">
+        <label for="product-url">Product Image URL</label>
+        <input [(ngModel)]="product.url" id="product-url" class="form-control" placeholder="url" name="url">
+      </div>
+      <div class="form-group">
+        <label for="product-width">Product Image Width</label>
+        <input [(ngModel)]="product.width" id="product-width" class="form-control" placeholder="width" name="width">
+      </div>
+    </form>
 
     <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
       <label for="myFile">Upload Image</label>
-      <input  name="myFile" id="myFile"  type="file" class="form-control form-group"/>
+      <input  name="myFile" id="myFile"  type="file" class="form-control form-group"
+              ngModel
+              required
+              #myFile="ngModel"/>
       <input  name="productName" value="{{product.productName}}" style="display: none"/>
       <input  name="brand" value="{{product.brand}}" style="display: none"/>
       <input  name="price" value="{{product.price}}" style="display: none"/>
       <input  name="description" value="{{product.description}}" style="display: none"/>
       <input  name="userId" value="{{userId}}" style="display: none"/>
-      <button type="submit" class="btn btn-outline-primary btn-block">Upload Image</button>
+      <button type="submit" class="btn btn-outline-success btn-block">Upload Image</button>
       <br/>
     </form>
-  <button type="button" class="btn btn-outline-primary btn-block"
-          (click)="createProduct()">Create</button>
-  <br>
-  <br>
+
+    <button type="button" class="btn btn-outline-primary btn-block"
+            (click)="createProduct()">Create</button>
+
   </div>
 </div>
 

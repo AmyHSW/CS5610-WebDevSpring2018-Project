@@ -10,13 +10,23 @@ import {environment} from '../../../../environments/environment';
   templateUrl: './product-new.component.html',
   styleUrls: ['./product-new.component.css']
 })
+
 export class ProductNewComponent implements OnInit {
-  user : any;
+  user: any;
   userId: String;
-  product : any;
+  product: any;
   baseUrl = environment.baseUrl;
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private router: Router,
-              private sharedService: SharedService, private userService: UserService) { }
+
+  constructor(private productService: ProductService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private sharedService: SharedService,
+              private userService: UserService) { }
+
+  ngOnInit() {
+    this.user = this.sharedService.user;
+    this.userId = this.user['_id'];
+  }
 
   createProduct() {
     this.productService.createProduct(this.userId, this.product).subscribe(
@@ -28,16 +38,12 @@ export class ProductNewComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.user = this.sharedService.user;
-    this.userId = this.user['_id'];
-  }
-
   logout() {
     this.userService.logout()
       .subscribe(
         (data: any) => {
           this.sharedService.user = '';
+          this.router.navigate(['/']);
         }
       );
   }

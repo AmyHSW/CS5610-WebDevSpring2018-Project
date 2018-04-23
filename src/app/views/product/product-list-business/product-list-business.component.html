@@ -16,7 +16,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0 cl-text-white">
       <div class="navbar-header navbar-toggler-right">
-        <a (click)="logout()" routerLink="['/login()']">Log Out</a>
+        <a (click)="logout()" routerLink=".">Log Out</a>
       </div>
     </form>
   </div>
@@ -45,81 +45,92 @@
   </div>
 
   <div class="col-9 col-sm-9 col-md-9 col-lg-9 cl-container-padding">
-  <h2><b>My Products</b></h2>
-
-  <button type="button" class="btn btn-outline-primary float-right"
-          routerLink="./new">Create</button>
+    <h2><b>My Products</b></h2>
+    <button class="btn btn-outline-primary" [routerLink]="['/user', 'product', 'new']">
+      Create New Product
+    </button>
     <br/>
     <br/>
 
-  <div class="container">
+    <div class="container-fluid">
       <div *ngFor="let product of products">
         <div class="card card-padding">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-4">
               <img src="{{product.url}}" height="215" width="215">
             </div>
-            <div class="col-md-8">
+
+            <div class="col-8 col-sm-8 col-md-8 col-lg-8">
               <div class="card-block">
                 <h4 class="card-title cl-text-bold">{{product.productName}}  {{product.price}}$</h4>
                 <p class="card-text">{{product.brand}}</p>
                 <p class="card-text">{{product.description}}</p>
-                <!--<button routerLink="./{{product._id}}/edit" >-->
-                  <!--Edit Product-->
-                <!--</button>-->
-                <button (click)="editProduct()">
+                <button class="btn btn-outline-primary" (click)="editProduct()">
                   Edit Product
                 </button>
               </div>
             </div>
+          </div>
 
-            <div class="card border-info mb-3" *ngIf="isClick">
+          <br/>
+          <div class="card border-info mb-4" *ngIf="isClick">
             <form #f="ngForm">
               <div class="form-group card-header">
                 <label for="product-name">Name</label>
-                <input id="product-name"  placeholder="Name"
-                       [(ngModel)]="product.productName" required
-                       name="name"/>
+                <input id="product-name"
+                       placeholder="Name"
+                       [(ngModel)]="product.productName"
+                       required
+                       name="product-name"/>
 
                 <span class="form-group">
-    <label for="product-brand">Brand</label>
-    <input id="product-brand" placeholder="Description"
-           [(ngModel)]="product.brand" required
-           name="description">
-  </span></div>
+                  <label for="product-brand">Brand</label>
+                  <input id="product-brand"
+                         placeholder="Description"
+                         [(ngModel)]="product.brand"
+                         required
+                         name="product-brand">
+                </span>
+              </div>
+
               <div class="card-body">
-              <div class="form-group">
-                <label for="product-price">Price</label>
-                <input id="product-price" placeholder="Price"
-                       [(ngModel)]="product.price" required
-                       name="description">
-              </div>
-              <div class="form-group">
-                <label for="product-description">Description</label>
-                <input id="product-description" class="form-control" placeholder="Description"
-                          [(ngModel)]="product.description" required
-                          name="description">
-              </div>
-              <div class="form-group">
-                <label for="product-url">Product Image URL</label>
-                <input [(ngModel)]="product.url" id="product-url"  placeholder="url" name="url">
-              </div>
-              <div class="form-group">
-                <label for="product-width">Product Image Width</label>
-                <input [(ngModel)]="product.width" id="product-width" placeholder="width" name="width">
-              </div>
-              <button type="button" class="btn btn-outline-primary btn-block"
-                      (click)="updateProduct(product._id, product)">Update</button>
-                <button type="button" class="btn btn-outline-primary btn-block"
+                <div class="form-group">
+                  <label for="product-price">Price</label>
+                  <input id="product-price"
+                         placeholder="Price"
+                         [(ngModel)]="product.price"
+                         required
+                         name="product-price">
+                </div>
+                <div class="form-group">
+                  <label for="product-description">Description</label>
+                  <input id="product-description"
+                         class="form-control"
+                         placeholder="Description"
+                         [(ngModel)]="product.description"
+                         required
+                         name="product-description">
+                </div>
+                <div class="form-group">
+                  <label for="product-url">Product Image URL</label>
+                  <input [(ngModel)]="product.url"
+                         id="product-url"
+                         placeholder="url"
+                         name="url">
+                </div>
+                <div class="form-group">
+                  <label for="product-width">Product Image Width</label>
+                  <input [(ngModel)]="product.width"
+                         id="product-width"
+                         placeholder="width"
+                         name="width">
+                </div>
+                <button type="button" class="btn btn-outline-success btn-block"
+                        (click)="updateProduct(product._id, product)">Update</button>
+                <button type="button" class="btn btn-outline-danger btn-block"
                         (click)="deleteProduct(product._id)">Delete</button>
               </div>
-              <br>
-              <br>
             </form>
-            </div>
-
-
-
           </div>
         </div>
       </div>
