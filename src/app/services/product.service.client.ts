@@ -12,6 +12,15 @@ export class ProductService {
   constructor(private _http: Http) {
   }
 
+  static getNewProduct() {
+    return {productName: undefined,
+      description: undefined,
+      brand: undefined,
+      url: undefined,
+      price: undefined,
+      width: undefined};
+  }
+
 
   findAllProduct() {
     const url = this.baseUrl + '/api/product/';
