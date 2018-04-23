@@ -54,7 +54,7 @@
           <img class="img-responsive mr-4" src="https://farm1.staticflickr.com/901/26205811937_7bd68ac7dc_b.jpg"
                height="215" width="215" *ngIf="!wProduct.mediumImage">
           <div class="media-body">
-            <h4><a class="mt-0" [routerLink]="['/product', product._id, '0']"><b>{{product.productName}}</b></a></h4>
+            <h4><a class="mt-0" [routerLink]="['/productItem', wProduct.itemId, '0']"><b>{{wProduct.name}}</b></a></h4>
             <p class="text-concat">{{wProduct.shortDescription}}</p>
           </div>
         </div>
