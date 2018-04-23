@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 export class WalmartService {
 
   key = 'fae928nnwy42uvgbm9z6pfvd';
-  urlBase = 'http://api.walmartlabs.com/v1/search?apiKey=API_KEY&query=TEXT';
+  urlBase = 'https://api.walmartlabs.com/v1/search?apiKey=API_KEY&query=TEXT';
 
   constructor(private _http: Http) {}
 
@@ -16,7 +16,7 @@ export class WalmartService {
     return this._http.get(url);
   }
 
-  urlItemBase = 'http://api.walmartlabs.com/v1/items/ITEM_ID?apiKey=API_KEY&format=json';
+  urlItemBase = 'https://api.walmartlabs.com/v1/items/ITEM_ID?apiKey=API_KEY&format=json';
   //541357139
   findProductByItemId(itemId) {
     const url = this.urlItemBase
