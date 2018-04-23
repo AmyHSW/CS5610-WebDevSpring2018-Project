@@ -83,9 +83,9 @@ export class ProductListComponent implements OnInit {
       (res) => {
         this.walmartProducts = res['items'];
         let index = this.walmartProducts.length - 1;
-        console.log(this.allProductsName);
+        //console.log(this.allProductsName);
         while (index >= 0) {
-          console.log(this.walmartProducts[index]);
+          //console.log(this.walmartProducts[index]);
           if (this.allProductsName.indexOf(this.walmartProducts[index].name) > -1) {
             this.walmartProducts.splice(index, 1);
           }
