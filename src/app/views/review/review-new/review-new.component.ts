@@ -45,7 +45,7 @@ export class ReviewNewComponent implements OnInit {
             this.product['productName'] = item.name;
             this.product['description'] = item.shortDescription;
             this.product['url'] = item.mediumImage;
-            this.product['price'] = item.price;
+            this.product['price'] = item.salePrice;
             this.product['brand'] = item.brand;
           }
         )
