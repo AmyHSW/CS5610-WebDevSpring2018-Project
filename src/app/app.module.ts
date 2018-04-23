@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientJsonpModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ProductNewComponent } from './views/product/product-new/product-new.component';
@@ -7,7 +8,7 @@ import { ProductListComponent } from './views/product/product-list/product-list.
 import { LoginComponent } from './views/user/login/login.component';
 import {routing} from './app.routing';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpModule, JsonpModule} from '@angular/http';
 import {UserService} from './services/user.service.client';
 import {ProductService} from './services/product.service.client';
 import {SharedService} from './services/shared.service';
@@ -41,6 +42,7 @@ import {TabsModule} from "ngx-bootstrap";
 import { FlickrComponent } from './views/user/profile/flickr/flickr.component';
 import {FlickrService} from "./services/flickr.service.client";
 import {WalmartService} from "./services/walmart.service.client";
+import { ProductItemDetailComponent } from './views/product/product-item-detail/product-item-detail.component';
 
 
 
@@ -66,13 +68,16 @@ import {WalmartService} from "./services/walmart.service.client";
     UserFollowersComponent,
     UserFollowingsComponent,
     ProfileOtherComponent,
-    FlickrComponent
+    FlickrComponent,
+    ProductItemDetailComponent
   ],
-  imports: [
+  imports:[
     BrowserModule,
     routing,
     FormsModule,
     HttpModule,
+    HttpClientJsonpModule,
+    JsonpModule,
     TabsModule.forRoot()
   ],
   providers: [UserService, ProductService, ReviewService, SharedService, AuthGuard, AuthGuardAdmin, AuthGuardReviewer,

@@ -31,6 +31,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 // app.use(express.static(path.join(__dirname, 'src/assets')));
 
+
+var cors = require('cors');
+app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
+
 //CORS
 app.use(function(reg, res, next){
   res.header("Access-Control-Allow-Origin", "http://localhost:4200");

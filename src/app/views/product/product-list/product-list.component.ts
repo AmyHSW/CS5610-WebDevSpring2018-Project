@@ -72,12 +72,7 @@ export class ProductListComponent implements OnInit {
         this.products = products;
       }
     );
-    this.walmartService.searchProducts(this.searchText).subscribe(
-      (res) => {
-        this.walmartProducts = res['items'];
-      }
-    );
-    console.log(this.walmartProducts);
+    this.walmartService.searchProducts(this.searchText);
   }
 
   addFavorite(productId) {

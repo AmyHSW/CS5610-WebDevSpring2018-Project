@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-color" xmlns="http://www.w3.org/1999/html">
+  <a class="navbar-brand thick" href="#"><b>Rate the Product</b></a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/product']">Products</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAdmin">
+          <a class="nav-link" [routerLink]="['/reviewers']">Influencers</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" [routerLink]="['/user/all']">Users</a>
+        </li>
+      </ul>
+    </ul>
+  </div>
+  <form class="form-inline my-2 my-lg-0 cl-text-white">
+    <div class="navbar-header navbar-toggler-right" *ngIf="noUser" name = "login">
+      <a [routerLink]="['/login']">Login</a>
+      <a [routerLink]="['/register']">Register</a>
+    </div>
+    <div class="navbar-header navbar-toggler-right" *ngIf="!noUser" name = "profile">
+      <a [routerLink]="['/profile']">Profile</a>
+    </div>
+  </form>
+</nav>
+
+<div class="container-fluid row">
+  <div class="col-4 cl-container-padding" *ngIf="product">
+    <br/>
+    <img class="img-responsive img-rounded cl-widget-images" src="{{product.url}}">
+  </div>
+
+
+  <div class="col-8 col-sm-8 col-md-8 col-lg-8 cl-container-padding" *ngIf="product">
+    <h1 >{{product.productName}}</h1>
+    <h2>${{product.price}}</h2>
+    <h3>Brand: {{product.brand}}</h3>
+    <h5>Description: {{product.description}}</h5>
+    <br/>
+    <a class="float-right" (click)="clickFavoriteButton()" *ngIf="isObserver&&!isFavorite"><i class="far fa-heart"></i></a>
+    <button type="button" class="btn btn-outline-primary btn-block" *ngIf="isReviewer"
+            routerLink="../review/new">Create Review</button>
+    <br/>
+    <h3>Reviews</h3>
+    <ul class="list-group cl-list-group-borderless">
+      <div *ngFor="let review of reviews; let i = index">
+        <div *ngIf="i >= reviewPage * 5 && i < reviewPage * 5 + 5">
+          <div class="card border-primary mb-3" *ngIf="review._user">
+            <div class="card-header">
+              Rating: {{review.rating}}
+            </div>
+            <div class="card-body text-primary">
+              <h5 class="card-title">{{review.summary}}</h5>
+              <p class="card-text">{{review.content}}</p>
+            </div>
+            <div class="card-footer">
+              By
+              <a [routerLink]="['/username', review._user.username]">
+                {{review._user.username}}
+              </a>
+              {{review.dateCreated}}
+            </div>
+          </div>
+        </div>
+
+        <!--      <div *ngIf="i>=reviewPage*5&&i<reviewPage*5+5">
+                <div *ngIf="review._user"><b>{{review._user.username}} : {{review.rating}}</b></div>
+                <b>summary: </b>{{review.summary}}
+                <br/>
+                <b>content: </b>{{review.content}}
+                <br>
+                <br>
+              </div>-->
+      </div>
+    </ul>
+    <br/>
+
+    <ul class="pagination">
+      <li *ngFor = "let page of pages"class="page-item"><a class="page-link" routerLink="../{{page}}">{{page+1}}</a></li>
+    </ul>
+
+  </div>
+</div>
+

@@ -20,6 +20,7 @@ import {UserFollowersComponent} from "./views/user/user-followers/user-followers
 import {UserFollowingsComponent} from "./views/user/user-followings/user-followings.component";
 import {ProfileOtherComponent} from "./views/user/profile-other/profile-other.component";
 import {FlickrComponent} from "./views/user/profile/flickr/flickr.component";
+import {ProductItemDetailComponent} from "./views/product/product-item-detail/product-item-detail.component";
 
 
 const appRoutes: Routes = [
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'product', component: ProductListComponent},
   {path: 'product/:productId/:reviewPage', component: ProductDetailComponent},
+  {path: 'productItem/:itemId/:reviewPage', component: ProductItemDetailComponent},
 
   // require user logged in
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
