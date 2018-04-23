@@ -27,11 +27,11 @@
 
 <div class="body-grey body-padding">
 
-  <div *ngIf="!isAdmin&&!profileExisted" class="alert alert-danger">
+  <div *ngIf="!isAdmin&&!profileIsReviewer" class="alert alert-danger">
     No such reviewer!
   </div>
 
-  <div class="user-other-container" *ngIf="isAdmin||profileExisted">
+  <div class="user-other-container" *ngIf="isAdmin||profileIsReviewer">
     <div class="jumbotron jumbotron-fluid" *ngIf="profileUser">
 
       <div class="container">

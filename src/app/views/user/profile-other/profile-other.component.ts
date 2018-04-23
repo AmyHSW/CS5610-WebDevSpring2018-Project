@@ -20,7 +20,7 @@ export class ProfileOtherComponent implements OnInit {
   followings: [any];
   isFollowing: boolean;
   isReviewer: boolean;
-  profileExisted: boolean;
+  profileIsReviewer: boolean;
 
   constructor(
     private sharedService: SharedService,
@@ -73,6 +73,7 @@ export class ProfileOtherComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.profileIsReviewer = true;
     this.loginUser = this.sharedService.user;
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
     this.isReviewer = this.sharedService.user['type'] == 'REVIEWER';
@@ -85,9 +86,9 @@ export class ProfileOtherComponent implements OnInit {
       (user) => {
         this.profileUser = user;
         if (user['type'] !== 'REVIEWER') {
+          this.profileIsReviewer = false;
           return;
         }
-        this.profileExisted = true;
         this.reviewService.findAllReviewsForUser(this.profileUser._id).subscribe(
           (reviews) => {
             this.reviews = reviews;

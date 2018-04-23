@@ -107,7 +107,10 @@
                [ngModelOptions]="{standalone: true}"/>
       </div>
       <form ngNoForm action="{{baseUrl}}/api/userUpload" method="post" enctype="multipart/form-data">
-        <input  name="myFile"   type="file" class="form-control"/>
+        <input  name="myFile" type="file" class="form-control"
+                ngModel
+                required
+                #myFile="ngModel"/>
         <input  name="userId" value="{{user._id}}"   style="display: none"/>
         <button type="submit" class="btn btn-block btn-outline-success">Upload Image</button>
         <br/>
