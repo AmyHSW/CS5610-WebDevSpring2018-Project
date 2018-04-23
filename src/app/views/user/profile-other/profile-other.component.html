@@ -25,9 +25,13 @@
   </div>
 </nav>
 
-
 <div class="body-grey body-padding">
-  <div class="user-other-container">
+
+  <div *ngIf="!isAdmin&&!profileExisted" class="alert alert-danger">
+    No such reviewer!
+  </div>
+
+  <div class="user-other-container" *ngIf="isAdmin||profileExisted">
     <div class="jumbotron jumbotron-fluid" *ngIf="profileUser">
 
       <div class="container">

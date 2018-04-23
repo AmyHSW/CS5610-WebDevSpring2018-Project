@@ -20,6 +20,7 @@ export class ProfileOtherComponent implements OnInit {
   followings: [any];
   isFollowing: boolean;
   isReviewer: boolean;
+  profileExisted: boolean;
 
   constructor(
     private sharedService: SharedService,
@@ -34,7 +35,7 @@ export class ProfileOtherComponent implements OnInit {
       (any) => {
         this.userService.findFollowersForUser(this.profileUser._id).subscribe(
           (followers) => {
-            console.log("add follow success!!")
+            console.log("add follow success!!");
             this.followers = followers;
             console.log(followers);
             this.isFollowing = true;
@@ -42,7 +43,7 @@ export class ProfileOtherComponent implements OnInit {
           }
         );
       }
-    )
+    );
     console.log(this.followers);
   }
 
@@ -83,11 +84,15 @@ export class ProfileOtherComponent implements OnInit {
     this.userService.findUserByUsername(this.username).subscribe(
       (user) => {
         this.profileUser = user;
+        if (user['type'] !== 'REVIEWER') {
+          return;
+        }
+        this.profileExisted = true;
         this.reviewService.findAllReviewsForUser(this.profileUser._id).subscribe(
           (reviews) => {
             this.reviews = reviews;
           }
-        )
+        );
         this.userService.findFollowersForUser(this.profileUser._id).subscribe(
           (followers) => {
             this.followers = followers;

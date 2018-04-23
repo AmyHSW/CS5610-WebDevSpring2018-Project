@@ -94,10 +94,10 @@
       <form ngNoForm action="{{baseUrl}}/api/userUpload" method="post" enctype="multipart/form-data">
         <input  name="myFile"   type="file" class="form-control"/>
         <input  name="userId" value="{{user._id}}"   style="display: none"/>
-        <button type="submit" class="btn btn-block btn-outline-primary">Upload Image</button>
+        <button type="submit" class="btn btn-block btn-outline-success">Upload Image</button>
         <br/>
       </form>
-      <button class="btn btn-outline-primary btn-block"
+      <button class="btn btn-outline-warning btn-block"
               [routerLink]="['/profile/flickr']" >Choose From Flickr</button>
       <br/>
 

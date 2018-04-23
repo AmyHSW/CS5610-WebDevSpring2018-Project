@@ -20,8 +20,7 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService,
               private sharedService: SharedService,
               private userService: UserService,
-              private activatedRoute: ActivatedRoute,
-              private reviewService: ReviewService) { }
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
