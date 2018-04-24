@@ -61,7 +61,7 @@ export class ProductListObserverComponent implements OnInit {
             }
           );
         }
-      )
+      );
   }
   logout() {
     this.userService.logout()

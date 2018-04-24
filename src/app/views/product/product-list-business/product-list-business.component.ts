@@ -54,12 +54,18 @@ export class ProductListBusinessComponent implements OnInit {
   }
 
   deleteProduct(productId) {
-    this.productService.deleteProduct(productId).subscribe(
-      () => {
-        this.isClick = false;
-        this.router.navigate(['./'], {relativeTo: this.activatedRoute});
-      }
-    );
+    this.productService.deleteProduct(productId)
+      .subscribe(
+        (data: any) => {
+          console.log('deleted product');
+          this.isClick = false;
+          this.productService.findAllProductsForUser(this.user._id).subscribe(
+            (products: any) => {
+              this.products = products;
+            }
+          );
+        }
+      );
   }
 
 }
