@@ -6,6 +6,10 @@
 /*padding-bottom: 70px;*/
 /*}*/
 
+.color-red {
+  color: red;
+}
+
 .review-card {
   max-width: 18rem;
 }

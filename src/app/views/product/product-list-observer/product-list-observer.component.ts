@@ -30,22 +30,21 @@ export class ProductListObserverComponent implements OnInit {
     this.userService.findFavoritesForUser(this.user._id).subscribe(
       (products: any) => {
         this.products = products;
-        for (let i = 0; i < this.products.length; i++) {
-          this.products[i].count = 0;
-          const lastViewed = this.products[i].lastViewed;
-          this.reviewService.findAllReviewsForProduct(this.products[i]._id)
+        for (let product of this.products) {
+          product.count = 0;
+          const lastViewed = product.lastViewed;
+          this.reviewService.findAllReviewsForProduct(product._id)
             .subscribe(
               (reviews: any) => {
-                for (let i = 0; i < reviews.length; i++) {
-                  const created = reviews[i].dateCreated;
-                  // console.log('created: ' + created);
+                // console.log(this.products.indexOf(product));
+                for (let review of reviews) {
+                  const created = review.dateCreated;
                   if (created > lastViewed) {
-                    this.products[i].count++;
-                    // console.log('count++: ' + this.products[i].count);
+                    product.count++;
                   }
                 }
               }
-            );
+            )
         }
       });
   }
