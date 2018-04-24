@@ -60,7 +60,7 @@
       <li *ngFor="let review of reviews" class="list-group-item cl-list-item-borderless">
         <div class="card border-info mb-3">
           <div class="card-header">
-            <a [routerLink]="['/product', review._product._id]">
+            <a [routerLink]="['/product', review._product._id, '0']">
               Product: {{review._product.productName}}
             </a>
             (Rating: {{review.rating}})

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../../services/product.service.client';
 import {SharedService} from '../../../services/shared.service';
 import {UserService} from '../../../services/user.service.client';
@@ -21,11 +21,13 @@ export class ProductListComponent implements OnInit {
   walmartProducts: [any];
   allProducts: [any];
   allProductsName: String[];
+
   constructor(private productService: ProductService,
               private sharedService: SharedService,
               private userService: UserService,
               private activatedRoute: ActivatedRoute,
-              private walmartService: WalmartService) { }
+              private walmartService: WalmartService) {
+  }
 
   ngOnInit() {
     this.isAdmin = this.sharedService.user['type'] == 'ADMIN';
@@ -34,27 +36,24 @@ export class ProductListComponent implements OnInit {
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
         this.searchText = params['searchText'] || '';
-        if (this.searchText === '') {
-          this.productService.findAllProduct().subscribe(
-            (products) => {
-              products.sort((a, b): number => {
-                return b.reviews.length - a.reviews.length;
-              });
-              this.allProducts = products;
-              this.allProductsName = [];
-              for (let i = 0; i < products.length; i++) {
-                this.allProductsName.push(products[i].productName);
-              }
-              this.products = products;
+
+        this.productService.findAllProduct().subscribe(
+          (products) => {
+            products.sort((a, b): number => {
+              return b.reviews.length - a.reviews.length;
+            });
+            this.allProducts = products;
+            this.allProductsName = [];
+            for (let i = 0; i < products.length; i++) {
+              this.allProductsName.push(products[i].productName);
             }
-          );
-        } else {
-          this.productService.findProductsByProductName(this.searchText).subscribe(
-            (products) => {
+            if (this.searchText === '') {
               this.products = products;
+            } else {
+              this.searchProducts();
             }
-          );
-        }
+          }
+        );
       });
     this.userService.loggedIn().subscribe(
       (isLoggedIn) => {
@@ -73,7 +72,7 @@ export class ProductListComponent implements OnInit {
   searchProducts() {
     this.productService.findProductsByProductName(this.searchText).subscribe(
       (products) => {
-      products.sort((a, b): number => {
+        products.sort((a, b): number => {
           return b.reviews.length - a.reviews.length;
         });
         this.products = products;
